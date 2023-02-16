@@ -28,7 +28,7 @@ The roadmap of the project
 [] PromptLayerOpenAI
 
 ### Prompts
-[] PromptTemplate
+[x] PromptTemplate
 [] NustashePromptTemplate
 [] FewShotPromptTemplate
 [] LengthBasedExampleSelector

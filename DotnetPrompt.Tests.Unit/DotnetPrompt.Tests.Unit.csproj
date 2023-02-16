@@ -21,10 +21,17 @@
   <ItemGroup>
     <ProjectReference Include="..\DotnetPrompt.Abstractions\DotnetPrompt.Abstractions.csproj" />
     <ProjectReference Include="..\DotnetPrompt.LLM.OpenAI\DotnetPrompt.LLM.OpenAI.csproj" />
+    <ProjectReference Include="..\DotnetPrompt\DotnetPrompt.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="LLM\OpenAI\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Data\prompt_file.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

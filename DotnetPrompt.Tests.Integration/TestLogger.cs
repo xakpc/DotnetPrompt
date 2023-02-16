@@ -10,7 +10,7 @@ public static class TestLogger
         return logger;
     }
 
-    class NUnitLogger<T> : ILogger<T>, IDisposable
+    private class NUnitLogger<T> : ILogger<T>, IDisposable
     {
         private readonly Action<string> output = Console.WriteLine;
 
