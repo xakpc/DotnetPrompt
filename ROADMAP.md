@@ -13,8 +13,8 @@ The roadmap of the project
 [] Configuration binding
 
 ### LLMs
-[] BaseLLM
-[] OpenAI
+[x] BaseLLM
+[x] OpenAI
 [] AzureOpenAI
 [] Cohere
 [] HuggingFaceHub

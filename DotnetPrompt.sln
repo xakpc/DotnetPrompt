@@ -1,0 +1,56 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32922.545
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotnetPrompt.Tests.Unit", "DotnetPrompt.Tests.Unit\DotnetPrompt.Tests.Unit.csproj", "{4AD1B1C7-C10F-43DE-A68A-D73079F50272}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotnetPrompt", "DotnetPrompt\DotnetPrompt.csproj", "{4C191600-56C3-45F3-8864-0A2ACE066512}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotnetPrompt.Tests.Integration", "DotnetPrompt.Tests.Integration\DotnetPrompt.Tests.Integration.csproj", "{D0AEC563-D723-4B7E-B2CF-B51CB193635A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotnetPrompt.LLM.OpenAI", "DotnetPrompt.LLM.OpenAI\DotnetPrompt.LLM.OpenAI.csproj", "{15EB2B73-2B46-4DD0-B66D-F28EE6B41489}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotnetPrompt.Abstractions", "DotnetPrompt.Abstractions\DotnetPrompt.Abstractions.csproj", "{6750E20B-EB49-4D8E-86CE-8D3575CC8E8D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CC660958-1CEA-4D40-9657-A9982BB14C5A}"
+	ProjectSection(SolutionItems) = preProject
+		CONTRIBUTING.md = CONTRIBUTING.md
+		README.md = README.md
+		ROADMAP.md = ROADMAP.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4AD1B1C7-C10F-43DE-A68A-D73079F50272}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4AD1B1C7-C10F-43DE-A68A-D73079F50272}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4AD1B1C7-C10F-43DE-A68A-D73079F50272}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4AD1B1C7-C10F-43DE-A68A-D73079F50272}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C191600-56C3-45F3-8864-0A2ACE066512}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C191600-56C3-45F3-8864-0A2ACE066512}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C191600-56C3-45F3-8864-0A2ACE066512}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C191600-56C3-45F3-8864-0A2ACE066512}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0AEC563-D723-4B7E-B2CF-B51CB193635A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0AEC563-D723-4B7E-B2CF-B51CB193635A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0AEC563-D723-4B7E-B2CF-B51CB193635A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0AEC563-D723-4B7E-B2CF-B51CB193635A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15EB2B73-2B46-4DD0-B66D-F28EE6B41489}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15EB2B73-2B46-4DD0-B66D-F28EE6B41489}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15EB2B73-2B46-4DD0-B66D-F28EE6B41489}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15EB2B73-2B46-4DD0-B66D-F28EE6B41489}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6750E20B-EB49-4D8E-86CE-8D3575CC8E8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6750E20B-EB49-4D8E-86CE-8D3575CC8E8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6750E20B-EB49-4D8E-86CE-8D3575CC8E8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6750E20B-EB49-4D8E-86CE-8D3575CC8E8D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {73EC906F-88A8-4C0F-921C-4E5B73C65E36}
+	EndGlobalSection
+EndGlobal
