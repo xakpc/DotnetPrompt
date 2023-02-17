@@ -32,9 +32,9 @@ public class FakeLargeLanguageModel : BaseModel
         return JsonSerializer.Serialize(this, serializerOptions);
     }
 
-    protected override async Task<LLMResult> GenerateInternalAsync(List<string> prompts, IList<string> stop = null)
+    protected override async Task<LLMResult> GenerateInternalAsync(IList<string> prompts, IList<string> stop = null)
     {
-        var generations = new List<List<Generation>>();
+        var generations = new List<IList<Generation>>();
         foreach (var prompt in prompts)
         {
             var text = await Task.FromResult(Call(prompt, stop));
@@ -43,6 +43,7 @@ public class FakeLargeLanguageModel : BaseModel
 
         return new LLMResult { Generations = generations };
     }
+
 
     public override string LLMType => "fake";
 

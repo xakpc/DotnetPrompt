@@ -201,7 +201,7 @@ public class OpenAIModel : BaseModel
         return JsonSerializer.Serialize(this, serializerOptions);
     }
 
-    protected override async Task<LLMResult> GenerateInternalAsync(List<string> prompts, IList<string> stop = null)
+    protected override async Task<LLMResult> GenerateInternalAsync(IList<string> prompts, IList<string> stop = null)
     {
         var completionsOptions = DefaultModelConfiguration with { };
 
@@ -245,10 +245,10 @@ public class OpenAIModel : BaseModel
                 };
             }
         }
-        return CreateLLMResult(choices, prompts, tokenUsage);
+        return CreateLLMResult(completionsOptions, choices, prompts, tokenUsage);
     }
 
-    public List<List<string>> GetSubPrompts(OpenAIModelConfiguration completionsOptions, List<string> prompts)
+    public List<List<string>> GetSubPrompts(OpenAIModelConfiguration completionsOptions, IList<string> prompts)
     {
         if (completionsOptions.MaxTokens == -1)
         {
@@ -262,20 +262,19 @@ public class OpenAIModel : BaseModel
         var subPrompts = new List<List<string>>();
         for (var i = 0; i < prompts.Count; i += BatchSize)
         {
-            subPrompts.Add(prompts.GetRange(i, Math.Min(BatchSize, prompts.Count - i)));
+            subPrompts.Add(prompts.ToList().GetRange(i, Math.Min(BatchSize, prompts.Count - i)));
         }
         return subPrompts;
     }
 
-    public LLMResult CreateLLMResult(
-        List<Choice> choices,
-        List<string> prompts,
+    private static LLMResult CreateLLMResult(OpenAIModelConfiguration configuration, 
+        IList<Choice> choices, ICollection<string> prompts,
         CompletionsUsage tokenUsage)
     {
-        var generations = new List<List<Generation>>();
+        var generations = new List<IList<Generation>>();
         for (int i = 0; i < prompts.Count; i++)
         {
-            var subChoices = choices.Skip(i * DefaultModelConfiguration.SnippetCount).Take(DefaultModelConfiguration.SnippetCount).ToArray();
+            var subChoices = choices.Skip(i * configuration.SnippetCount).Take(configuration.SnippetCount).ToArray();
             generations.Add(subChoices.Select(choice => new Generation
             {
                 Text = choice.Text,

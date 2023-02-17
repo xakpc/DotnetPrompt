@@ -36,14 +36,14 @@ public abstract class BaseModel
     /// <param name="parameters"></param>
     /// <param name="prompts"></param>
     /// <returns></returns>
-    public async Task<(Dictionary<int, List<Generation>> ExistingPrompts, 
-        string LLMString, List<int> MissingPromptIdxs, 
-        List<string> MissingPrompts)> 
-        GetPromptsAsync(List<string> prompts)
+    public async Task<(Dictionary<int, IList<Generation>> ExistingPrompts, 
+        string LLMString, IList<int> MissingPromptIdxs, 
+        IList<string> MissingPrompts)> 
+        GetPromptsAsync(IList<string> prompts)
     {
         string llmString = AsUniqueString();
 
-        var existingPrompts = new Dictionary<int, List<Generation>>();
+        var existingPrompts = new Dictionary<int, IList<Generation>>();
         var missingPromptIdxs = new List<int>();
         var missingPrompts = new List<string>();
 
@@ -86,12 +86,12 @@ public abstract class BaseModel
     /// <param name="newResults"></param>
     /// <param name="prompts"></param>
     /// <returns></returns>
-    public async Task<Dictionary<string, object>> UpdateCache(
-        Dictionary<int, List<Generation>> existingPrompts,
+    public async Task<IDictionary<string, object>> UpdateCache(
+        Dictionary<int, IList<Generation>> existingPrompts,
         string llmString,
-        List<int> missingPromptIndexes,
+        IList<int> missingPromptIndexes,
         LLMResult newResults,
-        List<string> prompts)
+        IList<string> prompts)
     {
         for (var i = 0; i < newResults.Generations.Count; i++)
         {
@@ -134,7 +134,7 @@ public abstract class BaseModel
     /// <param name="stop"></param>
     /// <returns></returns>
     /// <exception cref="InvalidOperationException">When cache asked without </exception>
-    public async Task<LLMResult> GenerateAsync(List<string> prompts, List<string> stop = null)
+    public async Task<LLMResult> GenerateAsync(IList<string> prompts, IList<string> stop = null)
     {
         // merge stops
         if (DefaultStop != null && DefaultStop.Any())
@@ -176,7 +176,7 @@ public abstract class BaseModel
 
         var (existingPrompts, llmString, missingPromptIdxs, missingPrompts) = await GetPromptsAsync(prompts);
 
-        Dictionary<string, object> llmOutput = default;
+        IDictionary<string, object> llmOutput = default;
         if (missingPrompts.Count > 0)
         {
             //CallbackManager.OnLLMStart(new Dictionary<string, object> { { "name", this.GetType().Name } },
@@ -207,7 +207,7 @@ public abstract class BaseModel
         };
     }
 
-    protected abstract Task<LLMResult> GenerateInternalAsync(List<string> prompts, IList<string> stop = null);
+    protected abstract Task<LLMResult> GenerateInternalAsync(IList<string> prompts, IList<string> stop = null);
 
     /// <summary>
     /// Get the number of tokens present in the text.

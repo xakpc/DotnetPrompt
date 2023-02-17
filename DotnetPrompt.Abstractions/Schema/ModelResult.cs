@@ -10,15 +10,15 @@ namespace DotnetPrompt.Abstractions.Schema;
 public class LLMResult
 {
     /// <summary>
-    /// List of the things generated. This is List[List[]] because
-    /// each input could have multiple generations.
+    /// List of the things generated.
+    /// This is List[List[]] because each input could have multiple generations/generated completions.
     /// </summary>
     [DataMember]
-    public List<List<Generation>> Generations { get; set; }
+    public IList<IList<Generation>> Generations { get; set; }
 
     /// <summary>
     /// For arbitrary LLM provider specific output.
     /// </summary>
     [DataMember]
-    public Dictionary<string, object> Output { get; set; }
+    public IDictionary<string, object> Output { get; set; }
 }
