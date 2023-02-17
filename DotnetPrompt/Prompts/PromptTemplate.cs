@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using DotnetPrompt.Abstractions.Prompts;
 
 namespace DotnetPrompt.Prompts;
 
-/// <summary>
-/// Schema to represent a prompt for an LLM.
-/// </summary>
-public class PromptTemplate
+/// <inheritdoc />
+public class PromptTemplate : IPromptTemplate
 {
     /// <summary>
     /// Build PromptTemplate Schema from template string
