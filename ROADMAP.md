@@ -29,7 +29,7 @@ The roadmap of the project
 
 ### Prompts
 [x] PromptTemplate
-[] NustashePromptTemplate
+[] MustashePromptTemplate
 [] FewShotPromptTemplate
 [] LengthBasedExampleSelector
 [] MaxMarginalRelevanceExampleSelector
