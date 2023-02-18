@@ -25,6 +25,17 @@ public class PromptTemplateTests
         Assert.AreEqual("This is a bar test.", output);
     }
 
+    [Test]
+    public void Format_ProperValuesWithExtra_ProperTextGenerated()
+    {
+        // Test prompt works with just a suffix.
+        var prompt = new PromptTemplate("This is a {foo} test.", new[] { "foo" });
+
+        var output = prompt.Format(new Dictionary<string, string> { { "test1", "test1" }, { "foo", "bar" }, { "test2", "test2" } });
+
+        Assert.AreEqual("This is a bar test.", output);
+    }
+
     [TestCase("This is a foo test.", new string[] { })]
     [TestCase("This is a {foo} test.", new[] { "foo" })]
     [TestCase("This {bar} is a {foo} test.", new[] { "bar", "foo" })]

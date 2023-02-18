@@ -105,7 +105,7 @@ public class PromptTemplate : IPromptTemplate
     /// <exception cref="ArgumentException">Throws when provided list of keys does not match <see cref="InputVariables"/>.</exception>
     public string Format(IDictionary<string, string> values)
     {
-        if (!values.Keys.SequenceEqual(InputVariables))
+        if (!InputVariables.All(x => values.Keys.Contains(x))) // check if all elements of inputVariables are present in valuesKeys
         {
             throw new ArgumentException("parameters and input arguments are different ");
         }

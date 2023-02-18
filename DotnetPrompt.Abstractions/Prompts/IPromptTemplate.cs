@@ -11,7 +11,7 @@ public interface IPromptTemplate
     /// <summary>
     /// A list of the names of the variables the prompt template expects.
     /// </summary>
-    IList<string> InputVariables { get; set; }
+    IList<string> InputVariables { get; }
 
     /// <summary>
     /// Build a prompt from current template and a list of values.
