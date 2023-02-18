@@ -21,10 +21,14 @@
     <None Update="Data\few_shot.py">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Data\test_base.py">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="LLMs\" />
+    <Folder Include="Chains\" />
   </ItemGroup>
 
 </Project>

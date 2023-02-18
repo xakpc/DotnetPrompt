@@ -7,7 +7,9 @@ using DotnetPrompt.Abstractions.Prompts;
 
 namespace DotnetPrompt.Prompts;
 
-/// <inheritdoc />
+/// <summary>
+/// Schema to represent a prompt for an LLM based on formatted string
+/// </summary>
 public class PromptTemplate : IPromptTemplate
 {
     /// <summary>
@@ -16,7 +18,10 @@ public class PromptTemplate : IPromptTemplate
     /// <param name="template"></param>
     public PromptTemplate(string template)
     {
+        template = template.Replace("{{", "\a").Replace("}}", "\a\a"); // todo: find a better way
         InputVariables = ExtractWordsInBrackets(template).Distinct().ToList();
+        template = template.Replace("\a\a", "}").Replace("\a", "{");
+
         Template = template;
     }
 
@@ -111,6 +116,16 @@ public class PromptTemplate : IPromptTemplate
         }
 
         return values.Aggregate(Template, (s, kv) => s.Replace($"{{{kv.Key}}}", kv.Value));
+    }
+
+    /// <summary>
+    /// Build a prompt from current template and a list of value tuples.
+    /// </summary>
+    /// <param name="values">Tuple of key - value</param>
+    /// <returns></returns>
+    public string Format((string, string)[] values)
+    {
+        return Format(values.ToDictionary(k => k.Item1, v => v.Item2));
     }
 
     /// <summary>

@@ -11,7 +11,21 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace DotnetPrompt.Abstractions.LLM;
 
-public abstract class BaseModel
+public interface ILargeLanguageModel
+{
+    /// <summary>
+    /// Run the LLM on the given prompt and input.
+    /// </summary>
+    /// <param name="prompts"></param>
+    /// <param name="stop"></param>
+    /// <returns></returns>
+    /// <exception cref="InvalidOperationException">When cache asked without </exception>
+    Task<LLMResult> GenerateAsync(IList<string> prompts, IList<string> stop = null);
+
+    string LLMType { get; }
+}
+
+public abstract class BaseModel : ILargeLanguageModel
 {
     private readonly IDistributedCache _cache;
     protected readonly ILogger _logger;
@@ -101,6 +115,7 @@ public abstract class BaseModel
         }
 
         return newResults.Output;
+        //return llmOutput != null ? new Dictionary<int, List<string>>(existingPrompts) : null;
     }
 
     #region Constructors
@@ -250,7 +265,22 @@ public abstract class BaseModel
         get { return new Dictionary<string, dynamic> { }; }
     }
 
+    public override string ToString()
+    {
+        // Get a string representation of the object for printing.
+
+        var clsName = $"{this.GetType().Name}";
+        return $"{clsName}\nParams: {this.IdentifyingParams}";
+    }
 
     public abstract string LLMType { get; }
 
+    public Dictionary<string, dynamic> ToDict()
+    {
+        // Return a dictionary of the LLM.
+
+        var starterDict = this.IdentifyingParams;
+        starterDict["_type"] = this.LLMType;
+        return starterDict;
+    }
 }

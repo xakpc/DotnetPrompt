@@ -1,13 +1,13 @@
 ﻿using System.Text;
 using System.Text.RegularExpressions;
 
-namespace DotnetPrompt.Test.Examples;
+namespace DotnetPrompt.Tests.Examples;
 
 public class PythonHelpers
 {
     public static IEnumerable<(string Name, string Def, string Body)> GetPythonMethods(string filePath)
     {
-        var regex = new Regex(@"(def\s+(\w+)\([\w,:*\s]+\)\s+->\s+([\w\[\]]+):\n)(\s{8,}.+\n)+", RegexOptions.Compiled|RegexOptions.Multiline);
+        var regex = new Regex(@"(def\s+(\w+)\([\w,:*\s]*\)\s+->\s+([\w\[\]]+):\n)(\s{4,}.+\n)+", RegexOptions.Compiled|RegexOptions.Multiline);
 
         var fileContent = File.ReadAllText(filePath);
         var matches = regex.Matches(fileContent);

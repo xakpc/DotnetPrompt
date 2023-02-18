@@ -7,18 +7,18 @@ namespace DotnetPrompt.Abstractions.Schema;
 /// Output of a single generation.
 /// </summary>
 [DataContract]
-public class Generation
+public record Generation
 {
     /// <summary>
     /// Generated text output.
     /// </summary>
     [DataMember]
-    public string Text { get; set; }
+    public string Text { get; init; }
 
     /// <summary>
     /// Raw generation info response from the provider
     /// May include things like reason for finishing (e.g. in OpenAI)
     /// </summary>
     [DataMember]
-    public Dictionary<string, object> Info { get; set; }
+    public Dictionary<string, object> Info { get; init; }
 }

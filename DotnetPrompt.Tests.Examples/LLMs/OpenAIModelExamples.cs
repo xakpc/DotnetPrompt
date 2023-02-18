@@ -1,16 +1,16 @@
-﻿using DotnetPrompt.LLM.OpenAI;
+﻿using System.Text.Json;
+using DotnetPrompt.LLM.OpenAI;
 using Microsoft.Extensions.Logging.Abstractions;
 using NUnit.Framework;
-using System.Text.Json;
 
-namespace DotnetPrompt.Test.Examples.LLMs;
+namespace DotnetPrompt.Tests.Examples.LLMs;
 
 public class OpenAIModelExamples
 {
     private static OpenAIModel CreateOpenAiModel()
     {
         #region CreateOpenAiModel
-        var llm = new OpenAIModel(OpenAIKey,
+        var llm = new OpenAIModel(Constants.OpenAIKey,
             OpenAIModelConfiguration.Default with
             {
                 Model = "text-ada-001",
