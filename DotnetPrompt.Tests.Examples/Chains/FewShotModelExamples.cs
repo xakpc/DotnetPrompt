@@ -1,4 +1,5 @@
 ﻿using DotnetPrompt.Chains;
+using DotnetPrompt.LLM.CohereAI;
 using DotnetPrompt.LLM.OpenAI;
 using DotnetPrompt.Prompts;
 using NUnit.Framework;
@@ -12,7 +13,7 @@ public class FewShotModelExamples
     {
         #region Example_ModelChainFewShotPromptTemplate_SentimentAnalysis
         var example = new PromptTemplate("Message: {message}\nSentiment: {sentiment}");
-        var suffix = new PromptTemplate("Message: {message}:\nSentiment: ");
+        var suffix = new PromptTemplate("Message: {message}\nSentiment: ");
 
         var examples = new List<IDictionary<string, string>>()
         {

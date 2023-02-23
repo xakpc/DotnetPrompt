@@ -7,23 +7,38 @@ using DotnetPrompt.Prompts.ExampleSelectors;
 
 namespace DotnetPrompt.Prompts;
 
+/// <summary>
+/// The FewShotPromptTemplate class allows developers to create prompts for natural language processing (NLP) models using few-shot learning techniques.
+/// This class takes in a prefix, examples, and suffix, and combines them with a separator to generate a prompt for the language model.
+/// </summary>
 public class FewShotPromptTemplate : IPromptTemplate
 {
-    
     private readonly IPromptTemplate? _prefix;
     private readonly IPromptTemplate _suffixPromptTemplate;
     private readonly IPromptTemplate _examplePromptTemplate;
 
     private readonly IExampleSelector? _exampleSelector;
-    public IList<IDictionary<string, string>>? Examples { get; init; } = null;
 
     /// <inheritdoc />
     public IList<string> InputVariables { get; init; }
 
+    /// <summary>
+    /// List of Examples, where each example is a Dictionary where key is Input Variable and value is Input Value
+    /// </summary>
+    public IList<IDictionary<string, string>>? Examples { get; init; } = null;
+
+    /// <summary>
+    /// Separator for examples, default value is "\n\n"
+    /// </summary>
     public string ExampleSeparator { get; set; } = "\n\n";
 
     #region Constructors
-
+    /// <summary>
+    /// Constructor with examples 
+    /// </summary>
+    /// <param name="examplePromptTemplate">PromptTemplate to format Example</param>
+    /// <param name="suffixPromptTemplate">PromptTemplate to format suffix</param>
+    /// <param name="examples">List of Examples</param>
     public FewShotPromptTemplate(IPromptTemplate examplePromptTemplate,
         IPromptTemplate suffixPromptTemplate,
         IList<IDictionary<string, string>> examples)
@@ -35,6 +50,12 @@ public class FewShotPromptTemplate : IPromptTemplate
         _examplePromptTemplate = examplePromptTemplate;
     }
 
+    /// <summary>
+    /// Constructor with example selector
+    /// </summary>
+    /// <param name="examplePromptTemplate">PromptTemplate to format Example</param>
+    /// <param name="suffixPromptTemplate">PromptTemplate to format suffix</param>
+    /// <param name="exampleSelector">Example selector that will select examples for prompt</param>
     public FewShotPromptTemplate(IPromptTemplate examplePromptTemplate,
         IPromptTemplate suffixPromptTemplate,
         IExampleSelector exampleSelector)
@@ -45,6 +66,13 @@ public class FewShotPromptTemplate : IPromptTemplate
         _exampleSelector = exampleSelector;
     }
 
+    /// <summary>
+    /// Constructor with examples and prefix
+    /// </summary>
+    /// <param name="prefixPromptTemplate">PromptTemplate to format prefix</param>
+    /// <param name="examplePromptTemplate">PromptTemplate to format Example</param>
+    /// <param name="suffixPromptTemplate">PromptTemplate to format suffix</param>
+    /// <param name="examples">List of Examples</param>
     public FewShotPromptTemplate(IPromptTemplate prefixPromptTemplate,
         IPromptTemplate examplePromptTemplate,
         IPromptTemplate suffixPromptTemplate,
@@ -58,6 +86,13 @@ public class FewShotPromptTemplate : IPromptTemplate
         _examplePromptTemplate = examplePromptTemplate;
     }
 
+    /// <summary>
+    /// Constructor with example selector and prefix
+    /// </summary>
+    /// <param name="prefixPromptTemplate">PromptTemplate to format prefix</param>
+    /// <param name="examplePromptTemplate">PromptTemplate to format Example</param>
+    /// <param name="suffixPromptTemplate">PromptTemplate to format suffix</param>
+    /// <param name="exampleSelector">Example selector that will select examples for prompt</param>
     public FewShotPromptTemplate(IPromptTemplate prefixPromptTemplate,
         IPromptTemplate examplePromptTemplate,
         IPromptTemplate suffixPromptTemplate,
@@ -70,25 +105,9 @@ public class FewShotPromptTemplate : IPromptTemplate
         _examplePromptTemplate = examplePromptTemplate;
         _exampleSelector = exampleSelector;
     }
-
     #endregion
 
-
-    private IEnumerable<IDictionary<string, string>> GetExamples(IDictionary<string, string> inputValues)
-    {
-        if (Examples != null)
-        {
-            return Examples;
-        }
-
-        if (_exampleSelector != null)
-        {
-            return _exampleSelector.SelectExamples(inputValues);
-        }
-
-        throw new ArgumentException("One of 'examples' and 'example_selector' should be provided");
-    }
-
+    /// <inheritdoc />
     public string Format(IDictionary<string, string> values)
     {
         // Get the examples to use.
@@ -103,41 +122,22 @@ public class FewShotPromptTemplate : IPromptTemplate
         pieces.AddRange(exampleStrings);
         pieces.Add(_suffixPromptTemplate.Format(values));
         var template = sb.AppendJoin(ExampleSeparator, pieces.Where(piece => !string.IsNullOrEmpty(piece)));
-
-        // Format the template with the input variables.
-        //return TemplateFormatterMapping[TemplateFormat](template, values);
+        
         return template.ToString();
     }
 
-    //public static ValidationException CheckExamplesAndSelector(Dictionary<string, object> values)
-    //{
-    //    // Check that one and only one of examples/example_selector are provided.
-    //    List<Dictionary<string, object>> examples = values.GetValueOrDefault("examples") as List<Dictionary<string, object>>;
-    //    BaseExampleSelector exampleSelector = values.GetValueOrDefault("example_selector") as BaseExampleSelector;
-    //    if (examples != null && exampleSelector != null)
-    //    {
-    //        return new ValidationException("Only one of 'examples' and 'example_selector' should be provided");
-    //    }
+    private IEnumerable<IDictionary<string, string>> GetExamples(IDictionary<string, string> inputValues)
+    {
+        if (Examples != null)
+        {
+            return Examples;
+        }
 
-    //    if (examples == null && exampleSelector == null)
-    //    {
-    //        return new ValidationException("One of 'examples' and 'example_selector' should be provided");
-    //    }
+        if (_exampleSelector != null)
+        {
+            return _exampleSelector.SelectExamples(inputValues);
+        }
 
-    //    return null;
-    //}
-
-    //public static ValidationException TemplateIsValid(Dictionary<string, object> values)
-    //{
-    //    // Check that prefix, suffix and input variables are consistent.
-    //    if ((bool)values["validate_template"])
-    //    {
-    //        CheckValidTemplate(
-    //            (string)values["prefix"] + (string)values["suffix"],
-    //            (string)values["template_format"],
-    //            (List<string>)values["input_variables"]
-    //        );
-    //    }
-    //    return null;
-    //}
+        throw new ArgumentException("One of 'Examples' or 'ExampleSelector' should be provided");
+    }
 }
