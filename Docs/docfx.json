@@ -58,19 +58,16 @@
     "fileMetadataFiles": [],
     "template": [
       "default",
-      "templates/darkfx"
+      "templates/material"
     ],
     "postProcessors": [
       "ExtractSearchIndex"
     ],
     "globalMetadata": {
-      "_appFooter": "<span>Copyright 2023 © Pavel Osadchuk<br>Generated with <strong>DocFX</strong></span>",
+      "_appFooter": "<span>Copyright 2023 © Pavel Osadchuk for <strong>DotnetPrompt</strong><br>Generated with <strong>DocFX</strong></span>",
       "_appTitle": "DotnetPrompt",
       "_enableSearch": "true",
-      "_gitContribute": {
-        "repo": "https://github.com/xakpc/DotnetPrompt"
-      },
-      "_gitUrlPattern": "github"
+      "_appLogoPath": "./images/logo.svg"
     },
     "markdownEngineName": "markdig",
     "noLangKeyword": false,

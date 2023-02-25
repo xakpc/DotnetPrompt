@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <Folder Include="articles\LLMs\howto\" />
+    <Folder Include="articles\UseCases\" />
   </ItemGroup>
 
 </Project>
