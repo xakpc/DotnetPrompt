@@ -4,26 +4,12 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using DotnetPrompt.Abstractions.Schema;
+using DotnetPrompt.Abstractions.LLM.Schema;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 
 namespace DotnetPrompt.Abstractions.LLM;
-
-public interface ILargeLanguageModel
-{
-    /// <summary>
-    /// Run the LLM on the given prompt and input.
-    /// </summary>
-    /// <param name="prompts"></param>
-    /// <param name="stop"></param>
-    /// <returns></returns>
-    /// <exception cref="InvalidOperationException">When cache asked without </exception>
-    Task<LLMResult> GenerateAsync(IList<string> prompts, IList<string> stop = null);
-
-    string LLMType { get; }
-}
 
 public abstract class BaseModel : ILargeLanguageModel
 {
@@ -55,27 +41,29 @@ public abstract class BaseModel : ILargeLanguageModel
         IList<string> MissingPrompts)> 
         GetPromptsAsync(IList<string> prompts)
     {
-        string llmString = AsUniqueString();
+        var llmString = AsUniqueString();
 
         var existingPrompts = new Dictionary<int, IList<Generation>>();
         var missingPromptIdxs = new List<int>();
         var missingPrompts = new List<string>();
 
-        for (int i = 0; i < prompts.Count; i++)
+        for (var i = 0; i < prompts.Count; i++)
         {
             var prompt = prompts[i];
-            if (_cache != null)
+            if (_cache == null)
             {
-                var cacheVal = await LookupCacheAsync(prompt, llmString);
-                if (cacheVal != default)
-                {
-                    existingPrompts[i] = cacheVal;
-                }
-                else
-                {
-                    missingPrompts.Add(prompt);
-                    missingPromptIdxs.Add(i);
-                }
+                continue;
+            }
+
+            var cacheVal = await LookupCacheAsync(prompt, llmString);
+            if (cacheVal != default)
+            {
+                existingPrompts[i] = cacheVal;
+            }
+            else
+            {
+                missingPrompts.Add(prompt);
+                missingPromptIdxs.Add(i);
             }
         }
 
@@ -136,6 +124,7 @@ public abstract class BaseModel : ILargeLanguageModel
     /// Check Cache and run the LLM on the given prompt and input.
     /// </summary>
     /// <param name="prompt"></param>
+    /// <param name="stop"></param>
     /// <returns></returns>
     public async Task<string> PromptAsync(string prompt, List<string> stop = default)
     {
@@ -228,15 +217,14 @@ public abstract class BaseModel : ILargeLanguageModel
     /// Get the number of tokens present in the text.
     /// </summary>
     /// <param name="text"></param>
-    /// <returns></returns>
+    /// <returns>Number of words divided by 3 (on assumtion that each word on average took 3 tokens)</returns>
     public virtual int GetNumTokens(string text)
     {
         // 
         // TODO: this method may not be exact.
         // TODO: this method may differ based on model (eg codex).
         // TODO: do actual tokenization?
-
-        return text.Length;
+        return text.Split(new[]{' ', '\n'}, StringSplitOptions.RemoveEmptyEntries).Length / 3;
         //try
         //{
         //    // create a GPT-3 tokenizer instance
