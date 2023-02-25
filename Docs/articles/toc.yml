@@ -1,0 +1,8 @@
+- name: Quickstart Guide
+  href: getting_started.md
+- name: Prompt Templates
+  href: prompts/toc.yml
+- name: LLMs
+  href: LLMs/toc.yml
+- name: Chains
+  href: Chains/toc.yml
