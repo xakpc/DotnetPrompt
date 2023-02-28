@@ -28,8 +28,8 @@
       },
       {
         "files": [
-          "articles/**.md",
-          "articles/**/toc.yml",
+          "docs/**.md",
+          "docs/**/toc.yml",
           "toc.yml",
           "*.md"
         ]
@@ -64,10 +64,11 @@
       "ExtractSearchIndex"
     ],
     "globalMetadata": {
-      "_appFooter": "<span>Copyright 2023 © Pavel Osadchuk for <strong>DotnetPrompt</strong><br>Generated with <strong>DocFX</strong></span>",
+      "_appFooter": "<span>Copyright 2023 © Pavel <i>«xakpc»</i> Osadchuk for <strong>DotnetPrompt</strong></span>",
       "_appTitle": "DotnetPrompt",
       "_enableSearch": "true",
-      "_appLogoPath": "./images/logo.svg"
+      "_appLogoPath": "./images/logo.svg",
+      "_appFaviconPath": "./images/logo.svg"
     },
     "markdownEngineName": "markdig",
     "noLangKeyword": false,

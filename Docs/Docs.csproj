@@ -7,6 +7,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="docs\UseCases\chatbots.md" />
+    <None Remove="docs\UseCases\code_generation.md" />
+    <None Remove="docs\UseCases\question_answering.md" />
+    <None Remove="docs\UseCases\summarization.md" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="docs\UseCases\code_generation.md" />
+    <Compile Include="docs\UseCases\question_answering.md" />
+    <Compile Include="docs\UseCases\chatbots.md" />
+    <Compile Include="docs\UseCases\summarization.md" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="docfx.console" Version="2.59.4">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -15,8 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="articles\LLMs\howto\" />
-    <Folder Include="articles\UseCases\" />
+    <Folder Include="docs\LLMs\howto\" />
   </ItemGroup>
 
 </Project>
