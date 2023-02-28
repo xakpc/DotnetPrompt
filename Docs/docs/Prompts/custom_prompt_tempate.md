@@ -17,7 +17,7 @@ The only two requirements for all prompt templates are:
 
 These requirements set in `IPromptTemplate` interface, so your custom prompt template should implement it.
 
-[!code-csharp[](../../../../DotnetPrompt.Abstractions/Prompts/IPromptTemplate.cs#L6-L23)]
+[!code-csharp[](../../../DotnetPrompt.Abstractions/Prompts/IPromptTemplate.cs#L6-L23)]
 
 Let's create a custom prompt template that takes in the python file and function name as input, and formats the prompt template to provide the source code of the function.
 
@@ -29,13 +29,13 @@ IEnumerable<(string Name, string Def, string Body)> GetPythonMethods(string file
 
 Next, we'll create a custom prompt template that takes in the file path and the function name as input, and formats the prompt template to provide the source code of the function.
 
-[!code-csharp[](../../../../DotnetPrompt.Tests.Examples/Prompts/PromptTemplateExamples.cs#Example_CustomPromptTemplate_FunctionExplainerPromptTemplate)]
+[!code-csharp[](../../../DotnetPrompt.Tests.Examples/Prompts/PromptTemplateExamples.cs#Example_CustomPromptTemplate_FunctionExplainerPromptTemplate)]
 
 # Use the custom prompt template
 
 Now that we have created a custom prompt template, we can use it to generate prompts for our task.
 
-[!code-csharp[](../../../../DotnetPrompt.Tests.Examples/Prompts/PromptTemplateExamples.cs#Example_CustomPromptTemplate)]
+[!code-csharp[](../../../DotnetPrompt.Tests.Examples/Prompts/PromptTemplateExamples.cs#Example_CustomPromptTemplate)]
 
 Generated output:
 

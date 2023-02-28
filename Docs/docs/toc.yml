@@ -6,3 +6,7 @@
   href: LLMs/toc.yml
 - name: Chains
   href: Chains/toc.yml
+- name: Tools
+  href: Tools/toc.yml
+- name: Use Cases
+  href: UseCases/toc.yml
