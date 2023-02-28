@@ -1,18 +1,28 @@
 # General Road Map
 The roadmap of the project
 
+### Architecture
+
+[] Faulted state handling
+[] Chain Validation
+[] Generic Chain
+
 ### Infrastructure
+
+[] netstandard
 [] PythonToDotnet Chain
 [] Documentation generation 
 [] NuGet building and deploying
 [] PR flow setup
 
 ### Dotnet stack support
+
 [] NuGet Meta-package
 [] NuGet ASP.NET/CI support
 [] Configuration binding
 
 ### LLMs
+
 [x] BaseLLM
 [x] OpenAI
 [] AzureOpenAI
@@ -28,17 +38,21 @@ The roadmap of the project
 [] PromptLayerOpenAI
 
 ### Prompts
+
 [x] PromptTemplate
 [] MustashePromptTemplate
-[] FewShotPromptTemplate
+[x] FewShotPromptTemplate
 [] LengthBasedExampleSelector
 [] MaxMarginalRelevanceExampleSelector
 [] SemanticSimilarityExampleSelector
 
 ### Chains
-[] LLMChain
-[] SequentialChain
+
+[x] ModelChain
+[x] SequentialChain
 [] StuffDocumentsChain
+[] Conversation Chain
+[] Question Answering Chain
 [] RefineDocumentsChain
 [] MapReduceDocumentsChain
 [] MapRerankDocumentsChain
@@ -58,8 +72,24 @@ The roadmap of the project
 [] SequentialChain
 [] VectorDBQA
 [] VectorDBQAWithSourcesChain
+[] Vector DB QA Chain
+[] Chat Vector DB QA Chain
+
+## Indexes
+
+[] Documents
+[] Embeddings
+[] Text Splitter
+[] Vectorstores
+
+## Use-Cases
+
+[] Website search
+[] Chatbot
+[]
 
 ### Utils
+
 [] Python REPL ()
 [] SerpAPI
 [] SearxNG Search
@@ -69,6 +99,7 @@ The roadmap of the project
 [] VectorStores
 
 ### Agents
+
 [] Agent
 [] ConversationalAgent
 [] ReActChain
@@ -77,4 +108,10 @@ The roadmap of the project
 [] ZeroShotAgent
 
 ### Memory
+
+[] Buffer Memory
 [] Memory
+
+## Examples
+
+[] Describe Unit Test
