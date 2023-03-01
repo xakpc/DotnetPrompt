@@ -28,8 +28,4 @@
     <PackageReference Include="memberpage" Version="2.59.4" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="docs\LLMs\howto\" />
-  </ItemGroup>
-
 </Project>

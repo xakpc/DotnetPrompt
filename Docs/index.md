@@ -21,11 +21,11 @@ You could start with the below guide for a walkthrough of how to get started usi
 
 ## Basic Blocks
 
-Several basic blocks are available in DotnetPrompt, and several more are coming soon.
+Several basic components are available in DotnetPrompt, and several more are coming soon.
 
-We provide how-to guides to get started, examples, and reference docs for each block.
+We provide how-to guides to get started, examples, and reference docs for each component.
 
-- [Prompts](./docs/prompts/getting_started.md): Prompts are how you communicate with LLMs. This block includes prompt management, optimization, and usage of few-shot prompts.
+- [Prompts](./docs/prompts/getting_started.md): Prompts are how you communicate with LLMs. This component includes prompt management, optimization, and usage of few-shot prompts.
 
 - [LLMs](./docs/LLMs/getting_started.md): LLM is a generic interface for Large Language Models provider. We have implementation for some widespread providers and standard utilities for working with them out of the box.
 
@@ -35,7 +35,7 @@ We provide how-to guides to get started, examples, and reference docs for each b
 
 ## Use Cases
     
-DotnetPrompt provides examples of several common use cases, and this documentation offers guidance and assistance on how to use the blocks in different ways.
+DotnetPrompt provides examples of several common use cases, and this documentation offers guidance and assistance on how to use the components in different ways.
 
 - [Summarization](./docs/usecases/summarization.md): Summarizing longer documents into shorter, more condensed chunks of information.
 

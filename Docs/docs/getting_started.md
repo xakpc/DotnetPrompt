@@ -1,5 +1,3 @@
-using ThreadAbortException = System.Threading.ThreadAbortException;
-
 # Quickstart Guide
 
 The tutorial provides step-by-step instructions for creating a complete language model application using DotnetPrompt.
@@ -19,14 +17,14 @@ You could also install separate packages
 > dotnet add package DotnetPrompt.LLM.OpenAI --version 1.0.0-alpha.1
 ```
 
-DotnetPrompt provides many blocks that can be used to build language model applications. 
-Blocks can be combined to create complex applications, or be used individually for simple applications.
+DotnetPrompt provides several components that can be used to build language model applications. 
+They can be combined to create complex applications, or be used individually for simple applications.
 
 ## LLMs: Get predictions from a language model
 
 DotnetPrompt's fundamental component is its `ILargeLanguageModel`, 
 which serves as a client that calls a language model on a given input.
-We provide several out of the box implementations of the interface for different providers.
+We provide several out of the box implementations of the interface for different popular providers.
 
 Let's utilize the `OpenAIModel`, which employs the OpenAI REST API to generate completions based on the input prompt. 
 
@@ -40,8 +38,7 @@ var llm = new OpenAIModel(Constants.OpenAIKey, OpenAIModelConfiguration.Default 
         });
 ```
 
-For simplicity we provide `PromptAsync` extension method, 
-which take a single string as input and return generated result.
+For simplicity we provide `PromptAsync` extension method, which take a single string as input and return generated result.
 
 For example, if your friend sent you a message saying `I'm getting so old` you might input `What's a funny response to 'I'm getting so old'?` as the prompt. 
 
@@ -67,7 +64,6 @@ For instance, in the previous example, the text we provided was hardcoded to req
 response for theoretical friend message. 
 In a real-world scenario, we would only take the user 
 input, actual message, and utilize that information to format the prompt.
-
 
 First lets define the prompt template:
 
@@ -99,29 +95,20 @@ For more details, [check out the getting started guide for prompts.](./prompts/g
 Few-shot learning is a type of machine learning technique where a model is trained to learn from a small set of examples, 
 typically a few dozen or less, and can generalize to new examples with similar characteristics. 
 
-For example, few-shot learning could be used to train a chatbot to understand and 
-respond to user queries in a new domain with minimal training data.
-
 By leveraging a few-shot learning model, developers can quickly train a system to perform a specific task with minimal data, reducing the time and cost required to develop a fully-fledged AI system. 
 
-For instance, OpenAI's GPT-3 can be used to perform a wide range of 
+DotnetPrompt offers a convenient `FewShotPromptTemplate` to simplify the process of using Few Shot Learning effectively and with minimal effort.
+
+For instance, it can be used to perform a wide range of 
 [tasks](./prompts/few_shots_example.md), such as [summarization](./prompts/few_shots_example.md#summarization), 
 [question answering](./prompts/few_shots_example.md#question-answering), 
 and [language translation](./prompts/few_shots_example.md##machine-translation), with only a few examples of each task. 
-
-DotnetPrompt provides a `FewShotPromptTemplate` to ease utilizing Few Shot Learning efficiently and with minimal hassle. 
 
 ## Chains: Combine LLMs and prompts in multi-step workflows
 
 In real applications we usually need to do more actions, data transformation or even use several different prompts/models.
 
-In DotnetPrompt, we combine different building blocks to create a chain of actions. 
-These building blocks are called chains (even if they constins only one action), and they can be `Models` or other chains.
-
-Each chain has an `Input` and an `Output` property, which can be connected to other chains or blocks.
-The most basic type of chain is called a `ModelChain`. It's made up of two parts: a `PromptTemplate` and an LLM.
-
-![Image](../images/ichain.png)
+In DotnetPrompt, we combine different building blocks to create a chain of actions. Chain could have only a one element as well.
 
 For example, let's say we want to create a `ModelChain` that takes user input, formats it with a `PromptTemplate`, 
 and sends it to an LLM. This allows us to generate a response based on the user's input.
@@ -147,7 +134,7 @@ var chain = new ModelChain(oneInputPrompt, llm);
 var executor = chain.GetExecutor();
 ```
 
-Now we can run that chain only specifying the product!
+Now we can run that chain only specifying input value.
 
 ```csharp
 var result = await executor.PromptAsync("I have some exciting news to share with you!");
@@ -156,6 +143,7 @@ Console.WriteLine(result);
 ```text
 > I'm all ears! Hit me with it!
 ```
+
 Or with another input
 
 ```csharp
@@ -187,7 +175,16 @@ The result
 > Bring out your true colors with Soxicolor!
 ```
 
-
 ## Dependency Injecton
 
-Every block in DotnetPrompt could be created manually using constructor. But in complex applications in might be wise to use Dependency Injection especially if you want to use `ILogger` and `IDistributedCache`.
+Every component in DotnetPrompt could be created manually using constructor. But in complex applications in might be wise to use Dependency Injection especially if you want to use `ILogger` and `IDistributedCache`.
+
+Models could be injected as `Scoped` and we recomend to inject Chains as Transient or build them manually on demand.
+
+OpenAI could be registered in DI with helper method
+
+```csharp
+    services.AddOpenAIModel();
+```
+
+Currently dependency injecton support is in very early state, but it will be improved in future.
