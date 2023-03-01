@@ -54,5 +54,17 @@ You could pass input variables into `PromptTempalte` constructor as a `List<stri
 var oneInputPrompt = new PromptTemplate(template: "Tell me a {adjective} joke.");
 ```
 
+If you want to pass symbols '{' or '}' as a part of a prompt you should escape them like this
+
+```csharp
+ new PromptTemplate(template: "{{ \"code\": \"{value}\" }}");
+```
+
+which will produce final string after formatting and set up value
+
+```text
+{ "code": "input value" }
+```
+
 When you want to fill template with values you need to use `Dictionary<string, string>` where keys should be the same as your input variables and values could be
 any valid string that need to be fill in template.

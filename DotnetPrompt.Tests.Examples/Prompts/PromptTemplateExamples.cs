@@ -1,4 +1,5 @@
-﻿using DotnetPrompt.Abstractions.Prompts;
+﻿using DotnetPrompt.Abstractions.LLM;
+using DotnetPrompt.Abstractions.Prompts;
 using DotnetPrompt.LLM.OpenAI;
 using DotnetPrompt.Prompts;
 using Microsoft.Extensions.Logging.Abstractions;
@@ -55,63 +56,4 @@ public class PromptTemplateExamples
         //> "Tell me a funny joke about chickens."
         #endregion
     }
-
-    [Test]
-    public async Task Example_CustomPromptTemplate()
-    {
-        #region Example_CustomPromptTemplate
-        var funcExplainer = new FunctionExplainerPromptTemplate();
-
-        var methods = PythonHelpers.GetPythonMethods("data/test_base.py").ToList();
-
-        foreach (var (name, def, body) in methods)
-        {
-            // Generate a prompt for the function "format" if python file "data/few_shot.py"
-            var values = new Dictionary<string, string>()
-            {
-                {"function_file","data/test_base.py"},
-                {"function_name",name},
-            };
-
-            var prompt = funcExplainer.Format(values);
-            //Console.WriteLine(prompt);
-            // Arrange
-            var llm = new OpenAIModel("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",
-                OpenAIModelConfiguration.Default with { MaxTokens = -1 },
-                NullLogger.Instance);
-
-            // Act
-            var output = await llm.PromptAsync(prompt);
-            Console.WriteLine(output);
-        }
-
-        #endregion
-    }
-
-    #region Example_CustomPromptTemplate_FunctionExplainerPromptTemplate
-    internal class FunctionExplainerPromptTemplate : IPromptTemplate
-    {
-        public FunctionExplainerPromptTemplate()
-        {
-            InputVariables = new List<string>() { "function_file", "function_name" };
-        }
-
-        public IList<string> InputVariables { get; set; }
-
-        public string Format(IDictionary<string, string> values)
-        {
-            // Get the source code of the function
-            var methods = PythonHelpers.GetPythonMethods(values["function_file"]);
-            var method = methods.First(m => m.Name == values["function_name"]);
-
-            // Generate the prompt to be sent to the language model
-            var prompt = "Given the function python source code, generate an C# version of the function.\n" +
-                         "Source Code:\n" +
-                         method.Def +
-                         method.Body +
-                         "C# version of the function:\n";
-            return prompt;
-        }
-    }
-    #endregion
 }

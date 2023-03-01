@@ -4,7 +4,5 @@
   href: prompt_template.md
 - name: Few Shot Prompt Template
   href: few_shots_example.md
-- name: Custom Prompt Template
-  href: custom_prompt_tempate.md
 - name: Reference
   href: api/DotnetPrompt.Prompts.yml

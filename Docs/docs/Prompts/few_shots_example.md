@@ -11,7 +11,7 @@ The `FewShotPromptTemplate` class would take your prefix, examples and suffix an
 
 All of these examples can be found as unit tests in the [GitHub repository](). 
 
-Most of these examples are quite basic, and better results can be achieved more efficiently by using [chains]().
+Most of these examples are quite basic, and better results can be achieved more efficiently by using [chains](../Chains/getting_started.md).
 
 ## Sentiment Analysis 
 
@@ -140,8 +140,6 @@ going to remember anything about the previous requests you made.
 In many Natural Language Processing situations it's not a problem (summarization, classification, paraphras, etc), 
 but as far as chatbots are concerned it's definitely an issue because we do want our chatbot to memorize the discussion history in order to make more relevant responses.
 
-You could explore a proper chatbot, with memory, based on our `ConversationChain` [here]();
-
 ## Intent Classification
 
 [!code-csharp[](../../../DotnetPrompt.Tests.Examples/Chains/FewShotModelExamples.cs#Example_ModelChainFewShotPromptTemplate_IntentClassification)]
@@ -175,9 +173,6 @@ You could explore a proper chatbot, with memory, based on our `ConversationChain
 > Boris Roizman is the founder of the Museum of Nevyansk Icon, the first private museum to collect icon-paintings, located in Yekaterinburg, Russia. The museum houses over 600 exhibits, including icons, gospel covers, crosses, books, and wooden sculptures, ranging from The Egyptian Mother of God (1734) to Christ Pantocrator (1919). Roizman was responsible for finding, searching, and restoring the icons.
 ```
 Note: Roizman actual name is [Yevgeny](https://en.wikipedia.org/wiki/Yevgeny_Roizman)
-
-
-There are better ways to Summarize big texts like this. Check [Summarization section]() for several examples of pre-built chains for text summarizing.
 
 ## Zero-shot text classification
 
@@ -236,4 +231,4 @@ var example = new PromptTemplate("Keyword: {keyword}\nTweet: {tweet}");
 var suffix = new PromptTemplate("Keyword: {keyword}\nTweet: ");
 ```
 
-This obviously could be expanded to entire codebase generation. You could check [PythonToDotnet]() chain for example of such case.
+This obviously could be expanded to entire codebase generation.
