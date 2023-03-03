@@ -18,6 +18,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CC660958-1CEA-4D40-9657-A9982BB14C5A}"
 	ProjectSection(SolutionItems) = preProject
 		CONTRIBUTING.md = CONTRIBUTING.md
+		Directory.Build.props = Directory.Build.props
 		README.md = README.md
 		ROADMAP.md = ROADMAP.md
 	EndProjectSection
@@ -29,6 +30,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotnetPrompt.LLM.CohereAI", "src\DotnetPrompt.LLM.CohereAI\DotnetPrompt.LLM.CohereAI.csproj", "{1AE592BE-EC53-4064-BFA4-0DA37585A4C8}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotnetPrompt.Abstractions", "src\DotnetPrompt.Abstractions\DotnetPrompt.Abstractions.csproj", "{9DE69DEB-2EE3-402F-BFBA-0EE1CEEB5BAB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotnetPrompt.All", "src\DotnetPrompt.All\DotnetPrompt.All.csproj", "{5DF14023-BFBF-4EE0-8EBB-346EA34D24DC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -68,6 +71,10 @@ Global
 		{9DE69DEB-2EE3-402F-BFBA-0EE1CEEB5BAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9DE69DEB-2EE3-402F-BFBA-0EE1CEEB5BAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9DE69DEB-2EE3-402F-BFBA-0EE1CEEB5BAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5DF14023-BFBF-4EE0-8EBB-346EA34D24DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DF14023-BFBF-4EE0-8EBB-346EA34D24DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DF14023-BFBF-4EE0-8EBB-346EA34D24DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DF14023-BFBF-4EE0-8EBB-346EA34D24DC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Version>1.0.0-alpha.1</Version>
+    <Title>DotnetPrompt Meta-Package</Title>
+    <PackageIcon>icon.png</PackageIcon>
+    <RepositoryUrl>https://github.com/xakpc/DotnetPrompt</RepositoryUrl>
+    <Description>DotnetPrompt is a dotnet library that provides a set of tools for working with Large Language Models (LLMs) combined in chains.</Description>
+	<IncludeBuildOutput>false</IncludeBuildOutput>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\docs\images\icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DotnetPrompt.Abstractions\DotnetPrompt.Abstractions.csproj" />
+    <ProjectReference Include="..\DotnetPrompt.LLM.OpenAI\DotnetPrompt.LLM.OpenAI.csproj" />
+    <ProjectReference Include="..\DotnetPrompt\DotnetPrompt.csproj" />
+  </ItemGroup>
+
+</Project>

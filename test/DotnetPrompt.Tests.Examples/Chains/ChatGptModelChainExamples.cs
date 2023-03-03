@@ -81,4 +81,32 @@ public class ChatGptModelChainExamples
         Console.WriteLine(answer22["answer"]);
         #endregion
     }
+
+    [Test]
+    public async Task Example_ChatGpt_GettingStarted()
+    {
+        var llm = new ChatGptModel(Constants.OpenAIKey, ChatGptModelConfiguration.Default with
+        {
+            Temperature = 0.9f
+        });
+
+        var oneInputPrompt = new PromptTemplate("What's a funny response to '{message}'");
+
+        //We can now create a very simple chain that will take user input, format the prompt with it, and then send it to the LLM:
+
+        var chain = new ModelChain(oneInputPrompt, llm);
+        var executor = chain.GetExecutor();
+
+        //Now we can run that chain only specifying input value.
+
+        var result = await executor.PromptAsync("I have some exciting news to share with you!");
+        Console.WriteLine(result);
+        // > "I hope it's not that you finally learned how to tie your shoes, because that's not that exciting."
+
+        // Or with another input
+        var result2 = await executor.PromptAsync("Want to grab lunch later?");
+        Console.WriteLine(result2);
+        // > "I would, but I'm on a "seefood" diet - I see food and I eat it. So better not tempt me!"
+    }
+
 }

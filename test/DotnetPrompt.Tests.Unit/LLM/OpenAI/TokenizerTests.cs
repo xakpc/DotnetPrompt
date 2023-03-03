@@ -1,4 +1,4 @@
-﻿using DotnetPrompt.LLM.OpenAI.Encoder;
+﻿using AI.Dev.OpenAI.GPT;
 using NUnit.Framework;
 
 namespace DotnetPrompt.Tests.Unit.LLM.OpenAI;
@@ -10,7 +10,7 @@ public class TokenizerTests
     [TestCase("The models understand the statistical relationships between these tokens", new[] { 464, 4981, 1833, 262, 13905, 6958, 1022, 777, 16326 })]
     public void Gpt3Tokenizer_Encode_EqualToGpt2Tiktoken(string input, int[] expected)
     {
-        var result = Gpt3Tokenizer.Encode(input);
+        var result = GPT3Tokenizer.Encode(input);
         CollectionAssert.AreEqual(result, expected);
     }
 }
