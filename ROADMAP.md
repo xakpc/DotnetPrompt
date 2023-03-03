@@ -39,12 +39,13 @@ The roadmap of the project
 
 ### Prompts
 
-[x] PromptTemplate
-[] MustashePromptTemplate
-[x] FewShotPromptTemplate
-[] LengthBasedExampleSelector
-[] MaxMarginalRelevanceExampleSelector
-[] SemanticSimilarityExampleSelector
+- [x] PromptTemplate
+- [ ] MustashePromptTemplate
+- [x] FewShotPromptTemplate
+- [x] ChatMLPromptTemplate
+- [ ] LengthBasedExampleSelector
+- [ ] MaxMarginalRelevanceExampleSelector
+- [ ] SemanticSimilarityExampleSelector
 
 ### Chains
 
