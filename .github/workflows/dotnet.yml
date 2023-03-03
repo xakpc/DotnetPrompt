@@ -25,4 +25,4 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
     - name: Test
-      run: dotnet test test\DotnetPrompt.Tests.Unit\DotnetPrompt.Tests.Unit.csproj --no-build --verbosity normal
+      run: dotnet test /home/runner/work/DotnetPrompt/DotnetPrompt/test/DotnetPrompt.Tests.Unit/DotnetPrompt.Tests.Unit.csproj --no-build --verbosity normal
