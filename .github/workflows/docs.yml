@@ -26,7 +26,7 @@ jobs:
       with:
         dotnet-version: 6.x
 
-    - run: dotnet restore
+    - run: dotnet restore ${{env.SOLUTION_FILE_PATH}}
     - run: dotnet tool update -g docfx
     - run: docfx docs/docfx.json
 
