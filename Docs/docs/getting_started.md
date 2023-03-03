@@ -204,7 +204,7 @@ with each other asynchronously, and it uses a dataflow model to promote actor-ba
 For simple chaining we provide a special kind of chain called `SequentialChain`. 
 It consume several other chains and linking them together by assinging outputs to inputs between chains.
 
-[!code-csharp[](../../DotnetPrompt.Tests.Examples/Chains/CombinedChainExamples.cs#SequentialChain_Example)]
+[!code-csharp[](../../test/DotnetPrompt.Tests.Examples/Chains/CombinedChainExamples.cs#SequentialChain_Example)]
 
 The result
 

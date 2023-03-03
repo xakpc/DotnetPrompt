@@ -14,11 +14,11 @@ You would need to [get an API key](https://platform.openai.com/account/api-keys)
 
 Create model
 
-[!code-csharp[](../../../../DotnetPrompt.Tests.Examples/LLMs/ChatGptModelExamples.cs#CreateOpenAiModel)]
+[!code-csharp[](../../../../test/DotnetPrompt.Tests.Examples/LLMs/ChatGptModelExamples.cs#CreateOpenAiModel)]
 
 Send prompt to get result
 
-[!code-csharp[](../../../../DotnetPrompt.Tests.Examples/LLMs/ChatGptModelExamples.cs#Example_PromptLLM)]
+[!code-csharp[](../../../../test/DotnetPrompt.Tests.Examples/LLMs/ChatGptModelExamples.cs#Example_PromptLLM)]
 
 Output
 

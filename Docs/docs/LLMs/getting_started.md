@@ -19,11 +19,11 @@ dotnet add package DotnetPrompt.LLM.OpenAI --version 0.0.1-alpha1
 
 To create model manually
 
-[!code-csharp[](../../../DotnetPrompt.Tests.Examples/LLMs/OpenAIModelExamples.cs#CreateOpenAiModel)]
+[!code-csharp[](../../../test/DotnetPrompt.Tests.Examples/LLMs/OpenAIModelExamples.cs#CreateOpenAiModel)]
 
 **Generate Text**: The most basic functionality an LLM has is the ability to call `PromptAsync` it, passing in a string and getting back a string.
 
-[!code-csharp[](../../../DotnetPrompt.Tests.Examples/LLMs/OpenAIModelExamples.cs#Example_PromptLLM)]
+[!code-csharp[](../../../test/DotnetPrompt.Tests.Examples/LLMs/OpenAIModelExamples.cs#Example_PromptLLM)]
 
 Result would be:
 
@@ -35,7 +35,7 @@ Result would be:
 **Generate**: More broadly, you can call `GenerateAsync` with a list of inputs, getting back a more complete response than just the text. 
 This complete response includes things like multiple top responses, as well as LLM providers' specific information.
 
-[!code-csharp[](../../../DotnetPrompt.Tests.Examples/LLMs/OpenAIModelExamples.cs#Example_GenerateAsync)]
+[!code-csharp[](../../../test/DotnetPrompt.Tests.Examples/LLMs/OpenAIModelExamples.cs#Example_GenerateAsync)]
 
 This example will take two inputs and generate two completions per each input. 
 

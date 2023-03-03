@@ -45,7 +45,7 @@ What is a good name for a company that makes mobile phone?
 
 You can create prompts using the `PromptTemplate` class. Prompt templates can take any number of *input variables*, and can be formatted with *input values* to generate a prompt.
 
-[!code-csharp[Example_CreatingPromptTemplate](../../../DotnetPrompt.Tests.Examples/Prompts/PromptTemplateExamples.cs#Example_CreatingPromptTemplate)]
+[!code-csharp[Example_CreatingPromptTemplate](../../../test/DotnetPrompt.Tests.Examples/Prompts/PromptTemplateExamples.cs#Example_CreatingPromptTemplate)]
 
 When you want to fill template with values you need to use `Dictionary<string, string>` where keys should be the same as your input variables and values could be
 any valid string that need to be fill in template.
@@ -72,7 +72,7 @@ This allows the user to create prompts with a few examples that can significantl
 For a complete list of examples and use cases for few-shot learning, you can refer to [this page](./few_shots_example.md). 
 Here's an example to demonstrate how FewShotPromptTemplate works:
 
-[!code-csharp[](../../../DotnetPrompt.Tests.Examples/Prompts/FewShotPromptTemplateExamples.cs#Example_FewShotPromptTemplate_Simple)]
+[!code-csharp[](../../../test/DotnetPrompt.Tests.Examples/Prompts/FewShotPromptTemplateExamples.cs#Example_FewShotPromptTemplate_Simple)]
 
 ```text
 I want you to act as a naming consultant for new companies.

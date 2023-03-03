@@ -17,7 +17,7 @@ Most of these examples are quite basic, and better results can be achieved more 
 
 ## Sentiment Analysis 
 
-[!code-csharp[](../../../DotnetPrompt.Tests.Examples/Chains/FewShotModelExamples.cs#Example_ModelChainFewShotPromptTemplate_SentimentAnalysis)]
+[!code-csharp[](../../../test/DotnetPrompt.Tests.Examples/Chains/FewShotModelExamples.cs#Example_ModelChainFewShotPromptTemplate_SentimentAnalysis)]
 
 ```text
 > answer1: Positive
@@ -27,7 +27,7 @@ Most of these examples are quite basic, and better results can be achieved more 
 
 ## HTML code generation
 
-[!code-csharp[](../../../DotnetPrompt.Tests.Examples/Chains/FewShotModelExamples.cs#Example_ModelChainFewShotPromptTemplate_HTMLGeneration)]
+[!code-csharp[](../../../test/DotnetPrompt.Tests.Examples/Chains/FewShotModelExamples.cs#Example_ModelChainFewShotPromptTemplate_HTMLGeneration)]
 
 Generated HTML
 
@@ -48,9 +48,9 @@ Generated HTML
 
 For this example a helper method was introduced to convert from anonymous object to `IDictionary` to pass it into the LLM
 
-[!code-csharp[](../../../DotnetPrompt.Tests.Examples/Chains/FewShotModelExamples.cs#Example_ModelChainFewShotPromptTemplate_SQLGeneration)]
+[!code-csharp[](../../../test/DotnetPrompt.Tests.Examples/Chains/FewShotModelExamples.cs#Example_ModelChainFewShotPromptTemplate_SQLGeneration)]
 
-[!code-csharp[](../../../DotnetPrompt.Tests.Examples/Chains/FewShotModelExamples.cs#Example_ObjectExtension)]
+[!code-csharp[](../../../test/DotnetPrompt.Tests.Examples/Chains/FewShotModelExamples.cs#Example_ObjectExtension)]
 
 Generated SQL
 
@@ -64,7 +64,7 @@ Generated SQL
 
 ## Advanced Entity Extraction (NER)
 
-[!code-csharp[](../../../DotnetPrompt.Tests.Examples/Chains/FewShotModelExamples.cs#Example_ModelChainFewShotPromptTemplate_NERGeneration)]
+[!code-csharp[](../../../test/DotnetPrompt.Tests.Examples/Chains/FewShotModelExamples.cs#Example_ModelChainFewShotPromptTemplate_NERGeneration)]
 
 ```text
 >  David Melvin
@@ -83,7 +83,7 @@ Note, that we asked to complete text after `[Name]: ` text, and that exactly wha
 
 ## Question Answering
 
-[!code-csharp[](../../../DotnetPrompt.Tests.Examples/Chains/FewShotModelExamples.cs#Example_ModelChainFewShotPromptTemplate_QuestionAnswering)]
+[!code-csharp[](../../../test/DotnetPrompt.Tests.Examples/Chains/FewShotModelExamples.cs#Example_ModelChainFewShotPromptTemplate_QuestionAnswering)]
 
 ```text
 > The "Pro" plan.
@@ -94,7 +94,7 @@ Note, that we asked to complete text after `[Name]: ` text, and that exactly wha
 
 ## Grammar and Spelling Correction
 
-[!code-csharp[](../../../DotnetPrompt.Tests.Examples/Chains/FewShotModelExamples.cs#Example_ModelChainFewShotPromptTemplate_GrammarCorrection)]
+[!code-csharp[](../../../test/DotnetPrompt.Tests.Examples/Chains/FewShotModelExamples.cs#Example_ModelChainFewShotPromptTemplate_GrammarCorrection)]
 
 ```text
 > I do not want to go.
@@ -105,7 +105,7 @@ Note, that we asked to complete text after `[Name]: ` text, and that exactly wha
 
 ## Machine Translation
 
-[!code-csharp[](../../../DotnetPrompt.Tests.Examples/Chains/FewShotModelExamples.cs#Example_ModelChainFewShotPromptTemplate_MachineTranslation)]
+[!code-csharp[](../../../test/DotnetPrompt.Tests.Examples/Chains/FewShotModelExamples.cs#Example_ModelChainFewShotPromptTemplate_MachineTranslation)]
 
 ```text
 > Do you speak French?
@@ -116,7 +116,7 @@ Note, that we asked to complete text after `[Name]: ` text, and that exactly wha
 
 ## Tweet Generation
 
-[!code-csharp[](../../../DotnetPrompt.Tests.Examples/Chains/FewShotModelExamples.cs#Example_ModelChainFewShotPromptTemplate_TweetGeneration)]
+[!code-csharp[](../../../test/DotnetPrompt.Tests.Examples/Chains/FewShotModelExamples.cs#Example_ModelChainFewShotPromptTemplate_TweetGeneration)]
 
 ```text
 > Life is like a box of cats, you never know what you're gonna get! 
@@ -127,7 +127,7 @@ Note, that we asked to complete text after `[Name]: ` text, and that exactly wha
 
 ## Chatbot and Conversational AI
 
-[!code-csharp[](../../../DotnetPrompt.Tests.Examples/Chains/FewShotModelExamples.cs#Example_ModelChainFewShotPromptTemplate_Chatbot)]
+[!code-csharp[](../../../test/DotnetPrompt.Tests.Examples/Chains/FewShotModelExamples.cs#Example_ModelChainFewShotPromptTemplate_Chatbot)]
 
 ```text
 > I'm sorry to hear that. Is there anything I can do to help?
@@ -144,7 +144,7 @@ but as far as chatbots are concerned it's definitely an issue because we do want
 
 ## Intent Classification
 
-[!code-csharp[](../../../DotnetPrompt.Tests.Examples/Chains/FewShotModelExamples.cs#Example_ModelChainFewShotPromptTemplate_IntentClassification)]
+[!code-csharp[](../../../test/DotnetPrompt.Tests.Examples/Chains/FewShotModelExamples.cs#Example_ModelChainFewShotPromptTemplate_IntentClassification)]
 
 ```text
 > teach Chinese
@@ -155,7 +155,7 @@ but as far as chatbots are concerned it's definitely an issue because we do want
 
 ## Paraphrasing
 
-[!code-csharp[](../../../DotnetPrompt.Tests.Examples/Chains/FewShotModelExamples.cs#Example_ModelChainFewShotPromptTemplate_Paraphrasing)]
+[!code-csharp[](../../../test/DotnetPrompt.Tests.Examples/Chains/FewShotModelExamples.cs#Example_ModelChainFewShotPromptTemplate_Paraphrasing)]
 
 ```text
 > In 2023, nature positive travel is expected to become popular as travelers look for ways to reduce and undo their environmental footprint.
@@ -166,7 +166,7 @@ but as far as chatbots are concerned it's definitely an issue because we do want
 
 ## Summarization
 
-[!code-csharp[](../../../DotnetPrompt.Tests.Examples/Chains/FewShotModelExamples.cs#Example_ModelChainFewShotPromptTemplate_Summarization)]
+[!code-csharp[](../../../test/DotnetPrompt.Tests.Examples/Chains/FewShotModelExamples.cs#Example_ModelChainFewShotPromptTemplate_Summarization)]
 
 ```text
 > The season three finale of Succession saw Logan Roy defy his children by selling Waystar Royco to a Swedish tech bro, setting up a bold new future for the show. Season four could pick up at the moment of Logan's betrayal and focus on the Roy siblings' efforts to reorganize their rebellion against him.
@@ -178,7 +178,7 @@ Note: Roizman actual name is [Yevgeny](https://en.wikipedia.org/wiki/Yevgeny_Roi
 
 ## Zero-shot text classification
 
-[!code-csharp[](../../../DotnetPrompt.Tests.Examples/Chains/FewShotModelExamples.cs#Example_ModelChainFewShotPromptTemplate_TextClassification)]
+[!code-csharp[](../../../test/DotnetPrompt.Tests.Examples/Chains/FewShotModelExamples.cs#Example_ModelChainFewShotPromptTemplate_TextClassification)]
 
 ```text
 > cooking
@@ -189,7 +189,7 @@ Note: Roizman actual name is [Yevgeny](https://en.wikipedia.org/wiki/Yevgeny_Roi
 
 ## Keyword and Keyphrase Extraction
 
-[!code-csharp[](../../../DotnetPrompt.Tests.Examples/Chains/FewShotModelExamples.cs#Example_ModelChainFewShotPromptTemplate_KeywordExtraction)]
+[!code-csharp[](../../../test/DotnetPrompt.Tests.Examples/Chains/FewShotModelExamples.cs#Example_ModelChainFewShotPromptTemplate_KeywordExtraction)]
 
 ```text
 > transformer, token, errors, inputting, document, paragraphs, mean pooling
@@ -200,7 +200,7 @@ Note: Roizman actual name is [Yevgeny](https://en.wikipedia.org/wiki/Yevgeny_Roi
 
 Keyword extraction is the process of identifying the main ideas from a text. Keyphrase extraction is similar, but it involves extracting multiple words.
 
-[!code-csharp[](../../../DotnetPrompt.Tests.Examples/Chains/FewShotModelExamples.cs#Example_ModelChainFewShotPromptTemplate_KeyphraseExtraction)]
+[!code-csharp[](../../../test/DotnetPrompt.Tests.Examples/Chains/FewShotModelExamples.cs#Example_ModelChainFewShotPromptTemplate_KeyphraseExtraction)]
 
 ```text
 > transformer models, token limit, large documents, splitting, mean pooling
@@ -213,7 +213,7 @@ This time, instead of extracting one single word, we want to extract several wor
 
 ## Product Description and Ad Generation
 
-[!code-csharp[](../../../DotnetPrompt.Tests.Examples/Chains/FewShotModelExamples.cs#Example_ModelChainFewShotPromptTemplate_AdGeneration)]
+[!code-csharp[](../../../test/DotnetPrompt.Tests.Examples/Chains/FewShotModelExamples.cs#Example_ModelChainFewShotPromptTemplate_AdGeneration)]
 
 ```text
 > Stylish t-shirts for men, only $39.
@@ -226,7 +226,7 @@ This time, instead of extracting one single word, we want to extract several wor
 
 These examples could as well be created by use few-shots prompts to create them for us. Here is an snippet how to generate prompts based on example.
 
-[!code-csharp[](../../../DotnetPrompt.Tests.Examples/Chains/FewShotModelExamples.cs#Example_ModelChainFewShotPromptTemplate_PromptGeneration)]
+[!code-csharp[](../../../test/DotnetPrompt.Tests.Examples/Chains/FewShotModelExamples.cs#Example_ModelChainFewShotPromptTemplate_PromptGeneration)]
 
 ```csharp
 var example = new PromptTemplate("Keyword: {keyword}\nTweet: {tweet}");

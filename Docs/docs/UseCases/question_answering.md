@@ -8,7 +8,7 @@ In this article, we will explore how to build a simple question answering system
 
 By using a `ModelChain` with history of previous messages and context you could construct question answering chain.
 
-[!code-csharp[](../../../DotnetPrompt.Tests.Examples/Chains/ChatGptModelChainExamples.cs#Example_ModelChainFewShotPromptTemplate_QuestionAnswering)]
+[!code-csharp[](../../../test/DotnetPrompt.Tests.Examples/Chains/ChatGptModelChainExamples.cs#Example_ModelChainFewShotPromptTemplate_QuestionAnswering)]
 
 ## Web Question Answering
 

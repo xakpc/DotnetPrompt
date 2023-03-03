@@ -7,7 +7,7 @@ With the ability to analyze and learn from vast amounts of data, these models ca
 
 By using a `ModelChain` with history of previous messages you could construct chatbot capable to talk and remember previous discussion.
 
-[!code-csharp[](../../../DotnetPrompt.Tests.Examples/Chains/ChatGptModelChainExamples.cs#Example_ChatMLPromptTemplate_Chatbot)]
+[!code-csharp[](../../../test/DotnetPrompt.Tests.Examples/Chains/ChatGptModelChainExamples.cs#Example_ChatMLPromptTemplate_Chatbot)]
 
 ## Conversational Chain
 

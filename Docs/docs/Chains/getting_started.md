@@ -15,11 +15,11 @@ The `ModelChain` is a simple chain that takes in a prompt template, formats it w
 
 To use the `ModelChain`, first create a prompt template.
 
-[!code-csharp[](../../../DotnetPrompt.Tests.Examples/Chains/ChainsGettingStartedExamples.cs#Example_QueryLLM_Prompt)]
+[!code-csharp[](../../../test/DotnetPrompt.Tests.Examples/Chains/ChainsGettingStartedExamples.cs#Example_QueryLLM_Prompt)]
 
 We can now create a very simple chain. To run the chain and get a result back we could use extension method `PromptAsync`.
 
-[!code-csharp[](../../../DotnetPrompt.Tests.Examples/Chains/ChainsGettingStartedExamples.cs#Example_QueryLLM_Model)]
+[!code-csharp[](../../../test/DotnetPrompt.Tests.Examples/Chains/ChainsGettingStartedExamples.cs#Example_QueryLLM_Model)]
 
 ```text
 > CheeryToes Sockery.
@@ -34,7 +34,7 @@ The next step after calling a language model is make a series of calls to a lang
 which are chains that execute their links in a predefined order. Specifically, we will use the `SequentialChain`. 
 This is the simplest form of sequential chains, where each step has a singular input/output, and the output of one step is the input to the next.
 
-[!code-csharp[](../../../DotnetPrompt.Tests.Examples/Chains/CombinedChainExamples.cs#SequentialChain_Example)]
+[!code-csharp[](../../../test/DotnetPrompt.Tests.Examples/Chains/CombinedChainExamples.cs#SequentialChain_Example)]
 
 The result could look like this
 
@@ -130,11 +130,11 @@ The final step is to combine results in a single result string. The result would
 
 The full class would look like this
 
-[!code-csharp[](../../../DotnetPrompt.Tests.Examples/Chains/CombinedChainExamples.cs#CustomChain_ConcatenateChain)]
+[!code-csharp[](../../../test/DotnetPrompt.Tests.Examples/Chains/CombinedChainExamples.cs#CustomChain_ConcatenateChain)]
 
 Then to use it we will create a couple `ModelChain` and provide them to constructor of `ConcatenateChain`.
 
-[!code-csharp[](../../../DotnetPrompt.Tests.Examples/Chains/CombinedChainExamples.cs#CustomChain_Example)]
+[!code-csharp[](../../../test/DotnetPrompt.Tests.Examples/Chains/CombinedChainExamples.cs#CustomChain_Example)]
 
 When we execute this code, the result could look like this:
 

@@ -8,7 +8,7 @@
             "DotnetPrompt/DotnetPrompt.csproj",
             "DotnetPrompt.LLM.OpenAI/DotnetPrompt.LLM.OpenAI.csproj"
           ],
-          "src": "../"
+          "src": "../src"
         }
       ],
       "dest": "api",

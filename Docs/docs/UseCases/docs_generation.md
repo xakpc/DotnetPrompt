@@ -66,13 +66,13 @@ These examples will give the LLM an idea of the format and structure we want the
 
 Inside out custom chain we will use basic `ModelChain` to make a call to LLM.
 
-[!code-csharp[](../../../DotnetPrompt.Tests.Examples/UseCases/UseCaseGenerateDocumentation.cs#ModelSetup)]
+[!code-csharp[](../../../test/DotnetPrompt.Tests.Examples/UseCases/UseCaseGenerateDocumentation.cs#ModelSetup)]
 
 ### Step 4: Build the dataflow
 
 Next we need to setup our dataflow
 
-[!code-csharp[](../../../DotnetPrompt.Tests.Examples/UseCases/UseCaseGenerateDocumentation.cs#BuildDataflow)]
+[!code-csharp[](../../../test/DotnetPrompt.Tests.Examples/UseCases/UseCaseGenerateDocumentation.cs#BuildDataflow)]
 
 The dataflow here goes like this:
 
@@ -96,17 +96,17 @@ public ISourceBlock<ChainMessage> OutputBlock => _finalizatorBlock;
 Before we can generate the markdown table documentation, we need to extract the methods of the Logger class from the source file. 
 For that we have a `_transformationBlockOne` which action `ReadMethodsFromFile` could look like this.
 
-[!code-csharp[](../../../DotnetPrompt.Tests.Examples/UseCases/UseCaseGenerateDocumentation.cs#ReadMethodsFromFile)]
+[!code-csharp[](../../../test/DotnetPrompt.Tests.Examples/UseCases/UseCaseGenerateDocumentation.cs#ReadMethodsFromFile)]
 
 ### Step 6: Combine rows into table
 
-[!code-csharp[](../../../DotnetPrompt.Tests.Examples/UseCases/UseCaseGenerateDocumentation.cs#CombineRowsToTable)]
+[!code-csharp[](../../../test/DotnetPrompt.Tests.Examples/UseCases/UseCaseGenerateDocumentation.cs#CombineRowsToTable)]
 
 ### Step 7: Run method
 
 We need implemetation of `Run` method. Here we consume input `ChainMessage` with a single value - file name and post it to dataflow.
 
-[!code-csharp[](../../../DotnetPrompt.Tests.Examples/UseCases/UseCaseGenerateDocumentation.cs#RunMethod)]
+[!code-csharp[](../../../test/DotnetPrompt.Tests.Examples/UseCases/UseCaseGenerateDocumentation.cs#RunMethod)]
 
 Note the `Complete` method. We telling our chain that no more data will be added after inital file name.
 It's important to complete this one, because otherwise `BufferBlock` will be waiting forever or until it capacity full.
@@ -115,7 +115,7 @@ It's important to complete this one, because otherwise `BufferBlock` will be wai
 
 The usage of the chain is starighforward: we run the chain and wait for completion:
 
-[!code-csharp[](../../../DotnetPrompt.Tests.Examples/UseCases/UseCaseGenerateDocumentation.cs#GenerateDocumentation)]
+[!code-csharp[](../../../test/DotnetPrompt.Tests.Examples/UseCases/UseCaseGenerateDocumentation.cs#GenerateDocumentation)]
 
 Final result
 

@@ -8,7 +8,7 @@ This article will explore the usage of a single `ModelChain`, a type of chain ar
 
 First, lets go over an example using a single input
 
-[!code-csharp[](../../../../DotnetPrompt.Tests.Examples/Chains/ModelChainExamples.cs#ModelChain_Example_SingleInput)]
+[!code-csharp[](../../../../test/DotnetPrompt.Tests.Examples/Chains/ModelChainExamples.cs#ModelChain_Example_SingleInput)]
 
 Result
 ```text
@@ -19,7 +19,7 @@ Result
 
 Now lets go over an example using multiple inputs.
 
-[!code-csharp[](../../../../DotnetPrompt.Tests.Examples/Chains/ModelChainExamples.cs#ModelChain_Example_MultipleInput)]
+[!code-csharp[](../../../../test/DotnetPrompt.Tests.Examples/Chains/ModelChainExamples.cs#ModelChain_Example_MultipleInput)]
 
 ```text
 A dream of a future so bright,
@@ -53,7 +53,7 @@ And the world was much worse.
 `ModelChain` provide several levels of logging though standard `ILogger` interface.
 Here is an example of logs if `LogLevel.Trace` enabled.
 
-[!code-csharp[](../../../../DotnetPrompt.Tests.Examples/Chains/ModelChainExamples.cs#ModelChain_Example_SingleInputWithLogger)]
+[!code-csharp[](../../../../test/DotnetPrompt.Tests.Examples/Chains/ModelChainExamples.cs#ModelChain_Example_SingleInputWithLogger)]
 
 Trace Log Output: 
 ```text
