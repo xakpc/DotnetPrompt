@@ -11,7 +11,7 @@ The `FewShotPromptTemplate` class would take your prefix, examples and suffix an
 
 All of these examples can be found as unit tests in the [GitHub repository](). 
 
-Most of these examples are quite basic, and better results can be achieved more efficiently by using [chains](../Chains/getting_started.md).
+Most of these examples are quite basic, and better results can be achieved more efficiently by using [chains](../chains/getting_started.md).
 
 
 

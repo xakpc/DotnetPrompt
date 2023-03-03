@@ -3,8 +3,8 @@
 - name: Prompt Templates
   href: prompts/toc.yml
 - name: LLMs
-  href: LLMs/toc.yml
+  href: llms/toc.yml
 - name: Chains
-  href: Chains/toc.yml
+  href: chains/toc.yml
 - name: Use Cases
-  href: UseCases/toc.yml
+  href: usecases/toc.yml

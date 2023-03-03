@@ -27,7 +27,7 @@ We provide how-to guides to get started, examples, and reference docs for each c
 
 - [Prompts](./articles/prompts/getting_started.md): Prompts are how you communicate with LLMs. This component includes prompt management, optimization, and usage of few-shot prompts.
 
-- [LLMs](./articles/LLMs/getting_started.md): LLM is a generic interface for Large Language Models provider. We have implementation for some widespread providers and standard utilities for working with them out of the box.
+- [LLMs](./articles/llms/getting_started.md): LLM is a generic interface for Large Language Models provider. We have implementation for some widespread providers and standard utilities for working with them out of the box.
 
 - [Chains](./articles/chains/getting_started.md): Chains are sequences of LLMs or a different utility combined in Dataflow to achieve some tasks. With DotnetPrompt, you get a standard interface for chains and several commonly used implementations.
 
