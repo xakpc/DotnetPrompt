@@ -1,0 +1,996 @@
+{
+  "homepages": [],
+  "source_base_path": "/home/runner/work/DotnetPrompt/DotnetPrompt/docs",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Resource",
+      "output": {
+        "resource": {
+          "relative_path": "index.json"
+        }
+      }
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DotnetPrompt.Abstractions.Chains.ChainMessage.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DotnetPrompt.Abstractions.Chains.ChainMessage.html",
+          "hash": "+GBGgGXkt0uVp1jPcJPFqT2x4krfYltwW55+aieFnPc="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DotnetPrompt.Abstractions.Chains.IChain-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DotnetPrompt.Abstractions.Chains.IChain-2.html",
+          "hash": "9GXKwD+rkdch5LyLXa9wTfBBhCGDccof0RnnkegEfHA="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DotnetPrompt.Abstractions.Chains.IChain.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DotnetPrompt.Abstractions.Chains.IChain.html",
+          "hash": "nlFolskPfjEfHivfVMElTdUWKeAkLKcszSFttTEg6ns="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DotnetPrompt.Abstractions.Chains.IChainExecutor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DotnetPrompt.Abstractions.Chains.IChainExecutor.html",
+          "hash": "H0j9XHTno2TTI7jxrMhFcxhpebrKAqOtkFaccPNRb1I="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DotnetPrompt.Abstractions.Chains.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DotnetPrompt.Abstractions.Chains.html",
+          "hash": "zuSHGDj5Sa8+Q8P571KaN/pumbRZXxU4ZaBxpLch1HM="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DotnetPrompt.Abstractions.LLM.BaseModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DotnetPrompt.Abstractions.LLM.BaseModel.html",
+          "hash": "xLnLrJNopkkEb8GTXEEvA3pIYqddFRvOs2Z8o+2cooM="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DotnetPrompt.Abstractions.LLM.ILargeLanguageModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DotnetPrompt.Abstractions.LLM.ILargeLanguageModel.html",
+          "hash": "zJhhypSsk8uhtr5Ja/zxHKXFchm3FdXycompYfNOLtk="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DotnetPrompt.Abstractions.LLM.ModelCache.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DotnetPrompt.Abstractions.LLM.ModelCache.html",
+          "hash": "kHy1dCFr8UYMNdxXrkEoCTtE6zNzpfuOd9O8f6Jdpq8="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DotnetPrompt.Abstractions.LLM.ModelExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DotnetPrompt.Abstractions.LLM.ModelExtensions.html",
+          "hash": "DiLZsXq1ex1zMRcQ/CqGTuC4EV9xy4g/dZR2dmp0OMo="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DotnetPrompt.Abstractions.LLM.Schema.Generation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DotnetPrompt.Abstractions.LLM.Schema.Generation.html",
+          "hash": "qq3LUDAEWSCTgmRSxL/cwJCG/tKDRtVS+lSdxHUoUSU="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DotnetPrompt.Abstractions.LLM.Schema.ModelResult.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DotnetPrompt.Abstractions.LLM.Schema.ModelResult.html",
+          "hash": "9iWIGRBU1Nrl7kP2YeiGMB7YVLJk0bGJFe/TmLbrPxs="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DotnetPrompt.Abstractions.LLM.Schema.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DotnetPrompt.Abstractions.LLM.Schema.html",
+          "hash": "kvNy3XcKscMaUEnSBspat5BMMxNztihyfgCDqT8q9jM="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DotnetPrompt.Abstractions.LLM.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DotnetPrompt.Abstractions.LLM.html",
+          "hash": "fhtXZ66GWaqmS8nNTdJJb6TycKqTwjroYc5IyPbyPZg="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DotnetPrompt.Abstractions.Prompts.IPromptTemplate.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DotnetPrompt.Abstractions.Prompts.IPromptTemplate.html",
+          "hash": "aVqg5Z5g5h7Smm4uhl0wZYPrGknbOr4UMAjdBQXdQoU="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DotnetPrompt.Abstractions.Prompts.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DotnetPrompt.Abstractions.Prompts.html",
+          "hash": "D0EcH3+MEwDH7bbdZidjW6+HxCzNx18/daKByMWjwP8="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DotnetPrompt.Abstractions.Tools.IEmbeddings.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DotnetPrompt.Abstractions.Tools.IEmbeddings.html",
+          "hash": "1tSMjmNOGrRCiq8jTOsQbLxQg8ycYKcuueD7moCJHP8="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DotnetPrompt.Abstractions.Tools.ITokenizer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DotnetPrompt.Abstractions.Tools.ITokenizer.html",
+          "hash": "KkdVDaq/V91MEusqQAqQfn5gvvIXpl21Am/D8/Z8jT8="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DotnetPrompt.Abstractions.Tools.TextEmbedding.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DotnetPrompt.Abstractions.Tools.TextEmbedding.html",
+          "hash": "+fsxvwqeAgrgUJDimxfa9vYv1nQvNTgFJmPSyeTTVic="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DotnetPrompt.Abstractions.Tools.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DotnetPrompt.Abstractions.Tools.html",
+          "hash": "x7LTCZy6ULMq7ExGqt8wGBxw43QBuM+LJbrAN14QYv8="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DotnetPrompt.Chains.ChainExecutorExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DotnetPrompt.Chains.ChainExecutorExtensions.html",
+          "hash": "gTkiGXPkBhX7KGsogwJ7/Bt8Z+BpQfz+A+QYjy0OwtA="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DotnetPrompt.Chains.ChainExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DotnetPrompt.Chains.ChainExtensions.html",
+          "hash": "M29L/h/ZqYhiTqQCUaZkQ9NH1jhGJAr4rl1oWTdi1Pc="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DotnetPrompt.Chains.ModelChain.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DotnetPrompt.Chains.ModelChain.html",
+          "hash": "nzJvoPLMMnjPOEmBwfDchKruWuQ+9xA3yo/1KZEOZPA="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DotnetPrompt.Chains.OneShotChainExecutor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DotnetPrompt.Chains.OneShotChainExecutor.html",
+          "hash": "P0gGG2alDgTQcWbtK1nFlq22fXT/kEedUITXFkqmqCw="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DotnetPrompt.Chains.Specialized.ConversationChain.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DotnetPrompt.Chains.Specialized.ConversationChain.html",
+          "hash": "jViE2/Z+AbOTUqWcvBBg2rvPYFmjeUU5icAT7uN2QJE="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DotnetPrompt.Chains.Specialized.QuestionAnsweringChain.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DotnetPrompt.Chains.Specialized.QuestionAnsweringChain.html",
+          "hash": "Stvb0vM4+7hjGbhzTTEpUUcLCWWw1dtlAO4+NoF1vs8="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DotnetPrompt.Chains.Specialized.SequentialChain.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DotnetPrompt.Chains.Specialized.SequentialChain.html",
+          "hash": "Pk6vnxvpGtlvE40ltR9H7m+9i3bDMlqALWHvz9NqoqE="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DotnetPrompt.Chains.Specialized.SummarizeChain.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DotnetPrompt.Chains.Specialized.SummarizeChain.html",
+          "hash": "u1LNR2/3RsIT3C6L1Tas87rhcRtYIwG7YBldM887NEY="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DotnetPrompt.Chains.Specialized.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DotnetPrompt.Chains.Specialized.html",
+          "hash": "kZOL9uhjcjBhkR66tleZYBJwADm3Yh8MHD1UVFdWNao="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DotnetPrompt.Chains.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DotnetPrompt.Chains.html",
+          "hash": "4Ay+10PKJZjVsMCeGi1fRduyLQRgZvPS5JONNMnlptY="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DotnetPrompt.LLM.OpenAI.AzureOpenAIModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DotnetPrompt.LLM.OpenAI.AzureOpenAIModel.html",
+          "hash": "wZqUCoogVQsBTfYdM5dA2UqHZPwkI19DrWhJztyiSk8="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DotnetPrompt.LLM.OpenAI.ChatGptModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DotnetPrompt.LLM.OpenAI.ChatGptModel.html",
+          "hash": "KkRuv9GL3bONhxmaPyVCNT90oFTwe+lIDLmqDy6E0Lw="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DotnetPrompt.LLM.OpenAI.ChatGptModelConfiguration.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DotnetPrompt.LLM.OpenAI.ChatGptModelConfiguration.html",
+          "hash": "OA9pDeUviJ3UXl4IHG5ihvL8quOKJ5DVCFVPr5ZOULY="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DotnetPrompt.LLM.OpenAI.DependencyInjection.OpenAIServiceCollectionExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DotnetPrompt.LLM.OpenAI.DependencyInjection.OpenAIServiceCollectionExtensions.html",
+          "hash": "cimID2vGYzR6360YO9erjQ4GI21S9xVfZNaw34okG/o="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DotnetPrompt.LLM.OpenAI.DependencyInjection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DotnetPrompt.LLM.OpenAI.DependencyInjection.html",
+          "hash": "FVzVvDoVCgMvuS1w0vIbCE5LfCq1p0kYhqoXoPL0O/Q="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DotnetPrompt.LLM.OpenAI.Model.ChatMessage.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DotnetPrompt.LLM.OpenAI.Model.ChatMessage.html",
+          "hash": "iB7dd3vkElrIeFK1Z9FucdwxZEvDqmOnIGf8FNfmlpA="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DotnetPrompt.LLM.OpenAI.Model.Choice.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DotnetPrompt.LLM.OpenAI.Model.Choice.html",
+          "hash": "cyhMyU+UkbzEJJGfQchCHs0y+W8IPVtOdtxdoaM3Svs="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DotnetPrompt.LLM.OpenAI.Model.Completions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DotnetPrompt.LLM.OpenAI.Model.Completions.html",
+          "hash": "+P+uxCEZ1VZJM5P9yBqWaDFLpkvRbbcBhuHLbwaUJuY="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DotnetPrompt.LLM.OpenAI.Model.CompletionsLogProbability.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DotnetPrompt.LLM.OpenAI.Model.CompletionsLogProbability.html",
+          "hash": "npWOes3TBiFMa8RIaUVS0yv86JjGMcEklloT4smHSKU="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DotnetPrompt.LLM.OpenAI.Model.CompletionsUsage.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DotnetPrompt.LLM.OpenAI.Model.CompletionsUsage.html",
+          "hash": "YGfZS7CxW2SarMY0qM5iIWblZxTkXe/tJQ37F4mFqVc="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DotnetPrompt.LLM.OpenAI.Model.EmbeddingItem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DotnetPrompt.LLM.OpenAI.Model.EmbeddingItem.html",
+          "hash": "cuhiuQshSqX/nXjxMxKRWXEdWb4XAyoPJvy1v2nrVp4="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DotnetPrompt.LLM.OpenAI.Model.Embeddings.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DotnetPrompt.LLM.OpenAI.Model.Embeddings.html",
+          "hash": "30NikUHiaNKKs5U1KN+kTmZclaUvfPNnd9c4XnOCxUo="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DotnetPrompt.LLM.OpenAI.Model.EmbeddingsUsage.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DotnetPrompt.LLM.OpenAI.Model.EmbeddingsUsage.html",
+          "hash": "+8TH8/zwZdsqQYnZcAjNlUHuDq0qZZmxBlSglmIeZWI="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DotnetPrompt.LLM.OpenAI.Model.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DotnetPrompt.LLM.OpenAI.Model.html",
+          "hash": "imu6oYT3xsUI36GsEsqJldLCWhGx0zXq4GlkZ/rkJ/8="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DotnetPrompt.LLM.OpenAI.OpenAIEmbeddings.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DotnetPrompt.LLM.OpenAI.OpenAIEmbeddings.html",
+          "hash": "bnhSkmlbusCPqC21O3NSlNenPtiBD8OvFutjwTvHbGk="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DotnetPrompt.LLM.OpenAI.OpenAIModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DotnetPrompt.LLM.OpenAI.OpenAIModel.html",
+          "hash": "BYM2uclKMUesqv6Q3WIO56Q6EmravMOAsvKRtwwEo7w="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DotnetPrompt.LLM.OpenAI.OpenAIModelConfiguration.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DotnetPrompt.LLM.OpenAI.OpenAIModelConfiguration.html",
+          "hash": "VLEbugFQES6I4TqRCdCxKgvgb2tCFlhZrpL9my7NPZY="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DotnetPrompt.LLM.OpenAI.Tokens.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DotnetPrompt.LLM.OpenAI.Tokens.html",
+          "hash": "dRh63KdNTYFvF6ca+w1PSXVIVtW82ZWn3dle++BOsRQ="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DotnetPrompt.LLM.OpenAI.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DotnetPrompt.LLM.OpenAI.html",
+          "hash": "1owS0noMZ5g1ztfByYTk613+weYUZOiTEKj4y9FkuYk="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DotnetPrompt.Prompts.ChatMLPromptTemplate.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DotnetPrompt.Prompts.ChatMLPromptTemplate.html",
+          "hash": "TKr2qW2tS+kNbgWoZEmU0ZJfEGHlYyoeHU8Sk+eQP8E="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DotnetPrompt.Prompts.ChatMessageTemplate.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DotnetPrompt.Prompts.ChatMessageTemplate.html",
+          "hash": "C3xlTMQvbGewrSdypVxz3xKuKhRv+JJ2zq/BDm/f9Jw="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DotnetPrompt.Prompts.ChatRoles.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DotnetPrompt.Prompts.ChatRoles.html",
+          "hash": "c0re/7CD/OztBCUmHASSwwUWCNOjWuvL+pq3kaDtgVU="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DotnetPrompt.Prompts.ExampleSelectors.IExampleSelector.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DotnetPrompt.Prompts.ExampleSelectors.IExampleSelector.html",
+          "hash": "Eq9TPIx0IbwuacyySBtv1hAdWX5LIm1+jRYJ0M9pvy0="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DotnetPrompt.Prompts.ExampleSelectors.LengthBasedExampleSelector.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DotnetPrompt.Prompts.ExampleSelectors.LengthBasedExampleSelector.html",
+          "hash": "Ori9CctriMv/6ZiybMpIDSUJ7j5G31wV3X00MNNiK3A="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DotnetPrompt.Prompts.ExampleSelectors.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DotnetPrompt.Prompts.ExampleSelectors.html",
+          "hash": "jOKt138qjM/ClFPZFTGESn7u7eYEv+HeayGiXkO+XoM="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DotnetPrompt.Prompts.FewShotPromptTemplate.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DotnetPrompt.Prompts.FewShotPromptTemplate.html",
+          "hash": "4ukhvSLs9EtehVyA3L6YbJcF0AkQiI3IfUpw7753hwA="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DotnetPrompt.Prompts.PromptTemplate.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DotnetPrompt.Prompts.PromptTemplate.html",
+          "hash": "4cduu37krP9EA7wq9f7191UJWrjvTwC532wuJ/0lHW0="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DotnetPrompt.Prompts.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DotnetPrompt.Prompts.html",
+          "hash": "EZTMt+nAv+g/qyHoY/DEGEN1ip+so6kI1Fon+2dUzok="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "api/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "api/index.html",
+          "hash": "pabe1DJ5thOUEJ5z4sy5YCIaDWmRo/IvCf75EglRUpk="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html",
+          "hash": "muVEBjuBz4uxt0gwXL0djS0z5aK+EgfHBfchAzGlWEs="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/chains/getting_started.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/chains/getting_started.html",
+          "hash": "GislD/jabj6/0YjZKd8HCc43u8YnqAUgf2mew+Vapak="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/chains/howto/custom_chains.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/chains/howto/custom_chains.html",
+          "hash": "1bKK1cywRvyO8wd8sSbMjzjeHPdjtRxkNqTBpi2NKAM="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/chains/howto/model_chain.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/chains/howto/model_chain.html",
+          "hash": "67G8/jUeTpxBATi7TlOXIuTUlYleVHjLXZaT/PW0ruE="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/chains/howto/prebuilt_chains.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/chains/howto/prebuilt_chains.html",
+          "hash": "z0pfQQUElwWbInzc/nhuw/Q2YeRQXJKuDfKsZa2RWS8="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/chains/key_concepts.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/chains/key_concepts.html",
+          "hash": "P5U1vDp0RN1rvxsEpBX8Ic2nKxWYkQifEj3vCopyAYc="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/getting_started.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/getting_started.html",
+          "hash": "6bW86z8ua99XmSngFAH7sHOfL2eyFcVkPj97iGDPgts="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/intro.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/intro.html",
+          "hash": "U9fPBhztaXL/7vKJTJIPoUuabB6VJScAe5Cz+lg4jp8="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/llms/getting_started.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/llms/getting_started.html",
+          "hash": "U51ps/bAOIzZKdOTnDWLM50cSWxiDKNrkJhq4QxBqeQ="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/llms/key_concepts.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/llms/key_concepts.html",
+          "hash": "YRKGX9YQsbjwFNvB89nVhuBpVGM+MizqThU7z25KKyM="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/llms/providers/azure_openai.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/llms/providers/azure_openai.html",
+          "hash": "DAi67EoIWEQBAgt/KK4DEUDWzJDlgubiSDNyw829gJ0="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/llms/providers/chatgpt.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/llms/providers/chatgpt.html",
+          "hash": "JtB4ac8xMivb3iPY2a04eypgHaO+YRCoOWu1REn053Y="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/llms/providers/cohere.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/llms/providers/cohere.html",
+          "hash": "cU0hWDf3zDht5/pfeLaPAPnuC27OCdR51qaUZhvtKNw="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/llms/providers/openai.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/llms/providers/openai.html",
+          "hash": "UUsRwlNC2xM+nmVmtvYxsTTwXQdRXvpn/9+Ie8WN8vM="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/prompts/few_shots_example.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/prompts/few_shots_example.html",
+          "hash": "UJAPKT+msH/PLNcqWEoizpoBF6exi+eom2yGMc20DmY="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/prompts/getting_started.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/prompts/getting_started.html",
+          "hash": "dhkDKmvjOrQC06LKbtzENJnegolWJmKDdJtTRNm2TKA="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/prompts/prompt_template.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/prompts/prompt_template.html",
+          "hash": "fV6SqyJCUIqiejRbUAj/2rWQbOXET5kZsBu1SLJ/mik="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/research_papers.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/research_papers.html",
+          "hash": "IqbFjXnXB6DqIrJCAcX24VbII/lLBjSm3d/TWZFZHjY="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "articles/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "articles/toc.html",
+          "hash": "7YPqaJ82QkTcAFb3QQhzf8QSbjrkIsJeuSZUlekiDnU="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/tools/getting_started.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/tools/getting_started.html",
+          "hash": "jpLyqjSLbTkagn0v2njL6qfiHiuro5yafHJdUBoAgtI="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "articles/tools/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "articles/tools/toc.html",
+          "hash": "oS0e3UOE+1MtGuZ0wZdko3GLvbOHY6pn+h7l58RScEI="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/usecases/chatbots.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/usecases/chatbots.html",
+          "hash": "6b4DPi8p9XWlhVBtbYeAVmTw+5qTCerGQvy+az6F+Ms="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/usecases/docs_generation.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/usecases/docs_generation.html",
+          "hash": "6xhh53Nwn201HJ5bHDp4IPNYwyh5dVemUVTAKUL6Vqw="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/usecases/question_answering.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/usecases/question_answering.html",
+          "hash": "aryyKHjRwqXTJlVha0ru+I/szRe/fcLw6V99+13eaqQ="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/usecases/summarization.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/usecases/summarization.html",
+          "hash": "7q4/7tzmdqoaqIPLVQjTLARlmGNzwDDvLNLB8GA0tvs="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/ichain.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/ichain.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/icon.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/icon.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/logo.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/logo.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/logo.svg",
+      "output": {
+        "resource": {
+          "relative_path": "images/logo.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html",
+          "hash": "jypDuZYTRD1dYis+HdaLSTfIGRVtwmK+E+OQ19nX8oE="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html",
+          "hash": "CsuxNnau8xHn929Pnjt1Ft4kLmpsKyc4ylG+jSfk5fU="
+        }
+      },
+      "version": ""
+    }
+  ],
+  "version_info": {},
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}
