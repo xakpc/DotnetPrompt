@@ -4,3 +4,5 @@
   href: prompt_template.md
 - name: Few Shot Prompt Template
   href: few_shots_example.md
+- name: References
+  href: ~/api/DotnetPrompt.Prompts.yml

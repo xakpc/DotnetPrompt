@@ -12,3 +12,7 @@
     href: providers/azure_openai.md
   - name: Cohere AI
     href: providers/cohere.md
+- name: References
+  items:
+  - name: OpenAI
+    href: ~/api/DotnetPrompt.LLM.OpenAI.yml

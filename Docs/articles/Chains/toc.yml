@@ -4,3 +4,5 @@
   href: key_concepts.md
 - name: Model Chain
   href: howto/model_chain.md
+- name: Reference
+  href: ~/api/DotnetPrompt.Chains.yml
