@@ -5,8 +5,6 @@
     <Nullable>disable</Nullable>
     <LangVersion>latest</LangVersion>
     <Version>1.0.0-alpha.1</Version>
-    <Product>DotnetPrompt</Product>
-    <Company>DotnetPrompt</Company>
   </PropertyGroup>
 
   <ItemGroup>
@@ -27,11 +25,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DotnetPrompt.Abstractions\DotnetPrompt.Abstractions.csproj" />
+    <Folder Include="DependencyInjection\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DependencyInjection\" />
+    <ProjectReference Include="..\DotnetPrompt.Abstractions\DotnetPrompt.Abstractions.csproj" />
   </ItemGroup>
 
 </Project>

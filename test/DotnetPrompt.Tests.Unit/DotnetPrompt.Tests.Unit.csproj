@@ -20,15 +20,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DotnetPrompt.Abstractions\DotnetPrompt.Abstractions.csproj" />
-    <ProjectReference Include="..\DotnetPrompt.LLM.OpenAI\DotnetPrompt.LLM.OpenAI.csproj" />
-    <ProjectReference Include="..\DotnetPrompt\DotnetPrompt.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="LLM\OpenAI\" />
     <Folder Include="Chains\" />
     <Folder Include="Prompts\ExampleSelectors\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\DotnetPrompt.LLM.CohereAI\DotnetPrompt.LLM.CohereAI.csproj" />
+    <ProjectReference Include="..\..\src\DotnetPrompt.LLM.OpenAI\DotnetPrompt.LLM.OpenAI.csproj" />
+    <ProjectReference Include="..\..\src\DotnetPrompt\DotnetPrompt.csproj" />
   </ItemGroup>
 
   <ItemGroup>

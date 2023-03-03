@@ -15,9 +15,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DotnetPrompt.LLM.CohereAI\DotnetPrompt.LLM.CohereAI.csproj" />
-    <ProjectReference Include="..\DotnetPrompt.LLM.OpenAI\DotnetPrompt.LLM.OpenAI.csproj" />
-    <ProjectReference Include="..\DotnetPrompt\DotnetPrompt.csproj" />
+    <ProjectReference Include="..\..\src\DotnetPrompt.LLM.CohereAI\DotnetPrompt.LLM.CohereAI.csproj" />
+    <ProjectReference Include="..\..\src\DotnetPrompt.LLM.OpenAI\DotnetPrompt.LLM.OpenAI.csproj" />
+    <ProjectReference Include="..\..\src\DotnetPrompt\DotnetPrompt.csproj" />
   </ItemGroup>
 
 </Project>

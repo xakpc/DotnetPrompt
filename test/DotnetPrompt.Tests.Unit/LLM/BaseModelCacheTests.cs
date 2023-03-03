@@ -1,5 +1,4 @@
 ﻿using DotnetPrompt.Abstractions.LLM;
-using DotnetPrompt.LLM.OpenAI;
 using DotnetPrompt.Tests.Integration;
 using DotnetPrompt.Tests.Unit.LargeLanguageModels;
 using Microsoft.Extensions.Caching.Distributed;
@@ -22,7 +21,7 @@ public class BaseModelCacheTests
         var appSettingsOptions = Options.Create(settings);
         var cache = new MemoryDistributedCache(appSettingsOptions);
 
-        var fakeLLM = new FakeLargeLanguageModel(TestLogger.Create<OpenAIModel>(), cache)
+        var fakeLLM = new FakeLargeLanguageModel(TestLogger.Create<FakeLargeLanguageModel>(), cache)
         {
             UseCache = true,
             Queries = new Dictionary<string, string>()

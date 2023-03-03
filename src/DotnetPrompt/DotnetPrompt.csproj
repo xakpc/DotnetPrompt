@@ -9,10 +9,7 @@
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <AssemblyVersion>1.0.0</AssemblyVersion>
     <FileVersion>1.0.0</FileVersion>
-    <PackageOutputPath>.\artifacts</PackageOutputPath>
     <Title>DotnetPrompt</Title>
-    <Product>DotnetPrompt</Product>
-    <Authors>xakpc</Authors>
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,11 +17,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DotnetPrompt.Abstractions\DotnetPrompt.Abstractions.csproj" />
+    <Folder Include="DependencyInjection\" />
+    <Folder Include="Tools\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DependencyInjection\" />
-    <Folder Include="Tools\" />
+    <ProjectReference Include="..\DotnetPrompt.Abstractions\DotnetPrompt.Abstractions.csproj" />
   </ItemGroup>
 </Project>
