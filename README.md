@@ -1,5 +1,10 @@
 ![Image](./docs/images/logo.png)
 
+[![tests](https://github.com/xakpc/DotnetPrompt/actions/workflows/dotnet.yml/badge.svg)](https://github.com/xakpc/DotnetPrompt/actions/workflows/dotnet.yml)
+[![docs](https://github.com/xakpc/DotnetPrompt/actions/workflows/docs.yml/badge.svg)](https://github.com/xakpc/DotnetPrompt/actions/workflows/docs.yml)
+![License: Apache 2.0](https://img.shields.io/github/license/xakpc/DotnetPrompt)
+[![@DotnetPrompt](https://img.shields.io/twitter/follow/dotnetprompt?style=social)](https://twitter.com/dotnetprompt)
+
 ## Quick Start
 
 DotnetPrompt is a dotnet library that provides tools for working with Large Language Models (LLMs) individually and combined in chains.
