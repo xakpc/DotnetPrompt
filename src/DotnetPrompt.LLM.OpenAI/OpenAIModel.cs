@@ -7,9 +7,9 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using AI.Dev.OpenAI.GPT;
 using DotnetPrompt.Abstractions.LLM;
 using DotnetPrompt.Abstractions.LLM.Schema;
-using DotnetPrompt.LLM.OpenAI.Encoder;
 using DotnetPrompt.LLM.OpenAI.Model;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
@@ -154,7 +154,7 @@ public class OpenAIModel : BaseModel
 
     public override int GetNumTokens(string text)
     {
-        List<int> tokens = Gpt3Tokenizer.Encode(text);
+        List<int> tokens = GPT3Tokenizer.Encode(text);
         return tokens.Count;
     }
 

@@ -2,30 +2,31 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <Nullable>disable</Nullable>
+    <Nullable>enable</Nullable>
     <LangVersion>latest</LangVersion>
     <Version>1.0.0-alpha.1</Version>
+	<Description>A clients for OpenAI and Azure OpenAI for DotnetPrompt. DotnetPrompt is a dotnet library that provides a set of tools for working with Large Language Models (LLMs) combined in chains.</Description>
+	<PackageIcon>icon.png</PackageIcon>
+	<RepositoryUrl>https://github.com/xakpc/DotnetPrompt</RepositoryUrl>
+	<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Encoder\encoder.json" />
-    <None Remove="Encoder\vocab.bpe" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="Encoder\encoder.json" />
-    <EmbeddedResource Include="Encoder\vocab.bpe" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <PackageReference Include="AI.Dev.OpenAI.GPT" Version="1.0.2" />
     <PackageReference Include="Azure.AI.OpenAI" Version="1.0.0-beta.2" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="7.0.3" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
-    <PackageReference Include="Polly" Version="7.2.3" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="DependencyInjection\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\docs\images\icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
