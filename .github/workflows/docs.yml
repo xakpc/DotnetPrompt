@@ -1,0 +1,35 @@
+on:
+  push:
+    branches:
+    - main
+    paths:
+    - src/**
+    - docs/**
+    - .github/workflows/docs.yml
+  pull_request:
+    branches:
+    - main
+    paths:
+    - docs/**
+    - .github/workflows/docs.yml
+  workflow_dispatch:
+
+jobs:
+  generate-docs:
+    runs-on: ubuntu-latest
+    name: A job to say hello
+    steps:
+    - uses: actions/checkout@v3.3.0
+    
+    - uses: nikeee/docfx-action@v1.0.0
+      name: Build Documentation
+      with:
+        args: docs/docfx.json
+
+    - name: Publish
+      if: github.event_name == 'push'
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: docs/_site
+        force_orphan: true
