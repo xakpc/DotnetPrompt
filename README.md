@@ -66,7 +66,7 @@ Some examples of solutions that you could create using our library include:
 
 ## Documentation
 
-Please see the [full documentation]() on:
+Please see the [full documentation](https://xakpc.github.io/DotnetPrompt/index.html) on:
 
 - Getting started (installation, setting up the environment, simple examples)
 - How-To examples (demos, integrations, helper functions)
