@@ -132,6 +132,6 @@ public class PromptTemplateTests
         var prompt = PromptTemplate.FromFile(templateFile, inputVariables);
 
         // Assert
-        Assert.AreEqual("Question: {question}\nAnswer:", prompt.Template);
+        Assert.AreEqual("Question: {question}\r\nAnswer:", prompt.Template);
     }
 }

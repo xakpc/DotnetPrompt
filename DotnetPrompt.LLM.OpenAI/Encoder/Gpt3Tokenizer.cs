@@ -9,6 +9,9 @@ using System.Text.RegularExpressions;
 
 namespace DotnetPrompt.LLM.OpenAI.Encoder;
 
+/// <summary>
+/// Equal to tiktoken.get_encoding("gpt2")
+/// </summary>
 public static class Gpt3Tokenizer
 {
     private static readonly ConcurrentDictionary<string, string> BPE_CACHE = new();

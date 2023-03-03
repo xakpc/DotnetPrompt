@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.Serialization;
 
 namespace DotnetPrompt.Abstractions.LLM.Schema;
 
 /// <summary>
 /// Class that contains all relevant information for an LLM Result.
 /// </summary>
-public record LLMResult
+public record ModelResult
 {
     /// <summary>
     /// List of the things generated.

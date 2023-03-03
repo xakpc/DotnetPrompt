@@ -8,26 +8,26 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using DotnetPrompt.Abstractions.LLM;
-using DotnetPrompt.Abstractions.Schema;
+using DotnetPrompt.Abstractions.LLM.Schema;
 using DotnetPrompt.LLM.OpenAI.Encoder;
+using DotnetPrompt.LLM.OpenAI.Model;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Polly;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace DotnetPrompt.LLM.OpenAI;
 
+/// <summary>
+/// Model for OpenAI
+/// </summary>
 public class OpenAIModel : BaseModel
 {
     public OpenAIModelConfiguration DefaultModelConfiguration { get; init; }
 
-    public string OpenAiApiKey = null;
+    public string OpenAiApiKey;
 
     public int BatchSize = 20;
-
-    public float? RequestTimeout = null;
-
-    public int MaxRetries = 6;
 
     public bool Streaming { get; init; } = false;
 
@@ -38,17 +38,11 @@ public class OpenAIModel : BaseModel
 
     #region Constructors
 
-    public OpenAIModel(string openAIApiKey, OpenAIModelConfiguration defaultModelConfiguration, ILogger logger, IDistributedCache cache = null) : base(logger, cache)
+    public OpenAIModel(string openAIApiKey, OpenAIModelConfiguration defaultModelConfiguration, ILogger logger, IDistributedCache cache = null) 
+        : base(logger, cache)
     {
         OpenAiApiKey = openAIApiKey;
         DefaultModelConfiguration = defaultModelConfiguration;
-
-        ValidateModelExtraArguments();
-    }
-
-    public OpenAIModel(string openAIApiKey, ILogger logger) : this(openAIApiKey, OpenAIModelConfiguration.Default, logger)
-    {
-        ValidateModelExtraArguments();
     }
 
     /// <summary>
@@ -56,12 +50,11 @@ public class OpenAIModel : BaseModel
     /// </summary>
     /// <param name="openAIApiKey"></param>
     /// <param name="defaultModelConfiguration"></param>
-    public OpenAIModel(string openAIApiKey, OpenAIModelConfiguration defaultModelConfiguration)
+    public OpenAIModel(string openAIApiKey, OpenAIModelConfiguration defaultModelConfiguration) 
+        : base(NullLogger.Instance, null)
     {
         OpenAiApiKey = openAIApiKey;
         DefaultModelConfiguration = defaultModelConfiguration;
-
-        ValidateModelExtraArguments();
     }
 
     /// <summary>
@@ -71,27 +64,33 @@ public class OpenAIModel : BaseModel
     /// <param name="logger"></param>
     /// <param name="cache"></param>
     /// <exception cref="InvalidOperationException"></exception>
-    public OpenAIModel(IConfiguration configuration, ILogger logger, IDistributedCache cache = null) : base(logger, cache)
+    public OpenAIModel(IConfiguration configuration, ILogger<OpenAIModel> logger, IDistributedCache cache) : base(logger, cache)
     {
-        this.OpenAiApiKey = configuration["OpenAI:Key"];
+        OpenAiApiKey = configuration.GetRequiredSection("OpenAI:Key").Value;
+        UseCache = configuration.GetSection("OpenAI:UseCache").Get<bool?>() ?? false;
 
-        if (string.IsNullOrWhiteSpace(this.OpenAiApiKey))
+        var partialConfig = configuration.GetRequiredSection("OpenAI:ModelConfiguration").Get<OpenAIModelConfiguration>();
+        var defaultConfiguration = OpenAIModelConfiguration.Default;
+        DefaultModelConfiguration = new OpenAIModelConfiguration()
         {
-            throw new InvalidOperationException("No OpenAI:Key configuration found");
-        }
-
-        // todo load model defaults from configuration
-        DefaultModelConfiguration = OpenAIModelConfiguration.Default;
-
-        ValidateModelExtraArguments();
+            CacheLevel = partialConfig.CacheLevel ?? defaultConfiguration.CacheLevel,
+            CompletionConfig = partialConfig.CompletionConfig ?? defaultConfiguration.CompletionConfig,
+            Echo = partialConfig.Echo ?? defaultConfiguration.Echo,
+            FrequencyPenalty = partialConfig.FrequencyPenalty ?? defaultConfiguration.FrequencyPenalty,
+            GenerationSampleCount = partialConfig.GenerationSampleCount ?? defaultConfiguration.GenerationSampleCount,
+            LogProbability = partialConfig.LogProbability ?? defaultConfiguration.LogProbability,
+            LogitBias = partialConfig.LogitBias ?? defaultConfiguration.LogitBias,
+            MaxTokens = partialConfig.MaxTokens ?? defaultConfiguration.MaxTokens,
+            Model = partialConfig.Model ?? defaultConfiguration.Model,
+            NucleusSamplingFactor = partialConfig.NucleusSamplingFactor ?? defaultConfiguration.NucleusSamplingFactor,
+            PresencePenalty = partialConfig.PresencePenalty ?? defaultConfiguration.PresencePenalty,
+            SnippetCount = partialConfig.SnippetCount ?? defaultConfiguration.SnippetCount,
+            Stop = partialConfig.Stop ?? defaultConfiguration.Stop,
+            User = partialConfig.User ?? defaultConfiguration.User,
+        };
     }
 
     #endregion
-
-    private void ValidateModelExtraArguments()
-    {
-        // todo prevent duplication of model arguments
-    }
 
     /// <summary>
     /// Use tenacity to retry the completion call.
@@ -201,7 +200,7 @@ public class OpenAIModel : BaseModel
         return JsonSerializer.Serialize(this, serializerOptions);
     }
 
-    protected override async Task<LLMResult> GenerateInternalAsync(IList<string> prompts, IList<string> stop = null)
+    protected override async Task<ModelResult> GenerateInternalAsync(IList<string> prompts, IList<string> stop = null)
     {
         var completionsOptions = DefaultModelConfiguration with { };
 
@@ -229,9 +228,9 @@ public class OpenAIModel : BaseModel
             else
             {
                 var subPromptOptions = completionsOptions with { Prompt = subPrompt };
-                _logger.LogTrace("Performing OpenAI request for {CompletionsOptions}", subPromptOptions);
+                Logger.LogTrace("Performing OpenAI request for {CompletionsOptions}", subPromptOptions);
                 var response = await CompletionWithRetry(subPromptOptions);
-                _logger.LogTrace("OpenAI request Result: {response}", response);
+                Logger.LogTrace("OpenAI request Result: {response}", response);
                 
                 choices.AddRange(response.Choices);
 
@@ -245,7 +244,7 @@ public class OpenAIModel : BaseModel
                 };
             }
         }
-        return CreateLLMResult(completionsOptions, choices, prompts, tokenUsage);
+        return CreateResult(completionsOptions, choices, prompts, tokenUsage);
     }
 
     public List<List<string>> GetSubPrompts(OpenAIModelConfiguration completionsOptions, IList<string> prompts)
@@ -267,14 +266,14 @@ public class OpenAIModel : BaseModel
         return subPrompts;
     }
 
-    private static LLMResult CreateLLMResult(OpenAIModelConfiguration configuration, 
-        IList<Choice> choices, ICollection<string> prompts,
+    private static ModelResult CreateResult(OpenAIModelConfiguration configuration, IList<Choice> choices, ICollection<string> prompts,
         CompletionsUsage tokenUsage)
     {
         var generations = new List<IList<Generation>>();
         for (int i = 0; i < prompts.Count; i++)
         {
-            var subChoices = choices.Skip(i * configuration.SnippetCount).Take(configuration.SnippetCount).ToArray();
+            var count = configuration.SnippetCount.Value;
+            var subChoices = choices.Skip(i * count).Take(count).ToArray();
             generations.Add(subChoices.Select(choice => new Generation
             {
                 Text = choice.Text,
@@ -285,7 +284,7 @@ public class OpenAIModel : BaseModel
                 }
             }).ToList());
         }
-        return new LLMResult
+        return new ModelResult
         {
             Generations = generations,
             Output = new Dictionary<string, object> { { "token_usage", tokenUsage } }

@@ -13,6 +13,8 @@ All of these examples can be found as unit tests in the [GitHub repository]().
 
 Most of these examples are quite basic, and better results can be achieved more efficiently by using [chains](../Chains/getting_started.md).
 
+
+
 ## Sentiment Analysis 
 
 [!code-csharp[](../../../DotnetPrompt.Tests.Examples/Chains/FewShotModelExamples.cs#Example_ModelChainFewShotPromptTemplate_SentimentAnalysis)]

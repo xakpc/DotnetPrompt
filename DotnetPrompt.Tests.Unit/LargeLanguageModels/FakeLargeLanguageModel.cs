@@ -1,16 +1,17 @@
 ﻿using DotnetPrompt.Abstractions.LLM;
-using DotnetPrompt.Abstractions.Schema;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
 using System.Text.Json.Serialization;
 using System.Text.Json;
 using JsonSerializer = System.Text.Json.JsonSerializer;
+using DotnetPrompt.Abstractions.LLM.Schema;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace DotnetPrompt.Tests.Unit.LargeLanguageModels;
 
 public class FakeLargeLanguageModel : BaseModel
 {
-    public IDictionary<string, string> Queries { get; set; } = null;
+    public IDictionary<string, string> Queries { get; set; }
 
     public string Call(string prompt, IList<string> stop = null)
     {
@@ -32,7 +33,7 @@ public class FakeLargeLanguageModel : BaseModel
         return JsonSerializer.Serialize(this, serializerOptions);
     }
 
-    protected override async Task<LLMResult> GenerateInternalAsync(IList<string> prompts, IList<string> stop = null)
+    protected override async Task<ModelResult> GenerateInternalAsync(IList<string> prompts, IList<string> stop = null)
     {
         var generations = new List<IList<Generation>>();
         foreach (var prompt in prompts)
@@ -41,7 +42,7 @@ public class FakeLargeLanguageModel : BaseModel
             generations.Add(new List<Generation> { new() { Text = text } });
         }
 
-        return new LLMResult { Generations = generations };
+        return new ModelResult { Generations = generations };
     }
 
 
@@ -49,5 +50,10 @@ public class FakeLargeLanguageModel : BaseModel
 
     public FakeLargeLanguageModel(ILogger logger, IDistributedCache cache = null) : base(logger, cache)
     {
+    }
+
+    public FakeLargeLanguageModel(Dictionary<string, string> queries = null) : base(NullLogger.Instance, null)
+    {
+        Queries = queries;
     }
 }

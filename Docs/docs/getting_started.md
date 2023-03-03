@@ -20,19 +20,23 @@ You could also install separate packages
 DotnetPrompt provides several components that can be used to build language model applications. 
 They can be combined to create complex applications, or be used individually for simple applications.
 
+> [!IMPORTANT]
+> Most of examples here built with `OpenAIModel` which is OpenAI completion model. Recently OpenAI published 
+> ChatGPT model which is 10 times cheaper and in some cases could yield better results. To try it you could use `ChatGptModel` and `ChatGptPromptTemplate` in your experiments.
+
 ## LLMs: Get predictions from a language model
 
 DotnetPrompt's fundamental component is its `ILargeLanguageModel`, 
 which serves as a client that calls a language model on a given input.
 We provide several out of the box implementations of the interface for different popular providers.
 
-Let's utilize the `OpenAIModel`, which employs the OpenAI REST API to generate completions based on the input prompt. 
+Let's utilize the `ChatGptModel`, which employs the OpenAI ChatGPT API to generate completions based on the input prompt. 
 
 To create the Model, we would need a valid OpenAI key. 
 In this example, you may want the outputs to be more diverse so we'll initialize the Model with a high temperature.
 
 ```csharp
-var llm = new OpenAIModel(Constants.OpenAIKey, OpenAIModelConfiguration.Default with
+var llm = new ChatGptModel(Constants.OpenAIKey, ChatGptModelConfiguration.Default with
         {
             Temperature = 0.9f
         });
@@ -103,6 +107,39 @@ For instance, it can be used to perform a wide range of
 [tasks](./prompts/few_shots_example.md), such as [summarization](./prompts/few_shots_example.md#summarization), 
 [question answering](./prompts/few_shots_example.md#question-answering), 
 and [language translation](./prompts/few_shots_example.md##machine-translation), with only a few examples of each task. 
+
+### Chat Markup Language Propmt Template
+
+With release of ChatGPT API we introduced `ChatMLPromptTemplate` which enforce a ChatML structure. It is still implementation of `IPromptTemplate` interface
+but it combines single and few-shot templates. `ChatMLPromptTemplate` is currently supported only by `ChatGptModel`.
+
+```csharp
+var suffix = new PromptTemplate("{human_phrase}");
+
+var examples = new List<(string, string)>()
+{
+    new("Hello nice to meet you.", "Nice to meet you too."),
+    new("How is it going today?", "Not so bad, thank you! How about you?"),
+};
+
+var prompt = new ChatMLPromptTemplate(suffix, "This is a discussion between a human and a robot. The robot is very nice and empathetic.", examples);
+```
+
+Result when formatted with `human_phrase` equal to `hello`:
+
+```json
+[
+    {
+        "role": "system",
+        "content": "This is a discussion between a human and a robot. The robot is very nice and empathetic."
+    },
+    { "role": "user", "content": "Hello nice to meet you." },
+    { "role": "assistant", "content": "Nice to meet you too." },
+    { "role": "user", "content": "How is it going today?" },
+    { "role": "assistant", "content": "Not so bad, thank you! How about you?" },
+    { "role": "user", "content": "hello" }
+]
+```
 
 ## Chains: Combine LLMs and prompts in multi-step workflows
 

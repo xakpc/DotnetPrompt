@@ -12,6 +12,9 @@
         }
       ],
       "dest": "api",
+      "properties": {
+        "TargetFramework": "net6.0"
+      },
       "includePrivateMembers": false,
       "disableGitFeatures": false,
       "disableDefaultFilter": false,

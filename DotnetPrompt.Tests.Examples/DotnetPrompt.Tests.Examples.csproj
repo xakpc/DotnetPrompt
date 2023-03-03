@@ -7,7 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Data\Logger.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Include="..\DotnetPrompt.Tests.Integration\TestLogger.cs" Link="TestLogger.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Data\Logger.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
@@ -17,21 +27,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DotnetPrompt.LLM.CohereAI\DotnetPrompt.LLM.CohereAI.csproj" />
     <ProjectReference Include="..\DotnetPrompt.LLM.OpenAI\DotnetPrompt.LLM.OpenAI.csproj" />
     <ProjectReference Include="..\DotnetPrompt\DotnetPrompt.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="Data\few_shot.py">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Data\test_base.py">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="LLMs\" />
   </ItemGroup>
 
 </Project>

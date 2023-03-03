@@ -1,8 +1,4 @@
-﻿using DotnetPrompt.Abstractions.LLM;
-using DotnetPrompt.Abstractions.Prompts;
-using DotnetPrompt.LLM.OpenAI;
-using DotnetPrompt.Prompts;
-using Microsoft.Extensions.Logging.Abstractions;
+﻿using DotnetPrompt.Prompts;
 using NUnit.Framework;
 
 namespace DotnetPrompt.Tests.Examples.Prompts;

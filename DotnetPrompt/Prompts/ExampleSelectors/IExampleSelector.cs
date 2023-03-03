@@ -19,7 +19,7 @@ public interface IExampleSelector
     /// <summary>
     /// Select which examples to use based on the inputs.
     /// </summary>
-    /// <param name="inputVariables"></param>
+    /// <param name="inputVariables">List of input variables that should be user for calculation of possible examples</param>
     /// <returns></returns>
     IList<IDictionary<string, string>> SelectExamples(IDictionary<string, string> inputVariables);
 }

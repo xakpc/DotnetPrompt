@@ -14,7 +14,7 @@ public interface ILargeLanguageModel
     /// <param name="stop"></param>
     /// <returns></returns>
     /// <exception cref="InvalidOperationException">When cache asked without </exception>
-    Task<LLMResult> GenerateAsync(IList<string> prompts, IList<string> stop = null);
+    Task<ModelResult> GenerateAsync(IList<string> prompts, IList<string> stop = null);
 
     /// <summary>
     /// Keyword for model type, used for serialization

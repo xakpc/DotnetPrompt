@@ -1,4 +1,6 @@
-﻿using DotnetPrompt.LLM.OpenAI;
+﻿using DotnetPrompt.Abstractions.LLM;
+using DotnetPrompt.LLM.OpenAI;
+using DotnetPrompt.Tests.Integration;
 using DotnetPrompt.Tests.Unit.LargeLanguageModels;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Caching.Memory;

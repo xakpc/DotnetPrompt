@@ -108,8 +108,10 @@ public class PromptTemplate : IPromptTemplate
     /// <param name="values">Key-Value list of values to use to build prompt.</param>
     /// <returns>String prompt</returns>
     /// <exception cref="ArgumentException">Throws when provided list of keys does not match <see cref="InputVariables"/>.</exception>
-    public string Format(IDictionary<string, string> values)
+    public string Format(IDictionary<string, string>? values = null)
     {
+        values ??= new Dictionary<string, string>();
+
         if (!InputVariables.All(x => values.Keys.Contains(x))) // check if all elements of inputVariables are present in valuesKeys
         {
             throw new ArgumentException("parameters and input arguments are different ");

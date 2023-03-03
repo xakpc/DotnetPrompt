@@ -41,7 +41,7 @@ DotnetPrompt provides examples of several common use cases, and this documentati
 
 - [Question Answering](./docs/usecases/chatbots.md): This technique involves utilizing only the information in provided documents to construct an answer to a given question.
 
-- [Code Generation](./docs/usecases/code_generation.md): Generating similar code to a given input. This is a common use case for many applications, and DotnetPrompt provides some prompts/chains for assisting in this.
+- [Docs Generation](./docs/usecases/docs_generation.md): Generating documentation to a source file. This is a common use case for many applications, and DotnetPrompt provides some prompts/chains for assisting in this.
 
 - [Chatbots](./docs/usecases/chatbots.md): Since language models are good at producing text, that makes them ideal for creating chatbots.
 

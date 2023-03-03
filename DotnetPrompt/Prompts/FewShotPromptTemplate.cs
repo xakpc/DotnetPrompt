@@ -25,7 +25,7 @@ public class FewShotPromptTemplate : IPromptTemplate
     /// <summary>
     /// List of Examples, where each example is a Dictionary where key is Input Variable and value is Input Value
     /// </summary>
-    public IList<IDictionary<string, string>>? Examples { get; init; } = null;
+    public IList<IDictionary<string, string>>? Examples { get; init; }
 
     /// <summary>
     /// Separator for examples, default value is "\n\n"
@@ -108,8 +108,10 @@ public class FewShotPromptTemplate : IPromptTemplate
     #endregion
 
     /// <inheritdoc />
-    public string Format(IDictionary<string, string> values)
+    public string Format(IDictionary<string, string>? values = null)
     {
+        values ??= new Dictionary<string, string>();
+
         // Get the examples to use.
         var examples = GetExamples(values);
 

@@ -1,5 +1,4 @@
 ﻿using DotnetPrompt.Chains;
-using DotnetPrompt.LLM.CohereAI;
 using DotnetPrompt.LLM.OpenAI;
 using DotnetPrompt.Prompts;
 using NUnit.Framework;
@@ -13,17 +12,11 @@ public static class ObjectExtensions
     // helper
     public static IDictionary<string, string> ToDictionary(this object obj)
     {
-        var result = new Dictionary<string, string>();
-        PropertyDescriptorCollection properties = TypeDescriptor.GetProperties(obj);
-        foreach (PropertyDescriptor property in properties)
-        {
-            result.Add(property.Name, property.GetValue(obj).ToString());
-        }
-        return result;
+        var properties = TypeDescriptor.GetProperties(obj);
+        return properties.Cast<PropertyDescriptor>().ToDictionary(property => property.Name, property => property.GetValue(obj).ToString());
     }
 }
 #endregion
-
 
 public class FewShotModelExamples
 {
@@ -44,7 +37,6 @@ public class FewShotModelExamples
         var prompt = new FewShotPromptTemplate(example, suffix, examples);
 
         var llm = new OpenAIModel(Constants.OpenAIKey, OpenAIModelConfiguration.Default with { Temperature = 0.2f });
-        //var llm = new CohereAIModel(Constants.CohereAIKey, CohereAIModelConfiguration.Default with { Temperature = 0, MaxTokens = 5, StopSequences = new[] {"\n\n"}});
         var llmChain = new ModelChain(prompt, llm);
         var executor = llmChain.GetExecutor();
 

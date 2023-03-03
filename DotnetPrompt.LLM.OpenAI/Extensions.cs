@@ -11,4 +11,12 @@ internal static class Extensions
             list.Add(item);
         }
     }
+
+    public static void AddRange<TKey, TValue>(this IDictionary<TKey,TValue> list, IDictionary<TKey, TValue> listToAdd)
+    {
+        foreach (var item in listToAdd)
+        {
+            list.Add(item.Key, item.Value);
+        }
+    }
 }

@@ -1,4 +1,6 @@
-﻿using NUnit.Framework;
+﻿using DotnetPrompt.Abstractions.LLM;
+using DotnetPrompt.LLM.CohereAI;
+using NUnit.Framework;
 using DotnetPrompt.LLM.OpenAI;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Caching.Memory;
@@ -8,15 +10,31 @@ namespace DotnetPrompt.Tests.Integration;
 
 public class OpenAiModelTests
 {
-    public const string Key = "TODO";
 
-    [Test]
-    public async Task PromptAsync_SanityCheck_StringOutputNotEmpty()
+    private BaseModel BuildModel(string llm)
+    {
+        switch (llm)
+        {
+            case "openai":
+                return new OpenAIModel(Constants.OpenAIKey,
+                    OpenAIModelConfiguration.Default with { MaxTokens = 10 },
+                    TestLogger.Create<OpenAIModel>());
+
+            case "cohereai":
+                return new CohereAIModel(Constants.CohereAIKey,
+                    new CohereAIModelConfiguration() { MaxTokens = 10 },
+                    TestLogger.Create<OpenAIModel>());
+
+            default: throw new ArgumentException(nameof(llm));
+        }
+    }
+
+    [TestCase("openai")]
+    [TestCase("cohereai")]
+    public async Task PromptAsync_SanityCheck_StringOutputNotEmpty(string model)
     {
         // Arrange
-        var llm = new OpenAIModel(Key, 
-            OpenAIModelConfiguration.Default with { MaxTokens = 10 },
-            TestLogger.Create<OpenAIModel>());
+        var llm = BuildModel(model);
 
         // Act
         var output = await llm.PromptAsync("Say foo:");
@@ -29,7 +47,7 @@ public class OpenAiModelTests
     public async Task PromptAsync_WithNegativeMaxTokensAndSinglePrompt_StringOutputNotEmpty()
     {
         // Arrange
-        var llm = new OpenAIModel(Key,
+        var llm = new OpenAIModel(Constants.OpenAIKey,
             OpenAIModelConfiguration.Default with { MaxTokens = -1 },
             TestLogger.Create<OpenAIModel>());
 
@@ -40,7 +58,6 @@ public class OpenAiModelTests
         Assert.IsNotEmpty(output);
     }
 
-
     [Test]
     public async Task PromptAsync_WithCache_SameResult()
     {
@@ -49,7 +66,7 @@ public class OpenAiModelTests
         var appSettingsOptions = Options.Create(settings);
         var cache = new MemoryDistributedCache(appSettingsOptions);
 
-        var llm = new OpenAIModel(Key,
+        var llm = new OpenAIModel(Constants.OpenAIKey,
             OpenAIModelConfiguration.Default with { MaxTokens = -1 },
             TestLogger.Create<OpenAIModel>(),
             cache)
@@ -73,7 +90,7 @@ public class OpenAiModelTests
         var appSettingsOptions = Options.Create(settings);
         var cache = new MemoryDistributedCache(appSettingsOptions);
 
-        var llm = new OpenAIModel(Key,
+        var llm = new OpenAIModel(Constants.OpenAIKey,
             OpenAIModelConfiguration.Default with { MaxTokens = -1 },
             TestLogger.Create<OpenAIModel>(),
             cache)
@@ -95,7 +112,7 @@ public class OpenAiModelTests
     public async Task PromptAsync_WithExtraArguments_StringOutputNotEmpty()
     {
         // Arrange
-        var llm = new OpenAIModel(Key,
+        var llm = new OpenAIModel(Constants.OpenAIKey,
             OpenAIModelConfiguration.Default with { MaxTokens = 10 },
             TestLogger.Create<OpenAIModel>())
         {
@@ -117,14 +134,14 @@ public class OpenAiModelTests
     public void Model_ModelExtraArguments_AddedProperlyAndValidated()
     {
         // Arrange
-        var llm1 = new OpenAIModel(Key,
+        var llm1 = new OpenAIModel(Constants.OpenAIKey,
             OpenAIModelConfiguration.Default with { MaxTokens = 10 },
             TestLogger.Create<OpenAIModel>())
         {
             ModelExtraArguments = new Dictionary<string, object> { { "foo", 3 } }
         };
 
-        var llm2 = new OpenAIModel(Key, OpenAIModelConfiguration.Default, TestLogger.Create<OpenAIModel>())
+        var llm2 = new OpenAIModel(Constants.CohereAIKey, OpenAIModelConfiguration.Default, TestLogger.Create<OpenAIModel>())
             { ModelExtraArguments = new Dictionary<string, object> { { "foo", 3 }, { "bar", 2 } } };
 
         // Assert
@@ -147,16 +164,16 @@ public class OpenAiModelTests
         // Arrange
         var query = "write an ordered list of five items";
 
-        var firstLlm = new OpenAIModel(Key, OpenAIModelConfiguration.Default with { Temperature = 0 },
+        var firstLlm = new OpenAIModel(Constants.OpenAIKey, OpenAIModelConfiguration.Default with { Temperature = 0 },
             TestLogger.Create<OpenAIModel>())
         {
             DefaultStop = new List<string> { "3" },
         };
 
-        var secondLlm = new OpenAIModel(Key, OpenAIModelConfiguration.Default with { Temperature = 0 },
+        var secondLlm = new OpenAIModel(Constants.OpenAIKey, OpenAIModelConfiguration.Default with { Temperature = 0 },
             TestLogger.Create<OpenAIModel>());
 
-        var thirdLlm = new OpenAIModel(Key, OpenAIModelConfiguration.Default with { Stop = new List<string> { "3" }, Temperature = 0 },
+        var thirdLlm = new OpenAIModel(Constants.OpenAIKey, OpenAIModelConfiguration.Default with { Stop = new List<string> { "3" }, Temperature = 0 },
             TestLogger.Create<OpenAIModel>());
 
         // Act
@@ -177,7 +194,7 @@ public class OpenAiModelTests
     public void Model_WithSeveralStops_InvalidOperationException()
     {
         // Arrange
-        var llm = new OpenAIModel(Key,
+        var llm = new OpenAIModel(Constants.OpenAIKey,
             OpenAIModelConfiguration.Default
                 with
                 {
@@ -194,7 +211,7 @@ public class OpenAiModelTests
     public void Model_WithSeveralStops2_InvalidOperationException()
     {
         // Arrange
-        var llm = new OpenAIModel(Key,
+        var llm = new OpenAIModel(Constants.OpenAIKey,
             OpenAIModelConfiguration.Default
                 with
                 {
@@ -209,4 +226,65 @@ public class OpenAiModelTests
         Assert.ThrowsAsync<InvalidOperationException>(() => llm.PromptAsync("write an ordered list of five items", stop: new List<string> { "\n" }));
     }
 
+    ///// <summary>
+    ///// Test saving/loading an OpenAPI LLM.
+    ///// </summary>
+    //[Test]
+    //public void Test_Saving_Loading_LLM()
+    //{
+    //    // Arrange
+    //    var tmp_path = Path.GetTempPath();
+    //    var file_path = Path.Combine(tmp_path, "openai.yaml");
+    //    var llm = new OpenAIModel(Key)(max_tokens: 10);
+
+    //    // Act
+    //    llm.Save(file_path);
+    //    var loaded_llm = OpenAIModel.Load(file_path);
+
+    //    // Assert
+    //    Assert.AreEqual(llm.max_tokens, loaded_llm.max_tokens);
+    //}
+
+    ///// <summary>
+    ///// Test streaming tokens from OpenAI.
+    ///// </summary>
+    //[Test]
+    //public void Test_Openai_Streaming()
+    //{
+    //    // Arrange
+    //    OpenAI llm = new OpenAIModel(Key)(max_tokens: 10);
+    //    IEnumerator<Dictionary<string, object>> generator = llm.Stream("I'm Pickle Rick");
+
+    //    // Assert
+    //    Assert.IsInstanceOf(typeof(IEnumerator<Dictionary<string, object>>), generator);
+
+    //    // Act & Assert
+    //    while (generator.MoveNext())
+    //    {
+    //        Assert.IsInstanceOf(typeof(string), generator.Current["choices"][0]["text"]);
+    //    }
+    //}
+
+    ///// <summary>
+    ///// Test error handling in stream.
+    ///// </summary>
+    //[Test]
+    //public void TestOpenaiStreamingError()
+    //{
+    //    // Arrange
+    //    var llm = new OpenAIModel(Key)(bestOf: 2);
+
+    //    // Act & Assert
+    //    Assert.Throws<ArgumentException>(() => llm.Stream("I'm Pickle Rick"));
+    //}
+
+    ///// <summary>
+    ///// Test validation for streaming fails if best_of is not 1.
+    ///// </summary>
+    //[Test]
+    //public void TestOpenaiStreamingBestOfError()
+    //{
+    //    // Arrange, Act & Assert
+    //    Assert.Throws<ArgumentException>(() => new OpenAIModel(Key)(bestOf: 2, streaming: true));
+    //}
 }

@@ -1,6 +1,7 @@
 ﻿using DotnetPrompt.Chains;
 using DotnetPrompt.LLM.OpenAI;
 using DotnetPrompt.Prompts;
+using DotnetPrompt.Tests.Integration;
 using NUnit.Framework;
 
 namespace DotnetPrompt.Tests.Examples.Chains;
@@ -18,7 +19,7 @@ public class ModelChainExamples
         var prompt = new PromptTemplate(template, new[] { "question" });
         var llm = new OpenAIModel(Constants.OpenAIKey, OpenAIModelConfiguration.Default with { Temperature = 0 });
         var llmChain = new ModelChain(prompt, llm);
-        var executor = llmChain.GetExecutor();
+        var executor = new OneShotChainExecutor(llmChain);
 
         var question = "What new discoveries from the James Webb Space Telescope can I tell my 9 year old about?";
 

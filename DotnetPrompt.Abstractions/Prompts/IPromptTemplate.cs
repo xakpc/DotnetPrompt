@@ -19,5 +19,5 @@ public interface IPromptTemplate
     /// <param name="values">Key-Value list of values to use to build prompt.</param>
     /// <returns>String prompt</returns>
     /// <exception cref="ArgumentException">Throws when provided list of keys does not match <see cref="InputVariables"/>.</exception>
-    string Format(IDictionary<string, string> values);
+    string Format(IDictionary<string, string> values = default);
 }

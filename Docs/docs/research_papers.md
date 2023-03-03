@@ -1,5 +1,9 @@
 # Research Papers
 
+## OpenAI Cookbook
+
+- [ChatML](https://github.com/openai/openai-python/blob/main/chatml.md)
+
 ## Chain of Thought Prompting
 
 A prompting technique used to encourage the model to generate a series of intermediate reasoning steps.

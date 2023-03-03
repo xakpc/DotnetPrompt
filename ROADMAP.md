@@ -86,7 +86,7 @@ The roadmap of the project
 
 [] Website search
 [] Chatbot
-[]
+[] [WebQA](https://github.com/openai/openai-cookbook/blob/3826607431929af5d58ba442aa3c2893009f637b/apps/web-crawl-q-and-a/web-qa.ipynb)
 
 ### Utils
 

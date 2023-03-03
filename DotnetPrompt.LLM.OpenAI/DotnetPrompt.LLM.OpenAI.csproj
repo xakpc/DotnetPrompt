@@ -1,9 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <Nullable>disable</Nullable>
     <LangVersion>latest</LangVersion>
+    <Version>1.0.0-alpha.1</Version>
+    <Product>DotnetPrompt</Product>
+    <Company>DotnetPrompt</Company>
   </PropertyGroup>
 
   <ItemGroup>
@@ -18,11 +21,17 @@
 
   <ItemGroup>
     <PackageReference Include="Azure.AI.OpenAI" Version="1.0.0-beta.2" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="7.0.3" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
     <PackageReference Include="Polly" Version="7.2.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\DotnetPrompt.Abstractions\DotnetPrompt.Abstractions.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="DependencyInjection\" />
   </ItemGroup>
 
 </Project>

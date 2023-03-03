@@ -37,7 +37,8 @@ public record OpenAIModelConfiguration
     /// allowed.
     /// </summary>
     [JsonPropertyName("n")]
-    public int SnippetCount { get; init; }
+    public int? SnippetCount { get; init; }
+
     /// <summary>
     /// Include the log probabilities on the `logprobs` most likely tokens, as well the
     /// chosen tokens. So for example, if `logprobs` is 10, the API will return a list
@@ -64,7 +65,7 @@ public record OpenAIModelConfiguration
     /// 2048.
     /// </summary>
     [JsonPropertyName("prompt")]
-    public IList<string> Prompt { get; init; } = new List<string>();
+    public IList<string> Prompt { get; init; }
 
     /// <summary> The maximum number of tokens to generate. Has minimum of 0. </summary>
     /// <remarks>Could be set to -1 if there a single prompt to return as many tokens as possible given the prompt and the models maximal context size.</remarks>
