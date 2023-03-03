@@ -3,6 +3,12 @@
 DotnetPrompt is a dotnet library that provides tools for working with Large Language Models (LLMs) individually and combined in chains.
 Our library helps you integrate LLMs with other tools and resources to create powerful AI applications. 
 
+To get started, add NuGet meta-package
+
+```ps
+> dotnet add package DotnetPrompt.All --version 1.0.0-alpha.1
+```
+
 For example, let's say we want to create a `ModelChain` that takes user message, formats it with a `PromptTemplate`, 
 and sends it to an `ChatGPT` LLM to generate funny responses to the message. This allows us to generate a response based on the user's input.
 

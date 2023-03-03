@@ -11,6 +11,7 @@
 	<Copyright>Copyright (c) $([System.DateTime]::Now.ToString(yyyy)), Pavel Osadchuk</Copyright>
 	<RepositoryUrl>https://github.com/xakpc/DotnetPrompt</RepositoryUrl>
 	<PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+	<PackageProjectUrl>https://xakpc.github.io/DotnetPrompt/</PackageProjectUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">

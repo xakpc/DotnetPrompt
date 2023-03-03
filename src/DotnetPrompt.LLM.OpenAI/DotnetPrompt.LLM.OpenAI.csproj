@@ -9,6 +9,7 @@
 	<PackageIcon>icon.png</PackageIcon>
 	<RepositoryUrl>https://github.com/xakpc/DotnetPrompt</RepositoryUrl>
 	<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+	<PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -31,6 +32,13 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DotnetPrompt.Abstractions\DotnetPrompt.Abstractions.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="README.md">
+      <PackagePath>\</PackagePath>
+      <Pack>True</Pack>
+    </None>
   </ItemGroup>
 
 </Project>

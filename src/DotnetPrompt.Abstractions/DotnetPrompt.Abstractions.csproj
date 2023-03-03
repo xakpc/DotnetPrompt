@@ -9,6 +9,7 @@
 	<Description>DotnetPrompt is a dotnet library that provides a set of tools for working with Large Language Models (LLMs) combined in chains.</Description>
 	<PackageIcon>icon.png</PackageIcon>
 	<RepositoryUrl>https://github.com/xakpc/DotnetPrompt</RepositoryUrl>
+	<PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,6 +23,13 @@
     <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="README.md">
+      <PackagePath>\</PackagePath>
+      <Pack>True</Pack>
+    </None>
   </ItemGroup>
 
 </Project>
