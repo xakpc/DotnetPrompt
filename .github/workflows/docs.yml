@@ -17,14 +17,17 @@ on:
 jobs:
   generate-docs:
     runs-on: ubuntu-latest
-    name: A job to say hello
+    name: Generate docfx Documentation
     steps:
     - uses: actions/checkout@v3.3.0
     
-    - uses: nikeee/docfx-action@v1.0.0
-      name: Build Documentation
+    - name: Setup .NET 6.0
+      uses: actions/setup-dotnet@v1
       with:
-        args: docs/docfx.json
+        dotnet-version: 6.x
+
+    - run: dotnet tool update -g docfx
+    - run: docfx docs/docfx.json
 
     - name: Publish
       if: github.event_name == 'push'
