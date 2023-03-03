@@ -77,12 +77,12 @@ Please see the [full documentation]() on:
 
 We are actively developing this library, while it already has a lot of useful funtionalty, much more would be introduced in the future.
 
-- [] Porting `tiktoken` and `huggingface` tokenizers to support more models, currently there is a partial support
-- [] Streaming (using SignalR maybe?)
-- [] VectorDB support
-- [] Context Window Management
-- [] ML.NET Agents/Chains/Integrations (is there anything good?)
-- [] More end-to-end examples
+- [ ] Porting `tiktoken` and `huggingface` tokenizers to support more models, currently there is a partial support
+- [ ] Streaming (using SignalR maybe?)
+- [ ] VectorDB support
+- [ ] Context Window Management
+- [ ] ML.NET Agents/Chains/Integrations (is there anything good?)
+- [ ] More end-to-end examples
 
 A full roadmap is  availible [here](ROADMAP.md)
 
