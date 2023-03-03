@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotnetPrompt", "src\DotnetP
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotnetPrompt.LLM.OpenAI", "src\DotnetPrompt.LLM.OpenAI\DotnetPrompt.LLM.OpenAI.csproj", "{15EB2B73-2B46-4DD0-B66D-F28EE6B41489}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Docs", "Docs\Docs.csproj", "{115CACE2-79B8-4016-9DD8-E58A966B2C3D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Docs", "docs\Docs.csproj", "{115CACE2-79B8-4016-9DD8-E58A966B2C3D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotnetPrompt.Tests.Integration", "test\DotnetPrompt.Tests.Integration\DotnetPrompt.Tests.Integration.csproj", "{D0AEC563-D723-4B7E-B2CF-B51CB193635A}"
 EndProject
