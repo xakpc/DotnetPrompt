@@ -17,7 +17,7 @@ Our library helps you integrate LLMs with other tools and resources to create po
 
 You could start with the below guide for a walkthrough of how to get started using DotnetPrompt to create an Language Model application.
 
-- [Getting Started Documentation](./docs/getting_started.md)
+- [Getting Started Documentation](./articles/getting_started.md)
 
 ## Basic Blocks
 
@@ -25,25 +25,25 @@ Several basic components are available in DotnetPrompt, and several more are com
 
 We provide how-to guides to get started, examples, and reference docs for each component.
 
-- [Prompts](./docs/prompts/getting_started.md): Prompts are how you communicate with LLMs. This component includes prompt management, optimization, and usage of few-shot prompts.
+- [Prompts](./articles/prompts/getting_started.md): Prompts are how you communicate with LLMs. This component includes prompt management, optimization, and usage of few-shot prompts.
 
-- [LLMs](./docs/LLMs/getting_started.md): LLM is a generic interface for Large Language Models provider. We have implementation for some widespread providers and standard utilities for working with them out of the box.
+- [LLMs](./articles/LLMs/getting_started.md): LLM is a generic interface for Large Language Models provider. We have implementation for some widespread providers and standard utilities for working with them out of the box.
 
-- [Chains](./docs/chains/getting_started.md): Chains are sequences of LLMs or a different utility combined in Dataflow to achieve some tasks. With DotnetPrompt, you get a standard interface for chains and several commonly used implementations.
+- [Chains](./articles/chains/getting_started.md): Chains are sequences of LLMs or a different utility combined in Dataflow to achieve some tasks. With DotnetPrompt, you get a standard interface for chains and several commonly used implementations.
 
-- [Tools](./docs/tools/getting_started.md): Different valuable tools for building Nature Language applications, without need to get into python.
+- [Tools](./articles/tools/getting_started.md): Different valuable tools for building Nature Language applications, without need to get into python.
 
 ## Use Cases
     
 DotnetPrompt provides examples of several common use cases, and this documentation offers guidance and assistance on how to use the components in different ways.
 
-- [Summarization](./docs/usecases/summarization.md): Summarizing longer documents into shorter, more condensed chunks of information.
+- [Summarization](./articles/usecases/summarization.md): Summarizing longer documents into shorter, more condensed chunks of information.
 
-- [Question Answering](./docs/usecases/chatbots.md): This technique involves utilizing only the information in provided documents to construct an answer to a given question.
+- [Question Answering](./articles/usecases/chatbots.md): This technique involves utilizing only the information in provided documents to construct an answer to a given question.
 
-- [Docs Generation](./docs/usecases/docs_generation.md): Generating documentation to a source file. This is a common use case for many applications, and DotnetPrompt provides some prompts/chains for assisting in this.
+- [Docs Generation](./articles/usecases/docs_generation.md): Generating documentation to a source file. This is a common use case for many applications, and DotnetPrompt provides some prompts/chains for assisting in this.
 
-- [Chatbots](./docs/usecases/chatbots.md): Since language models are good at producing text, that makes them ideal for creating chatbots.
+- [Chatbots](./articles/usecases/chatbots.md): Since language models are good at producing text, that makes them ideal for creating chatbots.
 
 - More use cases coming soon; subscribe to [@DotnetPrompt](https://twitter.com/dotnetprompt) to be updated
 
@@ -55,7 +55,7 @@ All of DotnetPrompt's reference documentation, in one place. Full documentation 
 
 ## Additional Resources 
 
-- [List of related research papers](./docs/research_papers.md): there are a lot of work going to invent better ways to work with LLMs. Some ideas of this framework is based on papers we listed there.
+- [List of related research papers](./articles/research_papers.md): there are a lot of work going to invent better ways to work with LLMs. Some ideas of this framework is based on papers we listed there.
 
 > [!NOTE]
 > This project initially was started as a port of popular Python framework [LangChain](https://github.com/hwchase17/langchain). 

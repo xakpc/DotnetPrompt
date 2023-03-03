@@ -12,5 +12,3 @@
     href: providers/azure_openai.md
   - name: Cohere AI
     href: providers/cohere.md
-- name: Reference
-  href: ../../api/index.md#large-language-models

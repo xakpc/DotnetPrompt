@@ -4,5 +4,3 @@
   href: prompt_template.md
 - name: Few Shot Prompt Template
   href: few_shots_example.md
-- name: Reference
-  href: ../../api/index.md#prompts
