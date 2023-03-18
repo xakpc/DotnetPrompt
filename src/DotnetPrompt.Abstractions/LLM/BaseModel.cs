@@ -119,4 +119,5 @@ public abstract class BaseModel : ILargeLanguageModel
     }
 
     public abstract string LLMType { get; }
+    public abstract int MaxRequestTokens { get; }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks.Dataflow;
 
 namespace DotnetPrompt.Abstractions.Chains;
@@ -18,6 +19,11 @@ public interface IChain <TInput, TOutput>
     {
         return InputBlock.Post(message);
     }
+
+    /// <summary>
+    /// Cancel Chain execution
+    /// </summary>
+    public void Cancel();
 }
 
 

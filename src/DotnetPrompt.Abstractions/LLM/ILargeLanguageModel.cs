@@ -20,4 +20,9 @@ public interface ILargeLanguageModel
     /// Keyword for model type, used for serialization
     /// </summary>
     string LLMType { get; }
+
+    /// <summary>
+    /// Maximum tokens that could be send to a language model
+    /// </summary>
+    public int MaxRequestTokens { get; }
 }
