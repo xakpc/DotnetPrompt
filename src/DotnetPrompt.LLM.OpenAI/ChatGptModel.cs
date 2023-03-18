@@ -48,7 +48,6 @@ public record ChatGptModelConfiguration : OpenAIModelConfiguration
 public class ChatGptModel : BaseModel
 {
     public const string Model = "gpt-3.5-turbo";
-    public const int MaxTokensForModel = 4000;
 
     public ChatGptModelConfiguration DefaultModelConfiguration { get; set; }
     public string OpenAiApiKey { get; set; }
@@ -78,6 +77,7 @@ public class ChatGptModel : BaseModel
     }
 
     public override string LLMType => "chatgpt";
+    public override int MaxRequestTokens => 4000;
 
     protected override async Task<ModelResult> GenerateInternalAsync(IList<string> prompts, IList<string> stop = null)
     {
@@ -110,7 +110,7 @@ public class ChatGptModel : BaseModel
             var subPromptOptions = completionsOptions with
             {
                 Messages = messages,
-                MaxTokens = completionsOptions.MaxTokens == -1 ? MaxTokensForModel - GetNumTokens(subPrompt) : completionsOptions.MaxTokens
+                MaxTokens = completionsOptions.MaxTokens == -1 ? MaxRequestTokens - GetNumTokens(subPrompt) : completionsOptions.MaxTokens
             };
 
             if (subPromptOptions.MaxTokens < 0)

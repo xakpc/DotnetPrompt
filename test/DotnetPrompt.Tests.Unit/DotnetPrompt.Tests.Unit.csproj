@@ -21,7 +21,7 @@
 
   <ItemGroup>
     <Folder Include="LLM\OpenAI\" />
-    <Folder Include="Chains\" />
+    <Folder Include="Tools\" />
     <Folder Include="Prompts\ExampleSelectors\" />
   </ItemGroup>
 

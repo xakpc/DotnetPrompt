@@ -68,14 +68,28 @@ public class CombinedChainExamples
     #region CustomChain_ConcatenateChain
     public class ConcatenateChain : IChain
     {
+        private readonly IChain _one;
+        private readonly IChain _two;
         private readonly BroadcastBlock<ChainMessage> _broadcast;
         private readonly TransformBlock<Tuple<ChainMessage, ChainMessage>, ChainMessage> _finalTransformation;
+        private CancellationTokenSource _cts = new(TimeSpan.FromMinutes(1));
+
 
         public ITargetBlock<ChainMessage> InputBlock => _broadcast;
         public ISourceBlock<ChainMessage> OutputBlock => _finalTransformation;
+        
+        
+        public void Cancel()
+        {
+            _one.Cancel();
+            _two.Cancel();
+            _cts.Cancel();
+        }
 
         public ConcatenateChain(IChain one, IChain two)
         {
+            _one = one;
+            _two = two;
             InputVariables = one.InputVariables;
 
             _broadcast = new BroadcastBlock<ChainMessage>(e => e with {}); // clone input record
@@ -99,7 +113,7 @@ public class CombinedChainExamples
                         { DefaultOutputKey, string.Concat(resultOne, "\n", resultTwo) }
                     };
                     return new ChainMessage(resultDictionary) { Id = list.Item1.Id };
-                });
+                }, new ExecutionDataflowBlockOptions() { CancellationToken = _cts.Token });
 
             joinBlock.LinkTo(_finalTransformation, options); 
         }

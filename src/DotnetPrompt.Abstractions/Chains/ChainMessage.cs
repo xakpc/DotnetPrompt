@@ -10,5 +10,5 @@ namespace DotnetPrompt.Abstractions.Chains;
 /// <param name="Stops"></param>
 public record ChainMessage(IDictionary<string, string> Values, IList<string> Stops = null)
 {
-    public Guid Id { get; set;  } = Guid.NewGuid();
+    public Guid Id { get; set; } = Guid.NewGuid();
 }

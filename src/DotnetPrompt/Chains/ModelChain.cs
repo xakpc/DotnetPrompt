@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Threading.Tasks.Dataflow;
 using DotnetPrompt.Abstractions.Chains;
@@ -21,6 +22,8 @@ public class ModelChain : IChain
     private readonly ILargeLanguageModel _llm;
     private readonly ILogger _logger;
 
+    private readonly CancellationTokenSource _cancellationTokenSource = new(TimeSpan.FromMinutes(1));
+
     /// <inheritdoc />
     public IList<string> InputVariables => _prompt.InputVariables;
 
@@ -32,6 +35,17 @@ public class ModelChain : IChain
 
     /// <inheritdoc />
     public ISourceBlock<ChainMessage> OutputBlock => _modelBlock;
+
+    /// <inheritdoc />
+    public void Cancel()
+    {
+        _cancellationTokenSource.Cancel();
+    }
+
+    /// <summary>
+    /// Maximum number of tokens
+    /// </summary>
+    public int ModelMaxRequestTokens => _llm.MaxRequestTokens;
 
     /// <summary>
     /// 
@@ -46,7 +60,15 @@ public class ModelChain : IChain
         _llm = llm;
         _logger = logger ?? new NullLogger<ModelChain>();
 
-        _modelBlock = new TransformBlock<ChainMessage, ChainMessage>(Transform);
+        if (InputVariables.Any(s => DefaultOutputKey.Equals(s)))
+        {
+            throw new InvalidOperationException("DefaultOutputKey should not be the same as InputValues");
+        }
+
+        _modelBlock = new TransformBlock<ChainMessage, ChainMessage>(Transform, new ExecutionDataflowBlockOptions()
+        {
+            CancellationToken = _cancellationTokenSource.Token
+        });
     }
 
     private async Task<ChainMessage> Transform(ChainMessage message)
@@ -68,7 +90,7 @@ public class ModelChain : IChain
             _logger.LogTrace("LLM response: {result}", result);
 
             // expand input and pass to the next
-            var text = result.Generations.FirstOrDefault()?.FirstOrDefault()?.Text;
+            var text = result.Generations.FirstOrDefault()?.FirstOrDefault()?.Text?.Trim();
             _logger.LogInformation("Result of ModelChain: {text}", text);
             input.Add(DefaultOutputKey, text);
             return message;

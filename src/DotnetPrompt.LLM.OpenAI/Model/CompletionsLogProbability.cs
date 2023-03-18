@@ -7,7 +7,7 @@ public record CompletionsLogProbability
 {
     /// <summary> Log Probability of Tokens. </summary>
     [JsonPropertyName("token_logprobs")]
-    public IReadOnlyList<float> TokenLogProbability { get; init; }
+    public IReadOnlyList<float?> TokenLogProbability { get; init; }
 
     /// <summary> Top Log Probabilities. </summary>
     [JsonPropertyName("top_logprobs")]

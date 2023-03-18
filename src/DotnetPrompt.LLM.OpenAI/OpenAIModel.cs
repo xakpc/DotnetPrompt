@@ -160,6 +160,8 @@ public class OpenAIModel : BaseModel
 
     public override string LLMType => "openai";
 
+    public override int MaxRequestTokens => ModelNameToContextSize(DefaultModelConfiguration.Model);
+
     /// <summary>
     /// Calculate the maximum number of tokens possible to generate for a model.
     ///  text-davinci-003: 4,097 tokens

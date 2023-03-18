@@ -9,11 +9,15 @@ namespace DotnetPrompt.Chains.Specialized;
 /// </summary>
 public class SummarizeChain : ModelChain
 {
-    private const string Template = "Summarize the following text.\r\n\r\n" +
-                                    "Text:\r\n" +
-                                    "{text}\r\n" +
-                                    "---\r\n\r\n" +
-                                    "Summary:";
+    private const string Template = """
+        Write a concise summary of the following text
+        
+        Text:
+        {text}
+        ---
+        
+        Summary:
+        """;
 
     /// <inheritdoc />
     public override string DefaultOutputKey => "summary";

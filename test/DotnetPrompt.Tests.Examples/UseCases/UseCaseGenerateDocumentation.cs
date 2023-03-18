@@ -42,28 +42,31 @@ public class UseCaseGenerateDocumentation
         #region BuildDataflow
         private readonly TransformBlock<IList<ChainMessage>, ChainMessage> _finalizatorBlock;
         private readonly TransformManyBlock<ChainMessage, ChainMessage> _transformationBlockOne;
+        private readonly CancellationTokenSource _cts = new(TimeSpan.FromMinutes(1));
+        private readonly ModelChain _llmModelChain;
 
         public ConvertDotnetTestsToMdTableChain(ILogger<ConvertDotnetTestsToMdTableChain> logger)
         {
             _logger = logger;
+            var dataflowOptions = new ExecutionDataflowBlockOptions() { CancellationToken = _cts.Token };
 
             // "transform" .cs file to list of methods
-            _transformationBlockOne = new TransformManyBlock<ChainMessage, ChainMessage>(ReadMethodsFromFile);
+            _transformationBlockOne = new TransformManyBlock<ChainMessage, ChainMessage>(ReadMethodsFromFile, dataflowOptions);
 
             // LLM set up with several examples through few-prompt learning
-            var llmModelChain = BuildFewPromptLLModelChain();
+            _llmModelChain = BuildFewPromptLLModelChain();
 
             // buffer to collect rows
-            var batchRowsBlock = new BatchBlock<ChainMessage>(100);
+            var batchRowsBlock = new BatchBlock<ChainMessage>(100, new GroupingDataflowBlockOptions() { CancellationToken = _cts.Token });
 
             // "transform" from list of rows to table
-            _finalizatorBlock = new TransformBlock<IList<ChainMessage>, ChainMessage>(CombineRowsToTable);
+            _finalizatorBlock = new TransformBlock<IList<ChainMessage>, ChainMessage>(CombineRowsToTable, dataflowOptions);
 
             var linkOptions = new DataflowLinkOptions() { PropagateCompletion = true };
 
             // set up chain
-            _transformationBlockOne.LinkTo(llmModelChain.InputBlock, linkOptions);
-            llmModelChain.OutputBlock.LinkTo(batchRowsBlock, linkOptions);
+            _transformationBlockOne.LinkTo(_llmModelChain.InputBlock, linkOptions);
+            _llmModelChain.OutputBlock.LinkTo(batchRowsBlock, linkOptions);
             batchRowsBlock.LinkTo(_finalizatorBlock, linkOptions);
         }
         #endregion
@@ -98,6 +101,13 @@ public class UseCaseGenerateDocumentation
             InputBlock.Complete();
             return launched;
         }
+
+        public void Cancel()
+        {
+            _cts.Cancel();
+            _llmModelChain.Cancel();
+        }
+
         #endregion
 
         #region ReadMethodsFromFile

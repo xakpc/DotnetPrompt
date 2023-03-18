@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Threading.Tasks.Dataflow;
@@ -31,13 +32,20 @@ public class OneShotChainExecutor : IChainExecutor
                 "Simplified PromptAsync could not be used for templates with more than one input variables or zero variables");
         }
 
-        var context = new ChainMessage(new Dictionary<string, string> { { _chainToExecute.InputVariables[0], input } });
+        try
+        {
+            var context = new ChainMessage(new Dictionary<string, string> { { _chainToExecute.InputVariables[0], input } });
 
-        var writeOnceBlock = PrepareWriteOnceBlock(_chainToExecute.OutputBlock, context);
-        _chainToExecute.InputBlock.Post(context);
-        var result = await CompleteAndReceiveAsync(writeOnceBlock);
-
-        return result.Values[_chainToExecute.DefaultOutputKey];
+            var writeOnceBlock = PrepareWriteOnceBlock(_chainToExecute.OutputBlock, context);
+            _chainToExecute.InputBlock.Post(context);
+            var result = await CompleteAndReceiveAsync(writeOnceBlock);
+            return result.Values[_chainToExecute.DefaultOutputKey];
+        }
+        catch (System.InvalidOperationException e)
+        {
+            Trace.TraceError(e.Message);
+            return string.Empty;
+        }
     }
 
     /// <inheritdoc />
