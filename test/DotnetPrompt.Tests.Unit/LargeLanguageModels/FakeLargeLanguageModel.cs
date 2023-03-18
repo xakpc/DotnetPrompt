@@ -47,7 +47,7 @@ public class FakeLargeLanguageModel : BaseModel
 
 
     public override string LLMType => "fake";
-
+    public override int MaxRequestTokens => 100;
     public FakeLargeLanguageModel(ILogger logger, IDistributedCache cache = null) : base(logger, cache)
     {
     }
