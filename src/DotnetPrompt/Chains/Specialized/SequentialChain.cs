@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks.Dataflow;
 using DotnetPrompt.Abstractions.Chains;
 
@@ -35,8 +37,21 @@ public class SequentialChain : IChain
     public ISourceBlock<ChainMessage> OutputBlock => Chains[^1].OutputBlock;
 
     /// <inheritdoc />
+    public void Cancel()
+    {
+        foreach (var chain in Chains)
+        {
+            chain.Cancel();
+        }
+        _cancellationTokenSource.Cancel();
+    }
+
+    /// <inheritdoc />
     public IList<string> InputVariables => Chains[0].InputVariables;
 
     /// <inheritdoc />
     public string DefaultOutputKey { get; set; } = "text";
+
+    /// <inheritdoc />
+    private readonly CancellationTokenSource _cancellationTokenSource = new(TimeSpan.FromMinutes(1));
 }
