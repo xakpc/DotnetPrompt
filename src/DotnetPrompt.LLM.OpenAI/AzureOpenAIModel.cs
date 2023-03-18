@@ -65,7 +65,6 @@ public class AzureOpenAIModel : OpenAIModel
             Created = azureCompletions.Created,
             Id = azureCompletions.Id,
             Model = azureCompletions.Model,
-            Object = azureCompletions.Object,
             Usage = azureCompletions.Usage != null ? new Model.CompletionsUsage()
                 {
                     CompletionTokens = azureCompletions.Usage.CompletionTokens,

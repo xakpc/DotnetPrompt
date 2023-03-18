@@ -9,9 +9,6 @@ public record Completions
     /// <summary> Id for completion response. </summary>
     [JsonPropertyName("id")]
     public string Id { get; init; }
-    /// <summary> Object for completion response. </summary>
-    [JsonPropertyName("object")]
-    public string Object { get; init; }
     /// <summary> Created time for completion response. </summary>
     [JsonPropertyName("created")]
     public int? Created { get; init; }

@@ -89,6 +89,11 @@ public class OpenAIEmbeddings : IEmbeddings
         }
     }
 
+    /// <summary>
+    /// Call OpenAI embeddings to embed a single text
+    /// </summary>
+    /// <param name="text"></param>
+    /// <returns></returns>
     public async Task<TextEmbedding> EmbedAsync(string text)
     {
         if (text.Length / 4 > MaxTokens) // on average 4 character per token
