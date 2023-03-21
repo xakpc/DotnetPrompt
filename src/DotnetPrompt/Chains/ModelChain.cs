@@ -28,7 +28,7 @@ public class ModelChain : IChain
     public IList<string> InputVariables => _prompt.InputVariables;
 
     /// <inheritdoc />
-    public virtual string DefaultOutputKey { get; set; } = "text";
+    public string DefaultOutputKey { get; set; }
 
     /// <inheritdoc />
     public ITargetBlock<ChainMessage> InputBlock => _modelBlock;
@@ -50,15 +50,18 @@ public class ModelChain : IChain
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="prompt"></param>
-    /// <param name="llm"></param>
-    /// <param name="logger"></param>
-    public ModelChain(IPromptTemplate prompt, ILargeLanguageModel llm, ILogger? logger = null)
+    /// <param name="prompt">Prompt template for chain to use in LLM</param>
+    /// <param name="llm">LLM to use</param>
+    /// <param name="defaultOutputKey">Default key for chain result</param>
+    /// <param name="logger">Default logger</param>
+    public ModelChain(IPromptTemplate prompt, ILargeLanguageModel llm, string defaultOutputKey = "text", ILogger? logger = null)
     {
         // chain 
         _prompt = prompt;
         _llm = llm;
         _logger = logger ?? new NullLogger<ModelChain>();
+
+        DefaultOutputKey = defaultOutputKey;
 
         if (InputVariables.Any(s => DefaultOutputKey.Equals(s)))
         {

@@ -113,7 +113,8 @@ namespace DotnetPrompt.LLM.CohereAI
         }
 
         public override string LLMType => "cohere";
-        public override int MaxRequestTokens { get; }
+        
+        public override int MaxRequestTokens => 2000;
 
         async Task<Completions> CallCohereAi(string key, CohereAIModelConfiguration configuration)
         {

@@ -28,6 +28,8 @@ public class SequentialChain : IChain
         {
             chains[i].LinkTo(chains[i + 1]);
         }
+
+        DefaultOutputKey = Chains[^1].DefaultOutputKey;
     }
 
     /// <inheritdoc />
@@ -50,7 +52,7 @@ public class SequentialChain : IChain
     public IList<string> InputVariables => Chains[0].InputVariables;
 
     /// <inheritdoc />
-    public string DefaultOutputKey { get; set; } = "text";
+    public string DefaultOutputKey { get; set; }
 
     /// <inheritdoc />
     private readonly CancellationTokenSource _cancellationTokenSource = new(TimeSpan.FromMinutes(1));

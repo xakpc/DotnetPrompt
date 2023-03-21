@@ -19,15 +19,12 @@ public class SummarizeChain : ModelChain
         Summary:
         """;
 
-    /// <inheritdoc />
-    public override string DefaultOutputKey => "summary";
-
     /// <summary>
     /// ctor
     /// </summary>
     /// <param name="llm"></param>
     /// <param name="logger"></param>
-    public SummarizeChain(ILargeLanguageModel llm, ILogger<ModelChain>? logger = null) : base(new PromptTemplate(Template), llm, logger)
+    public SummarizeChain(ILargeLanguageModel llm, ILogger? logger = null) : base(new PromptTemplate(Template), llm, "summary", logger)
     {
 
     }

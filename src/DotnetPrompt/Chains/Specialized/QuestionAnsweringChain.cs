@@ -19,16 +19,13 @@ public class QuestionAnsweringChain : ModelChain
                                     "Question: {question}\n" +
                                     "Answer:";
 
-    /// <inheritdoc />
-    public override string DefaultOutputKey => "answer";
-
     /// <summary>
     /// ctor
     /// </summary>
     /// <param name="llm"></param>
     /// <param name="logger"></param>
     public QuestionAnsweringChain(ILargeLanguageModel llm, ILogger<ModelChain>? logger = null) 
-        : base(new PromptTemplate(Template), llm, logger)
+        : base(new PromptTemplate(Template), llm, "answer", logger)
     {
 
     }

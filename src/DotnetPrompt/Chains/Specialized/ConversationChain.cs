@@ -16,15 +16,12 @@ public class ConversationChain : ModelChain
                                     "Human:{input}\r\n" +
                                     "AI: ";
 
-    /// <inheritdoc />
-    public override string DefaultOutputKey => "response";
-
     /// <summary>
     /// ctor
     /// </summary>
     /// <param name="llm"></param>
     /// <param name="logger"></param>
-    public ConversationChain(ILargeLanguageModel llm, ILogger<ConversationChain> logger = null) : base(new PromptTemplate(template), llm, logger)
+    public ConversationChain(ILargeLanguageModel llm, ILogger<ConversationChain> logger = null) : base(new PromptTemplate(template), llm, "response", logger)
     {
 
     }
