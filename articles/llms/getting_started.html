@@ -1,0 +1,217 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Getting Started | DotnetPrompt </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Getting Started | DotnetPrompt ">
+    <meta name="generator" content="docfx ">
+  
+    <link rel="shortcut icon" href="../.././images/logo.svg">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="../toc.html">
+  
+  <meta property="docfx:rel" content="../../">
+  
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../.././images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="getting-started">Getting Started</h1>
+
+<p>The LLM class is a class designed for interfacing with LLMs. Any model class in DotnetPrompt should have a base class of <code>BaseModel</code>
+There are lots of LLM providers (OpenAI, Cohere, Hugging Face, etc) - this class is designed to provide a standard interface for all of them.</p>
+<p>In this part of the article, we will focus on generic LLM functionality.
+For details on working with a specific LLM wrapper, please see the examples in the Provider section.</p>
+<p>For this article, we will work with an OpenAI Model, although the functionalities highlighted are generic for all LLM types.</p>
+<p>LLMs are distributed as separate NuGet packages and could be constructed directly or through <a href="../getting_started.html#dependency-injecton">dependecy injection</a>.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>If model is constructed through DI it would require its configuration te be set through <code>IConfiguration</code>.</p>
+</div>
+<pre><code class="lang-text">dotnet add package DotnetPrompt.LLM.OpenAI --version 0.0.1-alpha1
+</code></pre>
+<p>To create model manually</p>
+<pre><code class="lang-csharp">var llm = new OpenAIModel(Constants.OpenAIKey,
+    OpenAIModelConfiguration.Default with
+    {
+        Model = &quot;text-ada-001&quot;,
+        SnippetCount = 1,
+        GenerationSampleCount = 2,
+        Temperature = 0.9f
+    });
+</code></pre>
+<p><strong>Generate Text</strong>: The most basic functionality an LLM has is the ability to call <code>PromptAsync</code> it, passing in a string and getting back a string.</p>
+<pre><code class="lang-csharp">var llm = CreateOpenAiModel();
+
+var output = await llm.PromptAsync(&quot;Tell me a joke&quot;);
+Console.WriteLine(output);
+</code></pre>
+<p>Result would be:</p>
+<pre><code class="lang-text">&gt; Why did the chicken cross the road?
+&gt; To get to the other side!
+</code></pre>
+<p><strong>Generate</strong>: More broadly, you can call <code>GenerateAsync</code> with a list of inputs, getting back a more complete response than just the text.
+This complete response includes things like multiple top responses, as well as LLM providers' specific information.</p>
+<pre><code class="lang-csharp">
+var llm = new OpenAIModel(Constants.OpenAIKey, OpenAIModelConfiguration.Default with
+{
+    SnippetCount = 2,
+    GenerationSampleCount = 2,
+    Temperature = 0.9f
+});
+
+var prompts = new[] { &quot;Tell me a joke&quot;, &quot;Tell me a poem&quot; };
+
+// we generate two completions on each prompt
+var output = await llm.GenerateAsync(prompts);
+
+Console.WriteLine(JsonSerializer.Serialize(output));
+
+</code></pre>
+<p>This example will take two inputs and generate two completions per each input.</p>
+<p>Here is how final result might be looking</p>
+<pre><code class="lang-json">{
+  &quot;Generations&quot;: [ 
+    [
+      {
+        &quot;Text&quot;: &quot;\n\nQ: What did the fish say when it hit its head?\nA: \&quot;OW!\&quot;&quot;,
+        &quot;Info&quot;: {
+          &quot;finish_reason&quot;: &quot;stop&quot;,
+          &quot;logprobs&quot;: null
+        }
+      },
+      {
+        &quot;Text&quot;: &quot;\n\nQ: What did the fish say when he hit the wall? \nA: Dam!&quot;,
+        &quot;Info&quot;: {
+          &quot;finish_reason&quot;: &quot;stop&quot;,
+          &quot;logprobs&quot;: null
+        }
+      } 
+    ],
+    [
+      {
+         &quot;Text&quot;: &quot;\n\nThe fields of green and the standing stones,\nThe cool wind against my skin,\nThe distant harbor and rolling hills,\nA beauty I'm lost in.\n\nThe birds that sing in the silent trees,\nThe whispering of the brook,\nThe heather-clad peaks of the highland hills,\nAn enchantment I took.\n\nThe mists of morning and twilight's hush,\nThe blanket of stars that night,\nThe rustling of leaves and the swirl of snow,\nA world of pure delight.&quot;,
+         &quot;Info&quot;: {
+            &quot;finish_reason&quot;: &quot;stop&quot;,
+            &quot;logprobs&quot;: null
+         }
+      },
+      {
+         &quot;Text&quot;: &quot;\n\nRoses are red\nViolets are blue\nSugar is sweet\nAnd so are you!&quot;,
+         &quot;Info&quot;: {
+           &quot;finish_reason&quot;: &quot;stop&quot;,
+           &quot;logprobs&quot;: null
+         }
+      }
+    ]
+  ],
+  &quot;Output&quot;: {
+    &quot;token_usage&quot;: {
+      &quot;completion_tokens&quot;: 178,
+      &quot;prompt_tokens&quot;: 8,
+      &quot;total_tokens&quot;: 186
+    }
+  }
+}
+</code></pre>
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/xakpc/DotnetPrompt/blob/main/docs/articles/llms/getting_started.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      <span>Copyright 2023 © Pavel <i>«xakpc»</i> Osadchuk for <strong>DotnetPrompt</strong></span>
+      
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

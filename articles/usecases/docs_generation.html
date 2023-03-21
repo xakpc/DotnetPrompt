@@ -1,0 +1,370 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Documentation Generation | DotnetPrompt </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Documentation Generation | DotnetPrompt ">
+    <meta name="generator" content="docfx ">
+  
+    <link rel="shortcut icon" href="../.././images/logo.svg">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="../toc.html">
+  
+  <meta property="docfx:rel" content="../../">
+  
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../.././images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="documentation-generation">Documentation Generation</h1>
+
+<p>Code documentation is crucial for any software development project. It helps to make code understandable, maintainable and reduces the time required to fix bugs.
+Documentation for classes and functions is particularly important as it gives an overview of what the code does, how to use it, and any constraints or limitations.
+However, writing documentation can be time-consuming and often gets neglected.</p>
+<p>In this article, we will explore how with help of <code>DotnetPrompt</code> a Large Language Model (LLM) can be used to automatically generate documentation for a class with minimal effort.</p>
+<h2 id="problem">Problem:</h2>
+<p>We have a source file with a <code>Logger</code> class. This class provides logging functionality to other parts of the codebase.
+The <code>Logger</code> class has a predefined log messages in methods that look like this.</p>
+<pre><code class="lang-csharp">public void GetDocumentCodes(string id, int[] codes)
+{
+    WriteDebug(10001, new { id, codes },
+        () =&gt; $&quot;Reading document codes for id {id}.&quot;);
+}
+
+public void CreateMetadataCompleted(Guid id, TimeSpan timeToFilter)
+{
+    WriteInfo(11004, new { id, timeToFilter },
+         () =&gt; $&quot;Get comparison metadata for id {id} in {timeToFilter:c}&quot;);
+}
+
+public void IndexClientFailed(Exception exception)
+{
+    WriteError(13001, new { message = exception.Message },
+        () =&gt; $&quot;Failed to execute index client with error {exception.Message}&quot;, exception);
+}
+</code></pre>
+<p>We need to create documentation for this class that includes a log code, log level and log message.
+This documentation should be presented in a markdown table format.</p>
+<h2 id="solution">Solution:</h2>
+<p>We will use custom <code>Chain</code> with an LLM to generate the documentation for the Logger class.
+The <code>Chain</code> will take the source file as input, and generate markdown table documentation for the class.
+Inside the chain we will setup <code>OpenAIModel</code> with few prompt examples.</p>
+<h3 id="step-1-install-required-packages">Step 1: Install Required Packages</h3>
+<p>We will be using the OpenAI GPT-3 API to generate the documentation. You will need to sign up for an API key from OpenAI and install the <code>DotnetPrompt</code> from NuGet.</p>
+<pre><code class="lang-ps">&gt; dotnet add package DotnetPrompt.All --version 1.0.0-alpha.1
+</code></pre>
+<h3 id="step-2-initialize-openai-api-key">Step 2: Initialize OpenAI API Key</h3>
+<p>We would not use configuration or something like this, so we just store API key as a constant.</p>
+<pre><code class="lang-csharp">public static class Constants
+{
+    public const string OpenAIKey = &quot;YOUR-KEY&quot;;    
+}
+</code></pre>
+<h3 id="step-3-define-the-prompt-examples-and-setup-modelchain">Step 3: Define the Prompt Examples and setup <code>ModelChain</code></h3>
+<p>We will define a few prompt examples for the LLM to generate the documentation.
+These examples will give the LLM an idea of the format and structure we want the documentation to take.</p>
+<p>Inside out custom chain we will use basic <code>ModelChain</code> to make a call to LLM.</p>
+<pre><code class="lang-csharp">private ModelChain BuildFewPromptLLModelChain()
+{
+    var example = new PromptTemplate(&quot;Code:\n{code}\nTableRow: {row}&quot;);
+    var suffix = new PromptTemplate(&quot;Code:\n{code}\nTableRow: &quot;);
+
+    var examples = new List&lt;IDictionary&lt;string, string&gt;&gt;()
+    {
+        new Dictionary&lt;string, string&gt;()
+        {
+            {
+                &quot;code&quot;,
+                &quot;public void GetDocumentCodes(string id, int[] codes)\r\n {\r\n WriteDebug(10001, new { id, codes },\r\n () =&gt; $\&quot;Reading document metadata for id {id}.\&quot;);\r\n }&quot;
+            },
+            {
+                &quot;row&quot;,
+                &quot;| Debug | 10001 | GetDocumentCodes |  Reading document metadata for id {globalId}. |&quot;
+            }
+        },
+        new Dictionary&lt;string, string&gt;()
+        {
+            {
+                &quot;code&quot;,
+                &quot;public void CreateMetadataCompleted(Guid id, TimeSpan timeToFilter)\r\n {\r\n WriteInfo(11004, new { id, timeToFilter },\r\n () =&gt; $\&quot;Get comparison metadata for id {id} in {timeToFilter:c}\&quot;);\r\n }&quot;
+            },
+            {
+                &quot;row&quot;,
+                &quot;| Info | 11004 | CreateComparisonMetadataCompleted | Get comparison metadata for id {id} in {timeToFilter:c} |&quot;
+            }
+        },
+        new Dictionary&lt;string, string&gt;()
+        {
+            {
+                &quot;code&quot;,
+                &quot;public void IndexClientFailed(Exception exception)\r\n {\r\n WriteError(13001, new { message = exception.Message },\r\n () =&gt; $\&quot;Failed to execute index client with error {exception.Message}\&quot;, exception);\r\n }&quot;
+            },
+            {
+                &quot;row&quot;,
+                &quot;| Error | 13001 | IndexClientFailed | Failed to execute index client with error {exception.Message} |&quot;
+            }
+        },
+    };
+
+    var prompt = new FewShotPromptTemplate(example, suffix, examples)
+    {
+        ExampleSeparator = &quot;---&quot;
+    };
+
+    var model = new ModelChain(prompt, new OpenAIModel(Constants.OpenAIKey, OpenAIModelConfiguration.Default),
+        _logger);
+    return model;
+}
+</code></pre><h3 id="step-4-build-the-dataflow">Step 4: Build the dataflow</h3>
+<p>Next we need to setup our dataflow</p>
+<pre><code class="lang-csharp">private readonly TransformBlock&lt;IList&lt;ChainMessage&gt;, ChainMessage&gt; _finalizatorBlock;
+private readonly TransformManyBlock&lt;ChainMessage, ChainMessage&gt; _transformationBlockOne;
+private readonly CancellationTokenSource _cts = new(TimeSpan.FromMinutes(1));
+private readonly ModelChain _llmModelChain;
+
+public ConvertDotnetTestsToMdTableChain(ILogger&lt;ConvertDotnetTestsToMdTableChain&gt; logger)
+{
+    _logger = logger;
+    var dataflowOptions = new ExecutionDataflowBlockOptions() { CancellationToken = _cts.Token };
+
+    // &quot;transform&quot; .cs file to list of methods
+    _transformationBlockOne = new TransformManyBlock&lt;ChainMessage, ChainMessage&gt;(ReadMethodsFromFile, dataflowOptions);
+
+    // LLM set up with several examples through few-prompt learning
+    _llmModelChain = BuildFewPromptLLModelChain();
+
+    // buffer to collect rows
+    var batchRowsBlock = new BatchBlock&lt;ChainMessage&gt;(100, new GroupingDataflowBlockOptions() { CancellationToken = _cts.Token });
+
+    // &quot;transform&quot; from list of rows to table
+    _finalizatorBlock = new TransformBlock&lt;IList&lt;ChainMessage&gt;, ChainMessage&gt;(CombineRowsToTable, dataflowOptions);
+
+    var linkOptions = new DataflowLinkOptions() { PropagateCompletion = true };
+
+    // set up chain
+    _transformationBlockOne.LinkTo(_llmModelChain.InputBlock, linkOptions);
+    _llmModelChain.OutputBlock.LinkTo(batchRowsBlock, linkOptions);
+    batchRowsBlock.LinkTo(_finalizatorBlock, linkOptions);
+}
+</code></pre>
+<p>The dataflow here goes like this:</p>
+<ol>
+<li><code>TransformManyBlock</code> -&gt; get a single <code>ChainMessage</code> with file name and produce <code>ChainMessage</code> for each method.</li>
+<li><code>ModelChain</code> -&gt; Consume <code>ChainMessage</code> with method and extract documentation row from it (this could be launch in parallel, so we could simultaniously generate 5-10 rows).</li>
+<li><code>BatchBlock</code> -&gt; Collect results <code>ChainMessage</code> from models.</li>
+<li><code>TransformBlock</code> -&gt; Combine results from <code>BatchBlock</code> into a final <code>ChainMessage</code> with a table.</li>
+</ol>
+<p>In fact you could pass any data between internal blocks, only first and last need to consume and return <code>ChainMessage</code>.
+The only recomendation here is to pass <code>Id</code> from input block to output block (without it executor would not work for example)</p>
+<p>First and last data block we would make as a field to publish them as Input and Output of our chain.</p>
+<pre><code class="lang-csharp">public ITargetBlock&lt;ChainMessage&gt; InputBlock =&gt; _transformationBlockOne;
+public ISourceBlock&lt;ChainMessage&gt; OutputBlock =&gt; _finalizatorBlock;
+</code></pre>
+<h3 id="step-5-parse-the-source-file">Step 5: Parse the Source File</h3>
+<p>Before we can generate the markdown table documentation, we need to extract the methods of the Logger class from the source file.
+For that we have a <code>_transformationBlockOne</code> which action <code>ReadMethodsFromFile</code> could look like this.</p>
+<pre><code class="lang-csharp">private IEnumerable&lt;ChainMessage&gt; ReadClassesFromFile(string arg)
+{
+    _logger.LogInformation($&quot;Reading file {arg}&quot;);
+
+    var file = File.ReadAllText(arg);
+
+    var regex = new Regex(@&quot;\bpublic\svoid\s([a-zA-Z0-9_]+)\(([^)]*)\)\s*{([^{}]*(?:{[^{}]*}[^{}]*)*)}&quot;);
+
+    var methods = regex.Matches(file);
+
+    _logger.LogInformation($&quot;Extracted {methods.Count}&quot;);
+
+    var fromFile = new List&lt;ChainMessage&gt;();
+    foreach (var match in methods)
+    {
+        fromFile.Add(new ChainMessage(
+            new Dictionary&lt;string, string&gt;()
+            {
+                { &quot;code&quot;, match.ToString() }
+            }));
+    }
+
+    return fromFile;
+}
+</code></pre><h3 id="step-6-combine-rows-into-table">Step 6: Combine rows into table</h3>
+<pre><code class="lang-csharp">private ChainMessage CombineRowsToTable(IList&lt;ChainMessage&gt; message)
+{
+    _logger.LogInformation(&quot;Finalization&quot;);
+
+    var result = message.SelectMany(i =&gt; i.Values).Where(i =&gt; i.Key == &quot;text&quot;).Select(i =&gt; i.Value);
+    var resultText = string.Join('\n', result);
+    return new ChainMessage(new Dictionary&lt;string, string&gt;() { { DefaultOutputKey, resultText } })
+        { Id = message.First().Id };
+}
+</code></pre><h3 id="step-7-run-method">Step 7: Run method</h3>
+<p>We need implemetation of <code>Run</code> method. Here we consume input <code>ChainMessage</code> with a single value - file name and post it to dataflow.</p>
+<pre><code class="lang-csharp">public bool Run(ChainMessage message)
+{
+    if (InputBlock.Completion.IsCompleted)
+    {
+        throw new InvalidOperationException(&quot;This chain would not accept any more messages&quot;);
+    }
+
+    var launched = InputBlock.Post(message);
+    InputBlock.Complete();
+    return launched;
+}
+
+public void Cancel()
+{
+    _cts.Cancel();
+    _llmModelChain.Cancel();
+}
+
+</code></pre>
+<p>Note the <code>Complete</code> method. We telling our chain that no more data will be added after inital file name.
+It's important to complete this one, because otherwise <code>BufferBlock</code> will be waiting forever or until it capacity full.</p>
+<h3 id="step-8-generate-the-markdown-table-documentation">Step 8: Generate the Markdown Table Documentation</h3>
+<p>The usage of the chain is starighforward: we run the chain and wait for completion:</p>
+<pre><code class="lang-csharp">var chain = new ConvertDotnetTestsToMdTableChain(TestLogger.Create&lt;ConvertDotnetTestsToMdTableChain&gt;());
+var input = new Dictionary&lt;string, string&gt;()
+{
+    {
+        &quot;file&quot;,
+        @&quot;Data\Logger.cs&quot;
+    }
+};
+
+chain.Run(new ChainMessage(input));
+
+var result = await chain.OutputBlock.ReceiveAsync();
+var resultText = result.Values[&quot;table&quot;];
+
+Console.WriteLine(resultText);
+</code></pre>
+<p>Final result</p>
+<pre><code class="lang-markdown">  Standard Output: 
+ | Info | 17001 | WorkerStart | Start worker |
+ | Info | 17003 | StartProcessingDocument | Start processing document |
+ | Info | 17004 | EndProcessingDocument | End processing document. ElapsedMillisecond: {elapsedMillisecond} |
+ | Error | 17100 | ProcessDocumentHandledException | Processing Handled Exception |
+ | Warning | 171001 | ChangeTypeArgumentOutOfRangeWarning | Wrong change type. Exception message: {exception.Message} |
+</code></pre>
+<p>And here is a log of how our chain worked</p>
+<pre><code class="lang-text">2023-03-02T23:15:09 | Information | Reading file Data\Logger.cs
+2023-03-02T23:15:09 | Information | Extracted 5 methods
+2023-03-02T23:15:09 | Trace | Sending LLM request
+2023-03-02T23:15:10 | Information | Result of ModelChain:  | Info | 17001 | WorkerStart | Start worker |
+2023-03-02T23:15:10 | Trace | Sending LLM request
+2023-03-02T23:15:11 | Information | Result of ModelChain:  | Info | 17003 | StartProcessingDocument | Start processing document |
+2023-03-02T23:15:11 | Trace | Sending LLM request
+2023-03-02T23:15:13 | Information | Result of ModelChain:  | Info | 17004 | EndProcessingDocument | End processing document. ElapsedMillisecond: {elapsedMillisecond}
+2023-03-02T23:15:13 | Trace | Sending LLM request
+2023-03-02T23:15:14 | Information | Result of ModelChain:  | Error | 17100 | ProcessDocumentHandledException | Processing Handled Exception |
+2023-03-02T23:15:14 | Trace | Sending LLM request
+2023-03-02T23:15:16 | Information | Result of ModelChain:  | Warning | 171001 | ChangeTypeArgumentOutOfRangeWarning | Wrong change type. Exception message: {exception.Message} |
+2023-03-02T23:15:16 | Information | Finalization
+</code></pre>
+<h3 id="conclusion">Conclusion</h3>
+<p>In this article, we have seen how an LLM can be used to automatically generate documentation for a class.
+We used the OpenAI API to generate markdown table documentation for a Logger class by defining a few prompt examples and parsing the source file.</p>
+<p>While the documentation generated by the LLM may not be perfect, it can serve as a starting point for further refinement and can save developersa significant amount of time.</p>
+<p>The obvious improvement would be to provide list of examples as a parameter to make this chain suitable to generate documentation based on any kind of methods.
+This approach can be extended to generate documentation for other classes and functions in a codebase, making documentation a less time-consuming and tedious task.</p>
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/xakpc/DotnetPrompt/blob/main/docs/articles/usecases/docs_generation.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      <span>Copyright 2023 © Pavel <i>«xakpc»</i> Osadchuk for <strong>DotnetPrompt</strong></span>
+      
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

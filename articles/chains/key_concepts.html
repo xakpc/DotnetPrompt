@@ -1,0 +1,182 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Key Concepts | DotnetPrompt </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Key Concepts | DotnetPrompt ">
+    <meta name="generator" content="docfx ">
+  
+    <link rel="shortcut icon" href="../.././images/logo.svg">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="../toc.html">
+  
+  <meta property="docfx:rel" content="../../">
+  
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../.././images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="key-concepts">Key Concepts</h1>
+
+<p>Chain architecture is a programming approach that is gaining popularity due to its effectiveness in managing complex systems with multiple interconnected components.
+It involves breaking down a larger system into smaller, more manageable parts, and then connecting them through a series of models known as chains.</p>
+<p>Each chain processes a specific task and passes its output to the next chain, forming a continuous flow of data throughout the system.
+In this article, we will explore some of the key concepts of chain architecture.</p>
+<h2 id="chain-architecture">Chain architecture</h2>
+<p>Chains are based on <a href="https://learn.microsoft.com/en-us/dotnet/standard/parallel-programming/dataflow-task-parallel-library">TPL.Dataflow</a>, a programming library that helps manage multiple tasks that need to communicate
+with each other asynchronously, and it uses a dataflow model to promote actor-based programming.</p>
+<pre><code class="lang-csharp">/// &lt;summary&gt;
+/// Basic interface for a chain
+/// &lt;/summary&gt;
+public interface IChain : IChain&lt;ChainMessage, ChainMessage&gt;
+{
+    /// &lt;summary&gt;
+    /// Input block
+    /// &lt;/summary&gt;    
+    ITargetBlock&lt;ChainMessage&gt; InputBlock { get; }
+
+    /// &lt;summary&gt;
+    /// Output block
+    /// &lt;/summary&gt;    
+    ISourceBlock&lt;ChainMessage&gt; OutputBlock { get; }
+
+    /// &lt;summary&gt;
+    /// List of inputs chain require to run
+    /// &lt;/summary&gt;
+    IList&lt;string&gt; InputVariables { get; }
+
+    /// &lt;summary&gt;
+    /// Output chain produces
+    /// &lt;/summary&gt;
+    string DefaultOutputKey { get; set; }
+}
+</code></pre>
+<p>Most of the chains implementation wrap Dataflow primitives (called <strong>components</strong>) to make it more conviniet to use.
+Every <code>IChain</code> implementation has a <code>InputBlock</code> and <code>OutputBlock</code> properties which is used to connects chains between each other, as well as your Dataflow components.</p>
+<p><img src="../../images/ichain.png" alt="Image"></p>
+<p>To clarify, when we talk about linking chains together, we're essentially connecting inputs to outputs.
+To better organize this process, a chain can consume several variables that are listed in <code>InputVariables</code>,
+and it should produce a single result that is named <code>DefaultOutputKey</code>.</p>
+<p>A chain is a sequence of models that transmit a message <code>ChainMessage</code> between them.
+This message contains a dictionary of values, and each model within the chain can consume or modify values as needed.</p>
+<p>The <code>ChainMessage</code> may also contain stops for LLMs and has a unique identifier <code>Id</code> that must be passed throughout the entire chain.</p>
+<pre><code class="lang-csharp">/// &lt;summary&gt;
+/// Message that goes through chains
+/// &lt;/summary&gt;
+/// &lt;param name=&quot;Values&quot;&gt;&lt;/param&gt;
+/// &lt;param name=&quot;Stops&quot;&gt;&lt;/param&gt;
+public record ChainMessage(IDictionary&lt;string, string&gt; Values, IList&lt;string&gt; Stops = null)
+{
+    public Guid Id { get; set; } = Guid.NewGuid();
+}
+</code></pre>
+<p><code>ChainMessage</code> also could have Stops for LLMs and has a unique <code>Id</code> that should be passed through entire chain.</p>
+<h2 id="chain-executor">Chain executor</h2>
+<p>Chains are built to work on background, efficiently utilize resources and be scaled on demand. But sometimes you might want to execute chain and get a result
+immideatly. For that reason there is <code>IChainExecutor</code> iterface exists, which is currently implemented as <code>OneShotChainExecutor</code>.</p>
+<p>It is great for example if you need get chain result as a response to REST request or cloud function call.</p>
+<pre><code class="lang-csharp">var llmChain = new ModelChain(prompt, llm);
+var executor = new OneShotChainExecutor(llmChain);
+var answer = await executor.PromptAsync(question);
+</code></pre>
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/xakpc/DotnetPrompt/blob/main/docs/articles/chains/key_concepts.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      <span>Copyright 2023 © Pavel <i>«xakpc»</i> Osadchuk for <strong>DotnetPrompt</strong></span>
+      
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

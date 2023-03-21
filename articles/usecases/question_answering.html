@@ -1,0 +1,168 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Question Answering | DotnetPrompt </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Question Answering | DotnetPrompt ">
+    <meta name="generator" content="docfx ">
+  
+    <link rel="shortcut icon" href="../.././images/logo.svg">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="../toc.html">
+  
+  <meta property="docfx:rel" content="../../">
+  
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../.././images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="question-answering">Question Answering</h1>
+
+<p>Question answering is an important task in natural language processing that involves providing answers to questions based on a given context.
+With recent advancements in large language models, such as OpenAI's GPT series, it has become easier to build highly accurate question answering systems.
+In this article, we will explore how to build a simple question answering system using the <code>DotnetPrompt</code> and OpenAI API.</p>
+<h2 id="few-shots-learning-example">Few-shots learning example</h2>
+<p>By using a <code>ModelChain</code> with history of previous messages and context you could construct question answering chain.</p>
+<pre><code class="lang-csharp">
+var llm = new ChatGptModel(Constants.OpenAIKey, ChatGptModelConfiguration.Default with { Temperature = 0, MaxTokens = 100 });
+var llmChain = new QuestionAnsweringChain(llm);
+var executor = llmChain.GetExecutor();
+
+var answer1 = await executor.PromptAsync(new
+{
+    context = &quot;OpenAI offers several plans for GPT-3, ranging from a free tier to paid plans with larger amounts of access and dedicated support. The recommended plan for GPT-3 would depend on the specific needs and use case of the individual or organization. However, the most commonly used paid plan for GPT-3 is the \&quot;Pro\&quot; plan, which provides a significant amount of access to the API and is suitable for most applications.&quot;,
+    question = &quot;Which plan is recommended for GPT-3?&quot;
+}.ToDictionary());
+
+Console.WriteLine(answer1[&quot;answer&quot;]);
+
+var answer12 = await executor.PromptAsync(new
+{
+    context = &quot;GPT-3 supports many different natural languages, including English, Spanish, French, German, Italian, Dutch, Portuguese, Japanese, Korean, Chinese, and more. However, English is the language that GPT-3 has been most extensively trained on, and for which it has produced the most impressive results. Therefore, English is generally considered the most preferable language for GPT-3.&quot;,
+    question = &quot;Which language is preferable for GPT-3?&quot;
+}.ToDictionary());
+Console.WriteLine(answer12[&quot;answer&quot;]);
+
+Console.WriteLine(&quot;---&quot;);
+
+var llm2 = new OpenAIModel(Constants.OpenAIKey, OpenAIModelConfiguration.Default with { Temperature = 0, MaxTokens = 100 });
+var llmChain2 = new QuestionAnsweringChain(llm2);
+var executor2 = llmChain2.GetExecutor();
+
+var answer2 = await executor2.PromptAsync(new
+{
+    context = &quot;OpenAI offers several plans for GPT-3, ranging from a free tier to paid plans with larger amounts of access and dedicated support. The recommended plan for GPT-3 would depend on the specific needs and use case of the individual or organization. However, the most commonly used paid plan for GPT-3 is the \&quot;Pro\&quot; plan, which provides a significant amount of access to the API and is suitable for most applications.&quot;,
+    question = &quot;Which plan is recommended for GPT-3?&quot;
+}.ToDictionary());
+Console.WriteLine(answer2[&quot;answer&quot;]);
+
+var answer22 = await executor.PromptAsync(new
+{
+    context = &quot;GPT-3 supports many different natural languages, including English, Spanish, French, German, Italian, Dutch, Portuguese, Japanese, Korean, Chinese, and more. However, English is the language that GPT-3 has been most extensively trained on, and for which it has produced the most impressive results. Therefore, English is generally considered the most preferable language for GPT-3.&quot;,
+    question = &quot;Which language is preferable for GPT-3?&quot;
+}.ToDictionary());
+Console.WriteLine(answer22[&quot;answer&quot;]);
+</code></pre><h2 id="web-question-answering">Web Question Answering</h2>
+<p>When we combine Chain, Web parse and Vector Database we could achieve a chain what could answer on questions on any website.</p>
+<p><strong>WebQAChain - Coming Soon</strong></p>
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/xakpc/DotnetPrompt/blob/main/docs/articles/usecases/question_answering.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      <span>Copyright 2023 © Pavel <i>«xakpc»</i> Osadchuk for <strong>DotnetPrompt</strong></span>
+      
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

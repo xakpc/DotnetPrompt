@@ -1,0 +1,290 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Quickstart Guide | DotnetPrompt </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Quickstart Guide | DotnetPrompt ">
+    <meta name="generator" content="docfx ">
+  
+    <link rel="shortcut icon" href=".././images/logo.svg">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+  
+  <meta property="docfx:rel" content="../">
+  
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src=".././images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="quickstart-guide">Quickstart Guide</h1>
+
+<p>The tutorial provides step-by-step instructions for creating a complete language model application using DotnetPrompt.</p>
+<h2 id="installation">Installation</h2>
+<p>To get started, add NuGet meta-package</p>
+<pre><code class="lang-ps">&gt; dotnet add package DotnetPrompt.All --version 1.0.0-alpha.1
+</code></pre>
+<p>You could also install separate packages</p>
+<pre><code class="lang-ps">&gt; dotnet add package DotnetPrompt --version 1.0.0-alpha.1
+&gt; dotnet add package DotnetPrompt.LLM.OpenAI --version 1.0.0-alpha.1
+</code></pre>
+<p>DotnetPrompt provides several components that can be used to build language model applications.
+They can be combined to create complex applications, or be used individually for simple applications.</p>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>Most of examples here built with <code>OpenAIModel</code> which is OpenAI completion model. Recently OpenAI published
+ChatGPT model which is 10 times cheaper and in some cases could yield better results. To try it you could use <code>ChatGptModel</code> and <code>ChatGptPromptTemplate</code> in your experiments.</p>
+</div>
+<h2 id="llms-get-predictions-from-a-language-model">LLMs: Get predictions from a language model</h2>
+<p>DotnetPrompt's fundamental component is its <code>ILargeLanguageModel</code>,
+which serves as a client that calls a language model on a given input.
+We provide several out of the box implementations of the interface for different popular providers.</p>
+<p>Let's utilize the <code>ChatGptModel</code>, which employs the OpenAI ChatGPT API to generate completions based on the input prompt.</p>
+<p>To create the Model, we would need a valid OpenAI key.
+In this example, you may want the outputs to be more diverse so we'll initialize the Model with a high temperature.</p>
+<pre><code class="lang-csharp">var llm = new ChatGptModel(Constants.OpenAIKey, ChatGptModelConfiguration.Default with
+        {
+            Temperature = 0.9f
+        });
+</code></pre>
+<p>For simplicity we provide <code>PromptAsync</code> extension method, which take a single string as input and return generated result.</p>
+<p>For example, if your friend sent you a message saying <code>I'm getting so old</code> you might input <code>What's a funny response to 'I'm getting so old'?</code> as the prompt.</p>
+<pre><code class="lang-csharp">var text = &quot;What's a funny response to 'I'm getting so old'?&quot;;
+var response = await llm.PromptAsync(text);
+Console.WriteLine(response);
+</code></pre>
+<pre><code class="lang-text">&gt; Me too, but let's not get ahead of ourselves - we're still young at heart!
+</code></pre>
+<p>For more details on how to use LLMs within DotnetPrompt, see the <a href="llms/getting_started.html">LLM getting started guide</a>.</p>
+<h2 id="prompt-templates-manage-prompts-for-llms">Prompt Templates: Manage prompts for LLMs</h2>
+<p>While calling a language model (LLM) is a crucial initial step, it's merely the beginning of the process.
+When using an LLM in an application, user input is typically not sent directly to the model.
+Instead, the input is used to construct a prompt, which is then sent to the LLM.</p>
+<p>For instance, in the previous example, the text we provided was hardcoded to request a
+response for theoretical friend message.
+In a real-world scenario, we would only take the user
+input, actual message, and utilize that information to format the prompt.</p>
+<p>First lets define the prompt template:</p>
+<pre><code class="lang-csharp">var oneInputPrompt = new PromptTemplate(template: &quot;What's a funny response to '{message}'&quot;, 
+    inputVariables: new[] { &quot;message&quot; });
+</code></pre>
+<p>Let's now see how this works! We can call the <code>Format</code> method to format it.</p>
+<pre><code class="lang-csharp">var valuesOneInput = new Dictionary&lt;string, string&gt;
+    {
+        { &quot;message&quot;, &quot;I have some exciting news to share with you!&quot; }
+    };
+
+var text = oneInputPrompt.Format(valuesOneInput);
+Console.WriteLine(text);
+</code></pre>
+<pre><code class="lang-text">&gt; What's a funny response to 'I have some exciting news to share with you!'
+</code></pre>
+<p>For more details, <a href="prompts/getting_started.html">check out the getting started guide for prompts.</a></p>
+<h3 id="few-shot-learning">Few Shot Learning</h3>
+<p>Few-shot learning is a type of machine learning technique where a model is trained to learn from a small set of examples,
+typically a few dozen or less, and can generalize to new examples with similar characteristics.</p>
+<p>By leveraging a few-shot learning model, developers can quickly train a system to perform a specific task with minimal data, reducing the time and cost required to develop a fully-fledged AI system.</p>
+<p>DotnetPrompt offers a convenient <code>FewShotPromptTemplate</code> to simplify the process of using Few Shot Learning effectively and with minimal effort.</p>
+<p>For instance, it can be used to perform a wide range of
+<a href="prompts/few_shots_example.html">tasks</a>, such as <a href="prompts/few_shots_example.html#summarization">summarization</a>,
+<a href="prompts/few_shots_example.html#question-answering">question answering</a>,
+and <a href="prompts/few_shots_example.html##machine-translation">language translation</a>, with only a few examples of each task.</p>
+<h3 id="chat-markup-language-propmt-template">Chat Markup Language Propmt Template</h3>
+<p>With release of ChatGPT API we introduced <code>ChatMLPromptTemplate</code> which enforce a ChatML structure. It is still implementation of <code>IPromptTemplate</code> interface
+but it combines single and few-shot templates. <code>ChatMLPromptTemplate</code> is currently supported only by <code>ChatGptModel</code>.</p>
+<pre><code class="lang-csharp">var suffix = new PromptTemplate(&quot;{human_phrase}&quot;);
+
+var examples = new List&lt;(string, string)&gt;()
+{
+    new(&quot;Hello nice to meet you.&quot;, &quot;Nice to meet you too.&quot;),
+    new(&quot;How is it going today?&quot;, &quot;Not so bad, thank you! How about you?&quot;),
+};
+
+var prompt = new ChatMLPromptTemplate(suffix, &quot;This is a discussion between a human and a robot. The robot is very nice and empathetic.&quot;, examples);
+</code></pre>
+<p>Result when formatted with <code>human_phrase</code> equal to <code>hello</code>:</p>
+<pre><code class="lang-json">[
+    {
+        &quot;role&quot;: &quot;system&quot;,
+        &quot;content&quot;: &quot;This is a discussion between a human and a robot. The robot is very nice and empathetic.&quot;
+    },
+    { &quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Hello nice to meet you.&quot; },
+    { &quot;role&quot;: &quot;assistant&quot;, &quot;content&quot;: &quot;Nice to meet you too.&quot; },
+    { &quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;How is it going today?&quot; },
+    { &quot;role&quot;: &quot;assistant&quot;, &quot;content&quot;: &quot;Not so bad, thank you! How about you?&quot; },
+    { &quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;hello&quot; }
+]
+</code></pre>
+<h2 id="chains-combine-llms-and-prompts-in-multi-step-workflows">Chains: Combine LLMs and prompts in multi-step workflows</h2>
+<p>In real applications we usually need to do more actions, data transformation or even use several different prompts/models.</p>
+<p>In DotnetPrompt, we combine different building blocks to create a chain of actions. Chain could have only a one element as well.</p>
+<p>For example, let's say we want to create a <code>ModelChain</code> that takes user input, formats it with a <code>PromptTemplate</code>,
+and sends it to an LLM. This allows us to generate a response based on the user's input.</p>
+<pre><code class="lang-csharp">var llm = new OpenAIModel(Constants.OpenAIKey, OpenAIModelConfiguration.Default with
+{
+    Temperature = 0.9f
+});
+
+var oneInputPrompt = new PromptTemplate(template: &quot;What's a funny response to '{message}'&quot;, inputVariables: new[] { &quot;message&quot; });
+
+var valuesOneInput = new Dictionary&lt;string, string&gt;
+{
+    { &quot;message&quot;, &quot;I have some exciting news to share with you!&quot; }
+};
+</code></pre>
+<p>We can now create a very simple chain that will take user input, format the prompt with it, and then send it to the LLM:</p>
+<pre><code class="lang-csharp">var chain = new ModelChain(oneInputPrompt, llm);
+var executor = chain.GetExecutor();
+</code></pre>
+<p>Now we can run that chain only specifying input value.</p>
+<pre><code class="lang-csharp">var result = await executor.PromptAsync(&quot;I have some exciting news to share with you!&quot;);
+Console.WriteLine(result);
+</code></pre>
+<pre><code class="lang-text">&gt; I'm all ears! Hit me with it!
+</code></pre>
+<p>Or with another input</p>
+<pre><code class="lang-csharp">var result2 = await executor.PromptAsync(&quot;Want to grab lunch later?&quot;);
+Console.WriteLine(result2);
+</code></pre>
+<pre><code class="lang-text">&gt; Sure! What's on the menu?
+</code></pre>
+<p>This is one of the simpler types of chains, but understanding how it works will set you up well for working with
+more complex chains.</p>
+<p>For more details, <a href="chains/getting_started.html">check out the getting started guide for chains.</a></p>
+<h3 id="building-dataflows">Building dataflows</h3>
+<p>Chains are based on <a href="https://learn.microsoft.com/en-us/dotnet/standard/parallel-programming/dataflow-task-parallel-library">TPL.Dataflow</a>, a programming library that helps manage multiple tasks that need to communicate
+with each other asynchronously, and it uses a dataflow model to promote actor-based programming.</p>
+<p>For simple chaining we provide a special kind of chain called <code>SequentialChain</code>.
+It consume several other chains and linking them together by assinging outputs to inputs between chains.</p>
+<pre><code class="lang-csharp">var llm = new OpenAIModel(Constants.OpenAIKey, OpenAIModelConfiguration.Default with { Temperature = 0.9f });
+
+// Setup model to create a company name for a product
+var prompt = new PromptTemplate(&quot;What is a good name for a company that makes {product}?&quot;, new[] { &quot;product&quot; });
+var chain = new ModelChain(prompt, llm)
+{
+    DefaultOutputKey = &quot;company_name&quot;
+};
+
+// Setup model to create a catchphrase for the product
+var secondPrompt = new PromptTemplate(&quot;Write a catchphrase for the following company: {company_name}&quot;, new[] { &quot;company_name&quot; });
+var chainTwo = new ModelChain(secondPrompt, llm);
+
+// Combine the two chains, so that we can create a company name and a catchphrase in a single step.
+var overallChain = new SequentialChain(new[] { chain, chainTwo });
+
+// Run the chain specifying only the input variable for the first chain.
+var executor = overallChain.GetExecutor();
+var catchphrase = await executor.PromptAsync(&quot;colorful socks&quot;);
+
+Console.WriteLine(catchphrase);
+</code></pre>
+<p>The result</p>
+<pre><code class="lang-text">&gt; Bring out your true colors with Soxicolor!
+</code></pre>
+<h2 id="dependency-injecton">Dependency Injecton</h2>
+<p>Every component in DotnetPrompt could be created manually using constructor. But in complex applications in might be wise to use Dependency Injection especially if you want to use <code>ILogger</code> and <code>IDistributedCache</code>.</p>
+<p>Models could be injected as <code>Scoped</code> and we recomend to inject Chains as Transient or build them manually on demand.</p>
+<p>OpenAI could be registered in DI with helper method</p>
+<pre><code class="lang-csharp">    services.AddOpenAIModel();
+</code></pre>
+<p>Currently dependency injecton support is in very early state, but it will be improved in future.</p>
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/xakpc/DotnetPrompt/blob/main/docs/articles/getting_started.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      <span>Copyright 2023 © Pavel <i>«xakpc»</i> Osadchuk for <strong>DotnetPrompt</strong></span>
+      
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

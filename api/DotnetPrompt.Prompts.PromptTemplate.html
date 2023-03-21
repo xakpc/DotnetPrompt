@@ -1,0 +1,580 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class PromptTemplate
+ | DotnetPrompt </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class PromptTemplate
+ | DotnetPrompt ">
+    <meta name="generator" content="docfx ">
+  
+    <link rel="shortcut icon" href=".././images/logo.svg">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+  
+  <meta property="docfx:rel" content="../">
+  
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src=".././images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="DotnetPrompt.Prompts.PromptTemplate">
+
+
+  <h1 id="DotnetPrompt_Prompts_PromptTemplate" data-uid="DotnetPrompt.Prompts.PromptTemplate" class="text-break">Class PromptTemplate
+</h1>
+  <div class="markdown level0 summary"><p>Schema to represent a prompt for an LLM based on formatted string</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">object</span></div>
+    <div class="level1"><span class="xref">PromptTemplate</span></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="DotnetPrompt.Abstractions.Prompts.IPromptTemplate.html">IPromptTemplate</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">object.Equals(object)</span>
+    </div>
+    <div>
+      <span class="xref">object.Equals(object, object)</span>
+    </div>
+    <div>
+      <span class="xref">object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">object.ReferenceEquals(object, object)</span>
+    </div>
+    <div>
+      <span class="xref">object.ToString()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <span class="xref">DotnetPrompt</span>.<a class="xref" href="DotnetPrompt.Prompts.html">Prompts</a></h6>
+  <h6><strong>Assembly</strong>: DotnetPrompt.dll</h6>
+  <h5 id="DotnetPrompt_Prompts_PromptTemplate_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class PromptTemplate : IPromptTemplate</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/xakpc/DotnetPrompt/new/main/apiSpec/new?filename=DotnetPrompt_Prompts_PromptTemplate__ctor_System_String_System_Collections_Generic_IList_System_String__.md&amp;value=---%0Auid%3A%20DotnetPrompt.Prompts.PromptTemplate.%23ctor(System.String%2CSystem.Collections.Generic.IList%7BSystem.String%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/xakpc/DotnetPrompt/blob/main/src/DotnetPrompt/Prompts/PromptTemplate.cs/#L35">View Source</a>
+  </span>
+  <a id="DotnetPrompt_Prompts_PromptTemplate__ctor_" data-uid="DotnetPrompt.Prompts.PromptTemplate.#ctor*"></a>
+  <h4 id="DotnetPrompt_Prompts_PromptTemplate__ctor_System_String_System_Collections_Generic_IList_System_String__" data-uid="DotnetPrompt.Prompts.PromptTemplate.#ctor(System.String,System.Collections.Generic.IList{System.String})">PromptTemplate(string, IList&lt;string&gt;)</h4>
+  <div class="markdown level1 summary"><p>Build PromptTemplate Schema from template string and inputVariables</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PromptTemplate(string template, IList&lt;string&gt; inputVariables)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">template</span></td>
+        <td><p>Template string</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">IList</span>&lt;<span class="xref">string</span>&gt;</td>
+        <td><span class="parametername">inputVariables</span></td>
+        <td><p>List of input variables</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentException</span></td>
+        <td><p>Throws when list of input variables is invalid</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/xakpc/DotnetPrompt/new/main/apiSpec/new?filename=DotnetPrompt_Prompts_PromptTemplate__ctor_System_String_.md&amp;value=---%0Auid%3A%20DotnetPrompt.Prompts.PromptTemplate.%23ctor(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/xakpc/DotnetPrompt/blob/main/src/DotnetPrompt/Prompts/PromptTemplate.cs/#L19">View Source</a>
+  </span>
+  <a id="DotnetPrompt_Prompts_PromptTemplate__ctor_" data-uid="DotnetPrompt.Prompts.PromptTemplate.#ctor*"></a>
+  <h4 id="DotnetPrompt_Prompts_PromptTemplate__ctor_System_String_" data-uid="DotnetPrompt.Prompts.PromptTemplate.#ctor(System.String)">PromptTemplate(string)</h4>
+  <div class="markdown level1 summary"><p>Build PromptTemplate Schema from template string</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PromptTemplate(string template)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">template</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/xakpc/DotnetPrompt/new/main/apiSpec/new?filename=DotnetPrompt_Prompts_PromptTemplate_InputVariables.md&amp;value=---%0Auid%3A%20DotnetPrompt.Prompts.PromptTemplate.InputVariables%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/xakpc/DotnetPrompt/blob/main/src/DotnetPrompt/Prompts/PromptTemplate.cs/#L58">View Source</a>
+  </span>
+  <a id="DotnetPrompt_Prompts_PromptTemplate_InputVariables_" data-uid="DotnetPrompt.Prompts.PromptTemplate.InputVariables*"></a>
+  <h4 id="DotnetPrompt_Prompts_PromptTemplate_InputVariables" data-uid="DotnetPrompt.Prompts.PromptTemplate.InputVariables">InputVariables</h4>
+  <div class="markdown level1 summary"><p>A list of the names of the variables the prompt template expects.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IList&lt;string&gt; InputVariables { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IList</span>&lt;<span class="xref">string</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/xakpc/DotnetPrompt/new/main/apiSpec/new?filename=DotnetPrompt_Prompts_PromptTemplate_Template.md&amp;value=---%0Auid%3A%20DotnetPrompt.Prompts.PromptTemplate.Template%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/xakpc/DotnetPrompt/blob/main/src/DotnetPrompt/Prompts/PromptTemplate.cs/#L53">View Source</a>
+  </span>
+  <a id="DotnetPrompt_Prompts_PromptTemplate_Template_" data-uid="DotnetPrompt.Prompts.PromptTemplate.Template*"></a>
+  <h4 id="DotnetPrompt_Prompts_PromptTemplate_Template" data-uid="DotnetPrompt.Prompts.PromptTemplate.Template">Template</h4>
+  <div class="markdown level1 summary"><p>The prompt template.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Template { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/xakpc/DotnetPrompt/new/main/apiSpec/new?filename=DotnetPrompt_Prompts_PromptTemplate_Format_System_Collections_Generic_IDictionary_System_String_System_String__.md&amp;value=---%0Auid%3A%20DotnetPrompt.Prompts.PromptTemplate.Format(System.Collections.Generic.IDictionary%7BSystem.String%2CSystem.String%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/xakpc/DotnetPrompt/blob/main/src/DotnetPrompt/Prompts/PromptTemplate.cs/#L111">View Source</a>
+  </span>
+  <a id="DotnetPrompt_Prompts_PromptTemplate_Format_" data-uid="DotnetPrompt.Prompts.PromptTemplate.Format*"></a>
+  <h4 id="DotnetPrompt_Prompts_PromptTemplate_Format_System_Collections_Generic_IDictionary_System_String_System_String__" data-uid="DotnetPrompt.Prompts.PromptTemplate.Format(System.Collections.Generic.IDictionary{System.String,System.String})">Format(IDictionary&lt;string, string&gt;?)</h4>
+  <div class="markdown level1 summary"><p>Build a prompt from current template and a list of values.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Format(IDictionary&lt;string, string&gt;? values = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IDictionary</span>&lt;<span class="xref">string</span>, <span class="xref">string</span>&gt;</td>
+        <td><span class="parametername">values</span></td>
+        <td><p>Key-Value list of values to use to build prompt.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><p>String prompt</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentException</span></td>
+        <td><p>Throws when provided list of keys does not match <a class="xref" href="DotnetPrompt.Prompts.PromptTemplate.html#DotnetPrompt_Prompts_PromptTemplate_InputVariables">InputVariables</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/xakpc/DotnetPrompt/new/main/apiSpec/new?filename=DotnetPrompt_Prompts_PromptTemplate_Format_System_ValueTuple_System_String_System_String____.md&amp;value=---%0Auid%3A%20DotnetPrompt.Prompts.PromptTemplate.Format(System.ValueTuple%7BSystem.String%2CSystem.String%7D%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/xakpc/DotnetPrompt/blob/main/src/DotnetPrompt/Prompts/PromptTemplate.cs/#L128">View Source</a>
+  </span>
+  <a id="DotnetPrompt_Prompts_PromptTemplate_Format_" data-uid="DotnetPrompt.Prompts.PromptTemplate.Format*"></a>
+  <h4 id="DotnetPrompt_Prompts_PromptTemplate_Format_System_ValueTuple_System_String_System_String____" data-uid="DotnetPrompt.Prompts.PromptTemplate.Format(System.ValueTuple{System.String,System.String}[])">Format((string, string)[])</h4>
+  <div class="markdown level1 summary"><p>Build a prompt from current template and a list of value tuples.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Format((string, string)[] values)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>(<span class="xref">string</span>, <span class="xref">string</span>)[]</td>
+        <td><span class="parametername">values</span></td>
+        <td><p>Tuple of key - value</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/xakpc/DotnetPrompt/new/main/apiSpec/new?filename=DotnetPrompt_Prompts_PromptTemplate_FromExamples_System_Collections_Generic_List_System_String__System_String_System_Collections_Generic_List_System_String__System_String_System_String_.md&amp;value=---%0Auid%3A%20DotnetPrompt.Prompts.PromptTemplate.FromExamples(System.Collections.Generic.List%7BSystem.String%7D%2CSystem.String%2CSystem.Collections.Generic.List%7BSystem.String%7D%2CSystem.String%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/xakpc/DotnetPrompt/blob/main/src/DotnetPrompt/Prompts/PromptTemplate.cs/#L71">View Source</a>
+  </span>
+  <a id="DotnetPrompt_Prompts_PromptTemplate_FromExamples_" data-uid="DotnetPrompt.Prompts.PromptTemplate.FromExamples*"></a>
+  <h4 id="DotnetPrompt_Prompts_PromptTemplate_FromExamples_System_Collections_Generic_List_System_String__System_String_System_Collections_Generic_List_System_String__System_String_System_String_" data-uid="DotnetPrompt.Prompts.PromptTemplate.FromExamples(System.Collections.Generic.List{System.String},System.String,System.Collections.Generic.List{System.String},System.String,System.String)">FromExamples(List&lt;string&gt;, string, List&lt;string&gt;, string, string)</h4>
+  <div class="markdown level1 summary"><p>Take examples in list format with prefix and suffix to create a prompt.
+Intended be used as a way to dynamically create a prompt from examples</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static PromptTemplate FromExamples(List&lt;string&gt; examples, string suffix, List&lt;string&gt; inputVariables, string prefix = &quot;&quot;, string exampleSeparator = &quot;\n\n&quot;)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">List</span>&lt;<span class="xref">string</span>&gt;</td>
+        <td><span class="parametername">examples</span></td>
+        <td><p>List of examples to use in the prompt.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">suffix</span></td>
+        <td><p>String to go after the list of examples. Should generally set up the user's input.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">List</span>&lt;<span class="xref">string</span>&gt;</td>
+        <td><span class="parametername">inputVariables</span></td>
+        <td><p>A list of variable names the final prompt template will expect.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">prefix</span></td>
+        <td><p>String that should go before any examples. Generally includes examples. Default to an empty string</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">exampleSeparator</span></td>
+        <td><p>The separator to use in between examples. Defaults to two new line characters.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="DotnetPrompt.Prompts.PromptTemplate.html">PromptTemplate</a></td>
+        <td><p>The final prompt generated.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="DotnetPrompt_Prompts_PromptTemplate_FromExamples_System_Collections_Generic_List_System_String__System_String_System_Collections_Generic_List_System_String__System_String_System_String__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Verbatum string on windows will produce <code>\r\n</code> and that need to be handled somehow (todo).</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/xakpc/DotnetPrompt/new/main/apiSpec/new?filename=DotnetPrompt_Prompts_PromptTemplate_FromFile_System_String_System_String___.md&amp;value=---%0Auid%3A%20DotnetPrompt.Prompts.PromptTemplate.FromFile(System.String%2CSystem.String%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/xakpc/DotnetPrompt/blob/main/src/DotnetPrompt/Prompts/PromptTemplate.cs/#L99">View Source</a>
+  </span>
+  <a id="DotnetPrompt_Prompts_PromptTemplate_FromFile_" data-uid="DotnetPrompt.Prompts.PromptTemplate.FromFile*"></a>
+  <h4 id="DotnetPrompt_Prompts_PromptTemplate_FromFile_System_String_System_String___" data-uid="DotnetPrompt.Prompts.PromptTemplate.FromFile(System.String,System.String[])">FromFile(string, string[])</h4>
+  <div class="markdown level1 summary"><p>Load a prompt from a file.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static PromptTemplate FromFile(string templateFile, string[] inputVariables)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">templateFile</span></td>
+        <td><p>The path to the file containing the prompt template.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span>[]</td>
+        <td><span class="parametername">inputVariables</span></td>
+        <td><p>A list of variable names the final prompt template will expect.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="DotnetPrompt.Prompts.PromptTemplate.html">PromptTemplate</a></td>
+        <td><p>The prompt loaded from the file.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="DotnetPrompt.Abstractions.Prompts.IPromptTemplate.html">IPromptTemplate</a>
+  </div>
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/xakpc/DotnetPrompt/new/main/apiSpec/new?filename=DotnetPrompt_Prompts_PromptTemplate.md&amp;value=---%0Auid%3A%20DotnetPrompt.Prompts.PromptTemplate%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/xakpc/DotnetPrompt/blob/main/src/DotnetPrompt/Prompts/PromptTemplate.cs/#L13" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      <span>Copyright 2023 © Pavel <i>«xakpc»</i> Osadchuk for <strong>DotnetPrompt</strong></span>
+      
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

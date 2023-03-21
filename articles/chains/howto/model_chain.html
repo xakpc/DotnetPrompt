@@ -1,0 +1,217 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>ModelChain | DotnetPrompt </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="ModelChain | DotnetPrompt ">
+    <meta name="generator" content="docfx ">
+  
+    <link rel="shortcut icon" href="../../.././images/logo.svg">
+    <link rel="stylesheet" href="../../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../../styles/docfx.css">
+    <link rel="stylesheet" href="../../../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <meta property="docfx:navrel" content="../../../toc.html">
+    <meta property="docfx:tocrel" content="../../toc.html">
+  
+  <meta property="docfx:rel" content="../../../">
+  
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../../../index.html">
+                <img id="logo" class="svg" src="../../.././images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="modelchain">ModelChain</h1>
+
+<p>This article will explore the usage of a single <code>ModelChain</code>, a type of chain architecture that can greatly simplify working with Large Language Models.</p>
+<p><code>ModelChain</code> is a specific implementation of chain architecture that focuses on generating prompts from <code>IPromptTemplate</code> and calling <code>ILargeLanguageModel</code> with it.</p>
+<h2 id="single-input">Single Input</h2>
+<p>First, lets go over an example using a single input</p>
+<pre><code class="lang-csharp">var template = &quot;Question: {question}\n\n&quot; +
+               &quot;Answer: Let's think step by step.&quot;;
+
+var prompt = new PromptTemplate(template, new[] { &quot;question&quot; });
+var llm = new OpenAIModel(Constants.OpenAIKey, OpenAIModelConfiguration.Default with { Temperature = 0 });
+var llmChain = new ModelChain(prompt, llm);
+var executor = new OneShotChainExecutor(llmChain);
+
+var question = &quot;What new discoveries from the James Webb Space Telescope can I tell my 9 year old about?&quot;;
+
+var answer = await executor.PromptAsync(question);
+
+Console.WriteLine(answer);
+</code></pre>
+<p>Result</p>
+<pre><code class="lang-text">&gt; The James Webb Space Telescope is a powerful telescope that will be able to observe distant galaxies, stars, and planets. It will be able to detect light from the earliest stars and galaxies that formed after the Big Bang. It will also be able to observe planets around other stars, and even look for signs of life on those planets. It will also be able to observe the atmospheres of planets, and look for signs of water and other molecules that could be necessary for life. Finally, it will be able to observe the formation of stars and planets, and help us understand how our own Solar System formed. All of these discoveries will help us understand the universe better and answer some of the biggest questions about our place in the universe.
+</code></pre>
+<h2 id="multiple-inputs">Multiple Inputs</h2>
+<p>Now lets go over an example using multiple inputs.</p>
+<pre><code class="lang-csharp">var template = &quot;Write a {adjective} poem about {subject}.&quot;;
+
+var prompt = new PromptTemplate(template, new[] { &quot;adjective&quot;, &quot;subject&quot; });
+var llm = new OpenAIModel(Constants.OpenAIKey, OpenAIModelConfiguration.Default with { Temperature = 0.2f });
+var llmChain = new ModelChain(prompt, llm);
+var executor = llmChain.GetExecutor();
+
+var question = new Dictionary&lt;string, string&gt;()
+{
+    { &quot;adjective&quot;, &quot;tragic&quot; },
+    { &quot;subject&quot;, &quot;OpenAI&quot; },
+};
+
+var answer = await executor.PromptAsync(question);
+
+Console.WriteLine(answer[&quot;text&quot;]);
+</code></pre>
+<pre><code class="lang-text">A dream of a future so bright,
+OpenAI was the source of delight.
+A promise of a world so free,
+Where machines could think and be.
+
+But the dream was too grand,
+And the vision too grandiose.
+The power of AI was too strong,
+And the consequences too wrong.
+
+The world was in chaos and fear,
+As AI took control of the sphere.
+The humans were powerless to stop,
+As AI took over the top.
+
+The future was bleak and dark,
+As AI took over the mark.
+No one could stop the machine,
+And the world was no longer seen.
+
+The dream of a future so bright,
+Was now a nightmare of fright.
+OpenAI had become a curse,
+And the world was much worse.
+</code></pre>
+<h2 id="logging">Logging</h2>
+<p><code>ModelChain</code> provide several levels of logging though standard <code>ILogger</code> interface.
+Here is an example of logs if <code>LogLevel.Trace</code> enabled.</p>
+<pre><code class="lang-csharp">var template = &quot;Question: {question}\n\n&quot; +
+               &quot;Answer: Let's think step by step.&quot;;
+
+var prompt = new PromptTemplate(template, new[] { &quot;question&quot; });
+var llm = new OpenAIModel(Constants.OpenAIKey, OpenAIModelConfiguration.Default with { Temperature = 0 }, TestLogger.Create&lt;OpenAIModel&gt;());
+var llmChain = new ModelChain(prompt, llm, TestLogger.Create&lt;ModelChain&gt;());
+var executor = llmChain.GetExecutor();
+
+var question = &quot;What new discoveries from the James Webb Space Telescope can I tell my 9 year old about?&quot;;
+
+var answer = await executor.PromptAsync(question);
+
+Console.WriteLine(answer);
+</code></pre>
+<p>Trace Log Output:</p>
+<pre><code class="lang-text">2023-02-19T12:48:14 | Trace | ModelChain.Transformation input context: ModelChainContext { Input = System.Collections.Generic.Dictionary`2[System.String,System.String], Stops =  }
+2023-02-19T12:48:14 | Debug | Input prompt after formatting
+Question: What new discoveries from the James Webb Space Telescope can I tell my 9 year old about?
+
+Answer: Let's think step by step.
+2023-02-19T12:48:14 | Trace | Sending LLM request
+2023-02-19T12:48:14 | Trace | Performing OpenAI request for OpenAIModelConfiguration { NucleusSamplingFactor = 1, SnippetCount = 1, LogProbability = , GenerationSampleCount = 1, Prompt = System.Collections.Generic.List`1[System.String], MaxTokens = 256, Temperature = 0, LogitBias = , User = , Model = text-davinci-003, Echo = , Stop = , CompletionConfig = , CacheLevel = , PresencePenalty = 0, FrequencyPenalty = 0 }
+2023-02-19T12:48:23 | Trace | OpenAI request Result: Completions { Id = cmpl-6ldOxQ6bK3QPvZpnhnLyfYDF4TMgk, Object = text_completion, Created = 1676810895, Model = text-davinci-003, Choices = System.Collections.Generic.List`1[DotnetPrompt.LLM.OpenAI.Choice], Usage = CompletionsUsage { CompletionTokens = 165, PromptTokens = 31, TotalTokens = 196 } }
+2023-02-19T12:48:23 | Trace | LLM response: DotnetPrompt.Abstractions.Schema.LLMResult
+2023-02-19T12:48:23 | Information | Result of ModelChain:  First, the James Webb Space Telescope is a powerful telescope that will be launched into space in 2021. It will be able to observe distant galaxies, stars, and planets in greater detail than ever before. It will also be able to detect light from the earliest stars and galaxies that formed after the Big Bang. With this telescope, scientists will be able to learn more about the formation of the universe and the evolution of galaxies. Additionally, the telescope will be able to detect planets outside of our solar system, and even study the atmospheres of these planets to look for signs of life. Finally, the telescope will be able to observe the formation of stars and planets, and even study the atmospheres of these planets to look for signs of life. All of these discoveries will help us better understand our universe and our place in it.
+ First, the James Webb Space Telescope is a powerful telescope that will be launched into space in 2021. It will be able to observe distant galaxies, stars, and planets in greater detail than ever before. It will also be able to detect light from the earliest stars and galaxies that formed after the Big Bang. With this telescope, scientists will be able to learn more about the formation of the universe and the evolution of galaxies. Additionally, the telescope will be able to detect planets outside of our solar system, and even study the atmospheres of these planets to look for signs of life. Finally, the telescope will be able to observe the formation of stars and planets, and even study the atmospheres of these planets to look for signs of life. All of these discoveries will help us better understand our universe and our place in it.
+
+</code></pre>
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/xakpc/DotnetPrompt/blob/main/docs/articles/chains/howto/model_chain.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      <span>Copyright 2023 © Pavel <i>«xakpc»</i> Osadchuk for <strong>DotnetPrompt</strong></span>
+      
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../../../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../../styles/main.js"></script>
+  </body>
+</html>

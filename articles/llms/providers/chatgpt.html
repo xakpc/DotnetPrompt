@@ -1,0 +1,208 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>ChatGPT from OpenAI | DotnetPrompt </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="ChatGPT from OpenAI | DotnetPrompt ">
+    <meta name="generator" content="docfx ">
+  
+    <link rel="shortcut icon" href="../../.././images/logo.svg">
+    <link rel="stylesheet" href="../../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../../styles/docfx.css">
+    <link rel="stylesheet" href="../../../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <meta property="docfx:navrel" content="../../../toc.html">
+    <meta property="docfx:tocrel" content="../../toc.html">
+  
+  <meta property="docfx:rel" content="../../../">
+  
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../../../index.html">
+                <img id="logo" class="svg" src="../../.././images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="chatgpt-from-openai">ChatGPT from OpenAI</h1>
+
+<p>ChatGPT is a latest model <code>gpt-3.5-turbo</code> from OpenAI.</p>
+<p>It is 10 times cheaper than a previous models and provide a new Chat Markup Language.</p>
+<p>Installation</p>
+<pre><code>&gt; dotnet add package DotnetPrompt.LLM.OpenAI --version 1.0.0-alpha.1
+</code></pre>
+<p>You would need to <a href="https://platform.openai.com/account/api-keys">get an API key</a> to use this model.</p>
+<p>Create model</p>
+<pre><code class="lang-csharp">var llm = new ChatGptModel(Constants.OpenAIKey, ChatGptModelConfiguration.Default with { 
+        SnippetCount = 1,
+        Temperature = 0.9f });
+</code></pre>
+<p>Send prompt to get result</p>
+<pre><code class="lang-csharp">var llm = CreateChatGptModel();
+
+var output = await llm.PromptAsync(&quot;Tell me a joke&quot;);
+Console.WriteLine(output);
+</code></pre>
+<p>Output</p>
+<pre><code class="lang-text">&gt; Why did the tomato turn red?
+&gt; Because it saw the salad dressing!
+</code></pre>
+<h2 id="advanced-usage">Advanced usage</h2>
+<p>The majority of the tasks will require more than just using <code>PromptAsync</code> to obtain a single answer. So, let's consider how we could utilize the <code>ChatGptModel</code>.</p>
+<p>To establish a <code>ChatMLPromptTemplate</code>, you must generate a <code>PromptTemplate</code> that includes the necessary <em>input variables</em>.
+When you format the <em>input values</em>, a ChatML formatted message will be created.</p>
+<pre><code class="lang-csharp">// create prompt template
+var oneInputPrompt = new PromptTemplate(template: &quot;What's a funny response to '{message}'&quot;, inputVariables: new[] { &quot;message&quot; });
+var chatTemplate = new ChatMLPromptTemplate(oneInputPrompt, system: &quot;You are my buddy&quot;);
+
+// create value
+var valuesOneInput = new Dictionary&lt;string, string&gt;
+{
+    { &quot;message&quot;, &quot;I have some exciting news to share with you!&quot; }
+};
+
+// create text for llm
+var text = chatTemplate.Format(valuesOneInput);
+Console.WriteLine(text);
+</code></pre>
+<p>result:</p>
+<pre><code class="lang-json">[
+    { &quot;role&quot;: &quot;system&quot;, &quot;content&quot;: &quot;You are my buddy&quot; },
+    { &quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;What's a funny response to 'I have some exciting news to share with you!'&quot; }
+]
+</code></pre>
+<p>You could also use shorter option to create <code>chatTemplate</code> by passing template string.</p>
+<pre><code class="lang-csharp">var chatTemplate = new ChatMLPromptTemplate(What's a funny response to '{message}, system: &quot;You are my buddy&quot;);
+
+// create value
+var valuesOneInput = new Dictionary&lt;string, string&gt;
+{
+    { &quot;message&quot;, &quot;I have some exciting news to share with you!&quot; }
+};
+
+// create text for llm
+var text = chatTemplate.Format(valuesOneInput);
+Console.WriteLine(text);
+</code></pre>
+<p>result would be the same</p>
+<pre><code class="lang-json">[
+    { &quot;role&quot;: &quot;system&quot;, &quot;content&quot;: &quot;You are my buddy&quot; },
+    { &quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;What's a funny response to 'I have some exciting news to share with you!'&quot; }
+]
+</code></pre>
+<p>Next, we could call LLM directly:</p>
+<pre><code class="lang-csharp">// get answer from llm
+var response = await llm.PromptAsync(text);
+Console.WriteLine(response);
+</code></pre>
+<p>resulting message:</p>
+<pre><code class="lang-text">&gt; Don't tell me you finally learned how to juggle flaming pineapples!
+</code></pre>
+<p>Or even better, we could use <code>ModelChain</code> to do all prompt formatting for us</p>
+<pre><code class="lang-csharp">// create chain
+var chain = new ModelChain(chatTemplate, llm);
+var executor = chain.GetExecutor();
+
+// get answer from the chain providing different values
+var result = await executor.PromptAsync(&quot;I have some exciting news to share with you!&quot;);
+Console.WriteLine(result);
+var result2 = await executor.PromptAsync(&quot;Want to grab lunch later?&quot;);
+Console.WriteLine(result2);
+</code></pre>
+<p>resulting messages:</p>
+<pre><code class="lang-text">&gt; Oh boy, did you finally learn how to juggle flaming pineapples?
+&gt; Sure, as long as you don't mind me wearing my taco costume.
+</code></pre>
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/xakpc/DotnetPrompt/blob/main/docs/articles/llms/providers/chatgpt.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      <span>Copyright 2023 © Pavel <i>«xakpc»</i> Osadchuk for <strong>DotnetPrompt</strong></span>
+      
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../../../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../../styles/main.js"></script>
+  </body>
+</html>

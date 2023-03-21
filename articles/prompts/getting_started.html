@@ -1,0 +1,223 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Getting Started | DotnetPrompt </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Getting Started | DotnetPrompt ">
+    <meta name="generator" content="docfx ">
+  
+    <link rel="shortcut icon" href="../.././images/logo.svg">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="../toc.html">
+  
+  <meta property="docfx:rel" content="../../">
+  
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../.././images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="getting-started">Getting Started</h1>
+
+<p>One of the key component of any LLM and DotnetPrompt is a <code>PromptTemplate</code>.</p>
+<p>This article aims to clarify the concept of prompt templates and how they can assist you in producing high-quality inputs for your models.
+You will understand how to create prompt templates that are customized to your specific requirements and how to use few-shot learning to generate additional examples.</p>
+<h2 id="what-is-a-prompt-template">What is a prompt template?</h2>
+<p>A prompt template is a pre-defined structure that can be filled in with specific information to generate a prompt. The beauty of prompt templates lies in their ability to be highly reproducible.
+By providing a standardized format for prompts, prompt templates can help ensure consistency in the quality of inputs that are fed into the model.</p>
+<p>At its core, a prompt template consists of a text string or &quot;the template,&quot; which can take in parameters from the end user to generate a prompt. These parameters can include language model instructions, few-shot examples to improve the model's response, or specific questions for the model to answer.</p>
+<p>To help you better understand prompt templates, we've included a code snippet below that showcases a basic prompt template. With the ability to customize this template with specific parameters, you can generate a wide range of different prompts to suit your needs and tasks.</p>
+<pre><code class="lang-text">I want you to act as a naming consultant for new companies.
+Here are some examples of good company names:
+- search engine, Google
+- social media, Facebook
+- video sharing, YouTube
+The name should be short, catchy and easy to remember.
+What is a good name for a company that makes {product}?
+</code></pre>
+<h3 id="input-variables">Input Variables</h3>
+<p>Input variables are the variables that are used to fill in the template string. In the example above, the input variable is a <code>{product}</code>.</p>
+<p>Given an <em>input variables</em>, the <code>PromptTemplate</code> can generate a prompt by filling in the template string with <em>input values</em>.
+For example, if the input value is <code>mobile phone</code>, the template string can be formatted by <code>IPromptTemplate.Format</code> method to generate the following prompt:</p>
+<pre><code class="lang-text">I want you to act as a naming consultant for new companies.
+Here are some examples of good company names:
+- search engine, Google
+- social media, Facebook
+- video sharing, YouTube
+The name should be short, catchy and easy to remember.&quot; +
+What is a good name for a company that makes mobile phone?
+</code></pre>
+<h2 id="create-a-prompt-template">Create a Prompt Template</h2>
+<p>You can create prompts using the <code>PromptTemplate</code> class. Prompt templates can take any number of <em>input variables</em>, and can be formatted with <em>input values</em> to generate a prompt.</p>
+<pre><code class="lang-csharp" name="Example_CreatingPromptTemplate">var template = &quot;I want you to act as a naming consultant for new companies.\n\n&quot; +
+               &quot;Here are some examples of good company names:\n\n&quot; +
+               &quot;- search engine, Google\n&quot; +
+               &quot;- social media, Facebook\n&quot; +
+               &quot;- video sharing, YouTube\n\n&quot; +
+               &quot;The name should be short, catchy and easy to remember.\n\n&quot; +
+               &quot;What is a good name for a company that makes {product}?\n&quot;;
+
+var prompt = new PromptTemplate(
+    template: template,
+    inputVariables: new[] { &quot;product&quot; });
+</code></pre>
+<p>When you want to fill template with values you need to use <code>Dictionary&lt;string, string&gt;</code> where keys should be the same as your input variables and values could be
+any valid string that need to be fill in template.</p>
+<pre><code class="lang-csharp">var values = new Dictionary&lt;string, string&gt;()
+{
+    { &quot;product&quot;, &quot;toy car&quot; }
+};
+
+var finalPrompt = prompt.Format(values);
+</code></pre>
+<p>You could read more about prompt template and how to use it <a href="prompt_template.html">here</a>.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Currently, the template should be formatted as a C# formatted string. In the future, we will add more templating languages such as Mustache.</p>
+</div>
+<h2 id="pass-few-shot-examples-to-a-prompt-template">Pass few shot examples to a prompt template</h2>
+<p>The <code>FewShotPromptTemplate</code> class combines prefixes, examples, and suffixes into a prompt that is suitable for LLMs.
+This allows the user to create prompts with a few examples that can significantly enhance the model's accuracy.</p>
+<p>For a complete list of examples and use cases for few-shot learning, you can refer to <a href="few_shots_example.html">this page</a>.
+Here's an example to demonstrate how FewShotPromptTemplate works:</p>
+<pre><code class="lang-csharp">var prefix = new PromptTemplate(&quot;I want you to act as a naming consultant for new companies.\n&quot; +
+                                &quot;Here are some examples of good company names:&quot;);
+var example = new PromptTemplate(&quot;- {product}, {company}&quot;);
+var suffix = new PromptTemplate(&quot;The name should be short, catchy and easy to remember.\n&quot; +
+                                &quot;What is a good name for a company that makes {product}?\n&quot;);
+
+var examples = new List&lt;IDictionary&lt;string, string&gt;&gt;()
+{
+    new Dictionary&lt;string, string&gt;()
+        { { &quot;product&quot;, &quot;search engine&quot; }, { &quot;company&quot;, &quot;Google&quot; } },
+    new Dictionary&lt;string, string&gt;()
+        { { &quot;product&quot;, &quot;social media&quot; }, { &quot;company&quot;, &quot;Facebook&quot; } },
+    new Dictionary&lt;string, string&gt;()
+        { { &quot;product&quot;, &quot;video sharing&quot; }, { &quot;company&quot;, &quot;YouTube&quot; } },
+};
+
+var prompt = new FewShotPromptTemplate(prefix, example, suffix, examples)
+{
+    ExampleSeparator = &quot;\n&quot;
+};
+
+var values = new Dictionary&lt;string, string&gt;()
+{
+    { &quot;product&quot;, &quot;toy cars&quot; }
+};
+
+Console.WriteLine(prompt.Format(values));
+</code></pre>
+<pre><code class="lang-text">I want you to act as a naming consultant for new companies.
+Here are some examples of good company names:
+- search engine, Google
+- social media, Facebook
+- video sharing, YouTube
+The name should be short, catchy and easy to remember.
+What is a good name for a company that makes toy cars?
+</code></pre>
+<h2 id="select-examples-for-a-prompt-template">Select examples for a prompt template</h2>
+<p>If you have a large number of examples, you can use the implementation of <code>IExampleSelector</code> to select a subset of examples that will be most informative for the Language Model.
+This will help you generate a prompt that is more likely to generate a good response.</p>
+<p>There are a lot of different approaches to select examples, but currently only one is supported: <code>LengthBasedExampleSelector</code> which try to fit your examples into maximum allowed size of input
+for a model input size.</p>
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/xakpc/DotnetPrompt/blob/main/docs/articles/prompts/getting_started.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      <span>Copyright 2023 © Pavel <i>«xakpc»</i> Osadchuk for <strong>DotnetPrompt</strong></span>
+      
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

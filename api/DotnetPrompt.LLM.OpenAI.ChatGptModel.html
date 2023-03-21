@@ -1,0 +1,579 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class ChatGptModel
+ | DotnetPrompt </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class ChatGptModel
+ | DotnetPrompt ">
+    <meta name="generator" content="docfx ">
+  
+    <link rel="shortcut icon" href=".././images/logo.svg">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+  
+  <meta property="docfx:rel" content="../">
+  
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src=".././images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="DotnetPrompt.LLM.OpenAI.ChatGptModel">
+
+
+  <h1 id="DotnetPrompt_LLM_OpenAI_ChatGptModel" data-uid="DotnetPrompt.LLM.OpenAI.ChatGptModel" class="text-break">Class ChatGptModel
+</h1>
+  <div class="markdown level0 summary"><p>OpenAI model to use with gpt-3.5-turbo model</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">object</span></div>
+    <div class="level1"><a class="xref" href="DotnetPrompt.Abstractions.LLM.BaseModel.html">BaseModel</a></div>
+    <div class="level2"><span class="xref">ChatGptModel</span></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="DotnetPrompt.Abstractions.LLM.ILargeLanguageModel.html">ILargeLanguageModel</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="DotnetPrompt.Abstractions.LLM.BaseModel.html#DotnetPrompt_Abstractions_LLM_BaseModel_Logger">BaseModel.Logger</a>
+    </div>
+    <div>
+      <a class="xref" href="DotnetPrompt.Abstractions.LLM.BaseModel.html#DotnetPrompt_Abstractions_LLM_BaseModel_DefaultStop">BaseModel.DefaultStop</a>
+    </div>
+    <div>
+      <a class="xref" href="DotnetPrompt.Abstractions.LLM.BaseModel.html#DotnetPrompt_Abstractions_LLM_BaseModel_UseCache">BaseModel.UseCache</a>
+    </div>
+    <div>
+      <a class="xref" href="DotnetPrompt.Abstractions.LLM.BaseModel.html#DotnetPrompt_Abstractions_LLM_BaseModel_GenerateAsync_System_Collections_Generic_IList_System_String__System_Collections_Generic_IList_System_String__">BaseModel.GenerateAsync(IList&lt;string&gt;, IList&lt;string&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="DotnetPrompt.Abstractions.LLM.BaseModel.html#DotnetPrompt_Abstractions_LLM_BaseModel_GetNumTokens_System_String_">BaseModel.GetNumTokens(string)</a>
+    </div>
+    <div>
+      <span class="xref">object.Equals(object)</span>
+    </div>
+    <div>
+      <span class="xref">object.Equals(object, object)</span>
+    </div>
+    <div>
+      <span class="xref">object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">object.ReferenceEquals(object, object)</span>
+    </div>
+    <div>
+      <span class="xref">object.ToString()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <span class="xref">DotnetPrompt</span>.<span class="xref">LLM</span>.<a class="xref" href="DotnetPrompt.LLM.OpenAI.html">OpenAI</a></h6>
+  <h6><strong>Assembly</strong>: DotnetPrompt.LLM.OpenAI.dll</h6>
+  <h5 id="DotnetPrompt_LLM_OpenAI_ChatGptModel_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class ChatGptModel : BaseModel, ILargeLanguageModel</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/xakpc/DotnetPrompt/new/main/apiSpec/new?filename=DotnetPrompt_LLM_OpenAI_ChatGptModel__ctor_System_String_DotnetPrompt_LLM_OpenAI_ChatGptModelConfiguration_Microsoft_Extensions_Logging_ILogger_Microsoft_Extensions_Caching_Distributed_IDistributedCache_.md&amp;value=---%0Auid%3A%20DotnetPrompt.LLM.OpenAI.ChatGptModel.%23ctor(System.String%2CDotnetPrompt.LLM.OpenAI.ChatGptModelConfiguration%2CMicrosoft.Extensions.Logging.ILogger%2CMicrosoft.Extensions.Caching.Distributed.IDistributedCache)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/xakpc/DotnetPrompt/blob/main/src/DotnetPrompt.LLM.OpenAI/ChatGptModel.cs/#L60">View Source</a>
+  </span>
+  <a id="DotnetPrompt_LLM_OpenAI_ChatGptModel__ctor_" data-uid="DotnetPrompt.LLM.OpenAI.ChatGptModel.#ctor*"></a>
+  <h4 id="DotnetPrompt_LLM_OpenAI_ChatGptModel__ctor_System_String_DotnetPrompt_LLM_OpenAI_ChatGptModelConfiguration_Microsoft_Extensions_Logging_ILogger_Microsoft_Extensions_Caching_Distributed_IDistributedCache_" data-uid="DotnetPrompt.LLM.OpenAI.ChatGptModel.#ctor(System.String,DotnetPrompt.LLM.OpenAI.ChatGptModelConfiguration,Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Caching.Distributed.IDistributedCache)">ChatGptModel(string, ChatGptModelConfiguration, ILogger, IDistributedCache)</h4>
+  <div class="markdown level1 summary"><p>Default constructor without logging</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ChatGptModel(string openAIApiKey, ChatGptModelConfiguration defaultModelConfiguration, ILogger logger = null, IDistributedCache cache = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">openAIApiKey</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="DotnetPrompt.LLM.OpenAI.ChatGptModelConfiguration.html">ChatGptModelConfiguration</a></td>
+        <td><span class="parametername">defaultModelConfiguration</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">ILogger</span></td>
+        <td><span class="parametername">logger</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">IDistributedCache</span></td>
+        <td><span class="parametername">cache</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="fields">Fields
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/xakpc/DotnetPrompt/new/main/apiSpec/new?filename=DotnetPrompt_LLM_OpenAI_ChatGptModel_Model.md&amp;value=---%0Auid%3A%20DotnetPrompt.LLM.OpenAI.ChatGptModel.Model%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/xakpc/DotnetPrompt/blob/main/src/DotnetPrompt.LLM.OpenAI/ChatGptModel.cs/#L50">View Source</a>
+  </span>
+  <h4 id="DotnetPrompt_LLM_OpenAI_ChatGptModel_Model" data-uid="DotnetPrompt.LLM.OpenAI.ChatGptModel.Model">Model</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string Model = &quot;gpt-3.5-turbo&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/xakpc/DotnetPrompt/new/main/apiSpec/new?filename=DotnetPrompt_LLM_OpenAI_ChatGptModel_DefaultModelConfiguration.md&amp;value=---%0Auid%3A%20DotnetPrompt.LLM.OpenAI.ChatGptModel.DefaultModelConfiguration%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/xakpc/DotnetPrompt/blob/main/src/DotnetPrompt.LLM.OpenAI/ChatGptModel.cs/#L52">View Source</a>
+  </span>
+  <a id="DotnetPrompt_LLM_OpenAI_ChatGptModel_DefaultModelConfiguration_" data-uid="DotnetPrompt.LLM.OpenAI.ChatGptModel.DefaultModelConfiguration*"></a>
+  <h4 id="DotnetPrompt_LLM_OpenAI_ChatGptModel_DefaultModelConfiguration" data-uid="DotnetPrompt.LLM.OpenAI.ChatGptModel.DefaultModelConfiguration">DefaultModelConfiguration</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ChatGptModelConfiguration DefaultModelConfiguration { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="DotnetPrompt.LLM.OpenAI.ChatGptModelConfiguration.html">ChatGptModelConfiguration</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/xakpc/DotnetPrompt/new/main/apiSpec/new?filename=DotnetPrompt_LLM_OpenAI_ChatGptModel_LLMType.md&amp;value=---%0Auid%3A%20DotnetPrompt.LLM.OpenAI.ChatGptModel.LLMType%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/xakpc/DotnetPrompt/blob/main/src/DotnetPrompt.LLM.OpenAI/ChatGptModel.cs/#L79">View Source</a>
+  </span>
+  <a id="DotnetPrompt_LLM_OpenAI_ChatGptModel_LLMType_" data-uid="DotnetPrompt.LLM.OpenAI.ChatGptModel.LLMType*"></a>
+  <h4 id="DotnetPrompt_LLM_OpenAI_ChatGptModel_LLMType" data-uid="DotnetPrompt.LLM.OpenAI.ChatGptModel.LLMType">LLMType</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override string LLMType { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="DotnetPrompt.Abstractions.LLM.BaseModel.html#DotnetPrompt_Abstractions_LLM_BaseModel_LLMType">BaseModel.LLMType</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/xakpc/DotnetPrompt/new/main/apiSpec/new?filename=DotnetPrompt_LLM_OpenAI_ChatGptModel_MaxRequestTokens.md&amp;value=---%0Auid%3A%20DotnetPrompt.LLM.OpenAI.ChatGptModel.MaxRequestTokens%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/xakpc/DotnetPrompt/blob/main/src/DotnetPrompt.LLM.OpenAI/ChatGptModel.cs/#L80">View Source</a>
+  </span>
+  <a id="DotnetPrompt_LLM_OpenAI_ChatGptModel_MaxRequestTokens_" data-uid="DotnetPrompt.LLM.OpenAI.ChatGptModel.MaxRequestTokens*"></a>
+  <h4 id="DotnetPrompt_LLM_OpenAI_ChatGptModel_MaxRequestTokens" data-uid="DotnetPrompt.LLM.OpenAI.ChatGptModel.MaxRequestTokens">MaxRequestTokens</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override int MaxRequestTokens { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">int</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="DotnetPrompt.Abstractions.LLM.BaseModel.html#DotnetPrompt_Abstractions_LLM_BaseModel_MaxRequestTokens">BaseModel.MaxRequestTokens</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/xakpc/DotnetPrompt/new/main/apiSpec/new?filename=DotnetPrompt_LLM_OpenAI_ChatGptModel_OpenAiApiKey.md&amp;value=---%0Auid%3A%20DotnetPrompt.LLM.OpenAI.ChatGptModel.OpenAiApiKey%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/xakpc/DotnetPrompt/blob/main/src/DotnetPrompt.LLM.OpenAI/ChatGptModel.cs/#L53">View Source</a>
+  </span>
+  <a id="DotnetPrompt_LLM_OpenAI_ChatGptModel_OpenAiApiKey_" data-uid="DotnetPrompt.LLM.OpenAI.ChatGptModel.OpenAiApiKey*"></a>
+  <h4 id="DotnetPrompt_LLM_OpenAI_ChatGptModel_OpenAiApiKey" data-uid="DotnetPrompt.LLM.OpenAI.ChatGptModel.OpenAiApiKey">OpenAiApiKey</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string OpenAiApiKey { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/xakpc/DotnetPrompt/new/main/apiSpec/new?filename=DotnetPrompt_LLM_OpenAI_ChatGptModel_AsUniqueString.md&amp;value=---%0Auid%3A%20DotnetPrompt.LLM.OpenAI.ChatGptModel.AsUniqueString%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/xakpc/DotnetPrompt/blob/main/src/DotnetPrompt.LLM.OpenAI/ChatGptModel.cs/#L69">View Source</a>
+  </span>
+  <a id="DotnetPrompt_LLM_OpenAI_ChatGptModel_AsUniqueString_" data-uid="DotnetPrompt.LLM.OpenAI.ChatGptModel.AsUniqueString*"></a>
+  <h4 id="DotnetPrompt_LLM_OpenAI_ChatGptModel_AsUniqueString" data-uid="DotnetPrompt.LLM.OpenAI.ChatGptModel.AsUniqueString">AsUniqueString()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override string AsUniqueString()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="DotnetPrompt.Abstractions.LLM.BaseModel.html#DotnetPrompt_Abstractions_LLM_BaseModel_AsUniqueString">BaseModel.AsUniqueString()</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/xakpc/DotnetPrompt/new/main/apiSpec/new?filename=DotnetPrompt_LLM_OpenAI_ChatGptModel_CompletionsResponseValue_DotnetPrompt_LLM_OpenAI_ChatGptModelConfiguration_.md&amp;value=---%0Auid%3A%20DotnetPrompt.LLM.OpenAI.ChatGptModel.CompletionsResponseValue(DotnetPrompt.LLM.OpenAI.ChatGptModelConfiguration)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/xakpc/DotnetPrompt/blob/main/src/DotnetPrompt.LLM.OpenAI/ChatGptModel.cs/#L177">View Source</a>
+  </span>
+  <a id="DotnetPrompt_LLM_OpenAI_ChatGptModel_CompletionsResponseValue_" data-uid="DotnetPrompt.LLM.OpenAI.ChatGptModel.CompletionsResponseValue*"></a>
+  <h4 id="DotnetPrompt_LLM_OpenAI_ChatGptModel_CompletionsResponseValue_DotnetPrompt_LLM_OpenAI_ChatGptModelConfiguration_" data-uid="DotnetPrompt.LLM.OpenAI.ChatGptModel.CompletionsResponseValue(DotnetPrompt.LLM.OpenAI.ChatGptModelConfiguration)">CompletionsResponseValue(ChatGptModelConfiguration)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected Task&lt;Completions&gt; CompletionsResponseValue(ChatGptModelConfiguration options)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="DotnetPrompt.LLM.OpenAI.ChatGptModelConfiguration.html">ChatGptModelConfiguration</a></td>
+        <td><span class="parametername">options</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Task</span>&lt;<a class="xref" href="DotnetPrompt.LLM.OpenAI.Model.Completions.html">Completions</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/xakpc/DotnetPrompt/new/main/apiSpec/new?filename=DotnetPrompt_LLM_OpenAI_ChatGptModel_GenerateInternalAsync_System_Collections_Generic_IList_System_String__System_Collections_Generic_IList_System_String__.md&amp;value=---%0Auid%3A%20DotnetPrompt.LLM.OpenAI.ChatGptModel.GenerateInternalAsync(System.Collections.Generic.IList%7BSystem.String%7D%2CSystem.Collections.Generic.IList%7BSystem.String%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/xakpc/DotnetPrompt/blob/main/src/DotnetPrompt.LLM.OpenAI/ChatGptModel.cs/#L82">View Source</a>
+  </span>
+  <a id="DotnetPrompt_LLM_OpenAI_ChatGptModel_GenerateInternalAsync_" data-uid="DotnetPrompt.LLM.OpenAI.ChatGptModel.GenerateInternalAsync*"></a>
+  <h4 id="DotnetPrompt_LLM_OpenAI_ChatGptModel_GenerateInternalAsync_System_Collections_Generic_IList_System_String__System_Collections_Generic_IList_System_String__" data-uid="DotnetPrompt.LLM.OpenAI.ChatGptModel.GenerateInternalAsync(System.Collections.Generic.IList{System.String},System.Collections.Generic.IList{System.String})">GenerateInternalAsync(IList&lt;string&gt;, IList&lt;string&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override Task&lt;ModelResult&gt; GenerateInternalAsync(IList&lt;string&gt; prompts, IList&lt;string&gt; stop = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IList</span>&lt;<span class="xref">string</span>&gt;</td>
+        <td><span class="parametername">prompts</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">IList</span>&lt;<span class="xref">string</span>&gt;</td>
+        <td><span class="parametername">stop</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Task</span>&lt;<a class="xref" href="DotnetPrompt.Abstractions.LLM.Schema.ModelResult.html">ModelResult</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="DotnetPrompt.Abstractions.LLM.BaseModel.html#DotnetPrompt_Abstractions_LLM_BaseModel_GenerateInternalAsync_System_Collections_Generic_IList_System_String__System_Collections_Generic_IList_System_String__">BaseModel.GenerateInternalAsync(IList&lt;string&gt;, IList&lt;string&gt;)</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/xakpc/DotnetPrompt/new/main/apiSpec/new?filename=DotnetPrompt_LLM_OpenAI_ChatGptModel_ValidateJSON_System_String_.md&amp;value=---%0Auid%3A%20DotnetPrompt.LLM.OpenAI.ChatGptModel.ValidateJSON(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/xakpc/DotnetPrompt/blob/main/src/DotnetPrompt.LLM.OpenAI/ChatGptModel.cs/#L139">View Source</a>
+  </span>
+  <a id="DotnetPrompt_LLM_OpenAI_ChatGptModel_ValidateJSON_" data-uid="DotnetPrompt.LLM.OpenAI.ChatGptModel.ValidateJSON*"></a>
+  <h4 id="DotnetPrompt_LLM_OpenAI_ChatGptModel_ValidateJSON_System_String_" data-uid="DotnetPrompt.LLM.OpenAI.ChatGptModel.ValidateJSON(System.String)">ValidateJSON(string)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool ValidateJSON(string jsonString)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">jsonString</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="DotnetPrompt.Abstractions.LLM.ILargeLanguageModel.html">ILargeLanguageModel</a>
+  </div>
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/xakpc/DotnetPrompt/new/main/apiSpec/new?filename=DotnetPrompt_LLM_OpenAI_ChatGptModel.md&amp;value=---%0Auid%3A%20DotnetPrompt.LLM.OpenAI.ChatGptModel%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/xakpc/DotnetPrompt/blob/main/src/DotnetPrompt.LLM.OpenAI/ChatGptModel.cs/#L48" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      <span>Copyright 2023 © Pavel <i>«xakpc»</i> Osadchuk for <strong>DotnetPrompt</strong></span>
+      
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

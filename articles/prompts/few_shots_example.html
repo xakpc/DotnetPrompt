@@ -1,0 +1,680 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Few-Shot Prompt Template | DotnetPrompt </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Few-Shot Prompt Template | DotnetPrompt ">
+    <meta name="generator" content="docfx ">
+  
+    <link rel="shortcut icon" href="../.././images/logo.svg">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="../toc.html">
+  
+  <meta property="docfx:rel" content="../../">
+  
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../.././images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="few-shot-prompt-template">Few-Shot Prompt Template</h1>
+
+<p>Few-Shot Prompt Template  used in few-shot learning. It is a technique that enables a machine learning model to make predictions with only a few examples.
+Models like GPT-3 are so large that they can easily adjust to different contexts without needing to be retrained.</p>
+<p>Providing the model with a few examples can significantly improve its accuracy.
+In Natural Language Processing, these examples are passed along with the text input.</p>
+<p>This is a list of a few examples of few-shot learning done with DotnetPrompts' <code>FewShotPromptTemplate</code> and their results.
+The <code>FewShotPromptTemplate</code> class would take your prefix, examples and suffix and combine it with separator into a suitable prompt for LLM.</p>
+<p>All of these examples can be found as unit tests in the <a href="">GitHub repository</a>.</p>
+<p>Most of these examples are quite basic, and better results can be achieved more efficiently by using <a href="../chains/getting_started.html">chains</a>.</p>
+<h2 id="sentiment-analysis">Sentiment Analysis</h2>
+<pre><code class="lang-csharp">var example = new PromptTemplate(&quot;Message: {message}\nSentiment: {sentiment}&quot;);
+var suffix = new PromptTemplate(&quot;Message: {message}\nSentiment: &quot;);
+
+var examples = new List&lt;IDictionary&lt;string, string&gt;&gt;()
+{
+    new Dictionary&lt;string, string&gt;() { { &quot;message&quot;, &quot;Support has been terrible for 2 weeks...&quot; }, {&quot;sentiment&quot;, &quot;Negative&quot; } },
+    new Dictionary&lt;string, string&gt;() { { &quot;message&quot;, &quot;I love your framework, it is simple and so fast!&quot; }, {&quot;sentiment&quot;, &quot;Positive&quot; } },
+    new Dictionary&lt;string, string&gt;() { { &quot;message&quot;, &quot;ChatGPT has been released 10 months ago.&quot; }, {&quot;sentiment&quot;, &quot;Neutral&quot; } },
+};
+
+var prompt = new FewShotPromptTemplate(example, suffix, examples);
+
+var llm = new OpenAIModel(Constants.OpenAIKey, OpenAIModelConfiguration.Default with { Temperature = 0.2f });
+var llmChain = new ModelChain(prompt, llm);
+var executor = llmChain.GetExecutor();
+
+var answer1 = await executor.PromptAsync(&quot;The reactivity of your team was very good, thanks!&quot;);
+Console.WriteLine($&quot;&gt; {answer1}&quot;);
+
+var answer2 = await executor.PromptAsync(&quot;I hate you work, it's sloppy and lazy!&quot;);
+Console.WriteLine($&quot;&gt; {answer2}&quot;);
+
+var answer3 = await executor.PromptAsync(&quot;Today is a monday&quot;);
+Console.WriteLine($&quot;&gt; {answer3}&quot;);
+</code></pre>
+<pre><code class="lang-text">&gt; answer1: Positive
+&gt; answer2: Negative
+&gt; answer3: Neutral
+</code></pre>
+<h2 id="html-code-generation">HTML code generation</h2>
+<pre><code class="lang-csharp">var example = new PromptTemplate(&quot;Description: {description}\nCode: {code}&quot;);
+var suffix = new PromptTemplate(&quot;Description: {message}:\nCode: &quot;);
+
+var examples = new List&lt;IDictionary&lt;string, string&gt;&gt;()
+{
+    new Dictionary&lt;string, string&gt;() { { &quot;description&quot;, &quot;a red button that says stop&quot; }, {&quot;code&quot;, &quot;&lt;button style = color:white; background-color:red;&gt;Stop&lt;/button&gt;&quot; } },
+    new Dictionary&lt;string, string&gt;() { { &quot;description&quot;, &quot;a blue box that contains yellow circles with red borders&quot; }, { &quot;code&quot;, &quot;&lt;div style = background - color: blue; padding: 20px;&gt;&lt;div style = background - color: yellow; border: 5px solid red; border-radius: 50%; padding: 20px; width: 100px; height: 100px;&gt;&quot; } },
+};
+
+var prompt = new FewShotPromptTemplate(example, suffix, examples);
+
+var llm = new OpenAIModel(Constants.OpenAIKey, OpenAIModelConfiguration.Default with { Temperature = 0.2f });
+var llmChain = new ModelChain(prompt, llm);
+var executor = llmChain.GetExecutor();
+
+var answer1 = await executor.PromptAsync(&quot;a Headline saying Welcome to AI&quot;);
+Console.WriteLine(answer1);
+var answer2 = await executor.PromptAsync(&quot;a list of 5 countries in yellow on black background&quot;);
+Console.WriteLine(answer2);
+</code></pre>
+<p>Generated HTML</p>
+<pre><code class="lang-html">&lt;h1 style = &quot;color:black;&quot;&gt;Welcome to AI!&lt;/h1&gt;
+</code></pre>
+<pre><code class="lang-html">&lt;ul style=&quot;background-color:black; color:yellow;&quot;&gt;
+  &lt;li&gt;Country 1&lt;/li&gt;
+  &lt;li&gt;Country 2&lt;/li&gt;
+  &lt;li&gt;Country 3&lt;/li&gt;
+  &lt;li&gt;Country 4&lt;/li&gt;
+  &lt;li&gt;Country 5&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
+<h2 id="sql-code-generation">SQL code generation</h2>
+<p>For this example a helper method was introduced to convert from anonymous object to <code>IDictionary</code> to pass it into the LLM</p>
+<pre><code class="lang-csharp">var example = new PromptTemplate(&quot;Description: {Question}\nCode: {Answer}&quot;);
+var suffix = new PromptTemplate(&quot;Description: {Question}\nCode: &quot;);
+
+var examples = new List&lt;object&gt;()
+{
+    new { Question = &quot;Fetch the companies that have less than five people in it.&quot;, Answer = &quot;SELECT COMPANY, COUNT(EMPLOYEE_ID) FROM Employee GROUP BY COMPANY HAVING COUNT(EMPLOYEE_ID) &lt; 5;&quot; },
+    new { Question = &quot;Show all companies along with the number of employees in each department&quot;, Answer = &quot;SELECT COMPANY, COUNT(COMPANY) FROM Employee GROUP BY COMPANY;&quot; },
+    new { Question = &quot;Show the last record of the Employee table&quot;, Answer = &quot;SELECT* FROM Employee ORDER BY LAST_NAME DESC LIMIT 1;&quot;}
+};
+
+var prompt = new FewShotPromptTemplate(example, suffix, examples.Select(i =&gt; i.ToDictionary()).ToList());
+
+var llm = new OpenAIModel(Constants.OpenAIKey, OpenAIModelConfiguration.Default with { Temperature = 0.2f, MaxTokens = 100 });
+var llmChain = new ModelChain(prompt, llm);
+var executor = llmChain.GetExecutor();
+
+var answer1 = await executor.PromptAsync(&quot;Fetch three employees from the Employee table&quot;);
+Console.WriteLine($&quot;&gt; {answer1}&quot;);
+var answer2 = await executor.PromptAsync(&quot;Join employes from the Employee on their company name from Company table&quot;);
+Console.WriteLine($&quot;&gt; {answer2}&quot;);
+</code></pre><pre><code class="lang-csharp">public static class ObjectExtensions
+{
+    // helper
+    public static IDictionary&lt;string, string&gt; ToDictionary(this object obj)
+    {
+        var properties = TypeDescriptor.GetProperties(obj);
+        return properties.Cast&lt;PropertyDescriptor&gt;().ToDictionary(property =&gt; property.Name, property =&gt; property.GetValue(obj).ToString());
+    }
+}
+</code></pre>
+<p>Generated SQL</p>
+<pre><code class="lang-sql">&gt; SELECT * FROM Employee LIMIT 3;
+</code></pre>
+<pre><code class="lang-sql">&gt; SELECT e.EMPLOYEE_ID, e.FIRST_NAME, e.LAST_NAME, c.COMPANY_NAME FROM Employee e INNER JOIN Company c ON e.COMPANY = c.COMPANY_NAME;
+</code></pre>
+<h2 id="advanced-entity-extraction-ner">Advanced Entity Extraction (NER)</h2>
+<pre><code class="lang-csharp">var example = new PromptTemplate(&quot;[Text]: {text}\n&quot; +
+                                 &quot;[Name]: {name}\n&quot; +
+                                 &quot;[Position]: {position}\n&quot; +
+                                 &quot;[Company]: {company}&quot;);
+
+var suffix = new PromptTemplate(&quot;[Text]: {input}\n&quot; +
+                                &quot;[Name]: &quot;);
+
+var examples = new List&lt;object&gt;()
+{
+    new {text = &quot;Fred is a serial entrepreneur.Co-founder and CEO of Platform.sh, he previously co-founded Commerce Guys, a leading Drupal ecommerce provider.His mission is to guarantee that as we continue on an ambitious journey to profoundly transform how cloud computing is used and perceived, we keep our feet well on the ground continuing the rapid growth we have enjoyed up until now.&quot;,
+        name = &quot;Fred&quot;, position = &quot;Co-founder and CEO&quot;, company = &quot;Platform.sh&quot;},
+    new {text = &quot;Microsoft (the word being a portmanteau of \&quot;microcomputer software\&quot;) was founded by Bill Gates on April 4, 1975, to develop and sell BASIC interpreters for the Altair 8800. Steve Ballmer replaced Gates as CEO in 2000, and later envisioned a \&quot;devices and services\&quot; strategy.&quot;,
+        name = &quot;Steve Ballmer&quot;, position = &quot;CEO&quot;, company = &quot;Microsoft&quot;},
+    new {text = &quot;Franck Riboud was born on 7 November 1955 in Lyon.He is the son of Antoine Riboud, the previous CEO, who transformed the former European glassmaker BSN Group into a leading player in the food industry.He is the CEO at Danone.&quot;,
+        name = &quot;Franck Riboud&quot;, position = &quot;CEO&quot;, company = &quot;Danone&quot;}
+};
+
+var prompt = new FewShotPromptTemplate(example, suffix, examples.Select(i =&gt; i.ToDictionary()).ToList())
+{
+    ExampleSeparator = &quot;\n---\n&quot; // use &quot;---&quot; as separator, and as a stop sequence
+};
+
+var llm = new OpenAIModel(Constants.OpenAIKey, new OpenAIModelConfiguration() { 
+    NucleusSamplingFactor = 0,
+    Model = &quot;text-davinci-003&quot;,
+    MaxTokens = 30,
+    SnippetCount = 1,
+    GenerationSampleCount = 1,
+    Stop = new[] { &quot;---&quot; } });
+
+var llmChain = new ModelChain(prompt, llm);
+var executor = llmChain.GetExecutor();
+
+var answer1 = await executor.PromptAsync(&quot;David Melvin is an investment and financial services professional at CITIC CLSA with over 30 years’ experience in investment banking and private equity.He is currently a Senior Adviser of CITIC CLSA.&quot;);
+Console.WriteLine($&quot;&gt; {answer1}&quot;);
+var answer2 = await executor.PromptAsync(&quot;Pat Gelsinger is a highly respected technology executive with over four decades of experience in the industry. He started his career at Intel, where he spent over 30 years in various roles, including as the company's first chief technology officer. During his tenure at Intel, Gelsinger was widely recognized for his technical expertise and leadership in driving innovation.&quot;);
+Console.WriteLine($&quot;&gt; {answer2}&quot;);
+</code></pre>
+<pre><code class="lang-text">&gt;  David Melvin
+&gt; [Position]: Senior Adviser
+&gt; [Company]: CITIC CLSA
+
+</code></pre>
+<pre><code class="lang-text">&gt;  Pat Gelsinger
+&gt; [Position]: Chief Technology Officer
+&gt; [Company]: Intel
+</code></pre>
+<p>Note, that we asked to complete text after <code>[Name]: </code> text, and that exactly what model did - <code>[Name]</code> is not included in generated string.</p>
+<h2 id="question-answering">Question Answering</h2>
+<pre><code class="lang-csharp">var example = new PromptTemplate(&quot;Context: {context}\n&quot; +
+                                 &quot;Question: {question}\n&quot; +
+                                 &quot;Answer: {answer}&quot;);
+
+var suffix = new PromptTemplate(&quot;Context: {context}\n&quot; +
+                                &quot;Question: {question}\n&quot; +
+                                &quot;Answer: &quot;);
+
+var examples = new List&lt;object&gt;()
+{
+    new { context = &quot;OpenAI is an artificial intelligence research laboratory consisting of the for-profit corporation OpenAI LP and its parent company, the non-profit OpenAI Inc. It was founded in 2015 by a group of technology leaders, including Elon Musk and Sam Altman.&quot;, 
+        question = &quot;When was OpenAI founded?&quot;, answer = &quot;2015&quot; },
+    new { context = &quot;OpenAI has developed a number of significant artificial intelligence models and technologies, including the GPT series of natural language processing models, the DALL-E image generation model, and a range of robotics systems.&quot;, 
+        question = &quot;What did OpenAI develop?&quot;, answer = &quot;AI models&quot; },
+    new { context = &quot;OpenAI offers various plans for its products and services, including a free tier of access to its API, paid plans for businesses, and custom solutions for enterprises.&quot;, 
+        question = &quot;What plans are available in OpenAI?&quot;, answer = &quot;Various plans&quot; },
+}.Select(i =&gt; i.ToDictionary()).ToList();
+
+var prompt = new FewShotPromptTemplate(example, suffix, examples);
+
+var llm = new OpenAIModel(Constants.OpenAIKey, OpenAIModelConfiguration.Default with { Temperature = 0.2f, MaxTokens = 100 });
+var llmChain = new ModelChain(prompt, llm);
+var executor = llmChain.GetExecutor();
+
+var answer1 = await executor.PromptAsync(new { context = &quot;OpenAI offers several plans for GPT-3, ranging from a free tier to paid plans with larger amounts of access and dedicated support. The recommended plan for GPT-3 would depend on the specific needs and use case of the individual or organization. However, the most commonly used paid plan for GPT-3 is the \&quot;Pro\&quot; plan, which provides a significant amount of access to the API and is suitable for most applications.&quot;, 
+    question = &quot;Which plan is recommended for GPT-3?&quot; }.ToDictionary());
+Console.WriteLine(answer1.Values.Last());
+var answer2 = await executor.PromptAsync(new { context = &quot;GPT-3 supports many different natural languages, including English, Spanish, French, German, Italian, Dutch, Portuguese, Japanese, Korean, Chinese, and more. However, English is the language that GPT-3 has been most extensively trained on, and for which it has produced the most impressive results. Therefore, English is generally considered the most preferable language for GPT-3.&quot;, 
+    question = &quot;Which language is preferable for GPT-3?&quot;
+}.ToDictionary());
+Console.WriteLine(answer2.Values.Last());
+</code></pre>
+<pre><code class="lang-text">&gt; The &quot;Pro&quot; plan.
+</code></pre>
+<pre><code class="lang-text">&gt; English
+</code></pre>
+<h2 id="grammar-and-spelling-correction">Grammar and Spelling Correction</h2>
+<pre><code class="lang-csharp">var example = new PromptTemplate(&quot;{phrase}\n&quot; +
+                                 &quot;Correction: {correction}&quot;);
+
+var suffix = new PromptTemplate(&quot;{phrase}\n&quot; +
+                                &quot;Correction: &quot;);
+
+var examples = new List&lt;object&gt;()
+{
+    new { phrase = &quot;I love goin to the beach.&quot;, correction = &quot;I love going to the beach.&quot; },
+    new { phrase = &quot;Let me hav it!&quot;, correction = &quot;Let me have it!&quot; },
+    new { phrase = &quot;It have too many drawbacks.&quot;, correction = &quot;It has too many drawbacks.&quot; },
+}.Select(i =&gt; i.ToDictionary()).ToList();
+
+var prompt = new FewShotPromptTemplate(example, suffix, examples);
+
+var llm = new OpenAIModel(Constants.OpenAIKey, OpenAIModelConfiguration.Default with { MaxTokens = 100 });
+var llmChain = new ModelChain(prompt, llm);
+var executor = llmChain.GetExecutor();
+
+var answer1 = await executor.PromptAsync(&quot;I do not wan to go&quot;);
+Console.WriteLine(answer1);
+var answer2 = await executor.PromptAsync(@&quot;Wat ar u doing?&quot;);
+Console.WriteLine(answer2);
+</code></pre>
+<pre><code class="lang-text">&gt; I do not want to go.
+</code></pre>
+<pre><code class="lang-text">&gt; What are you doing?
+</code></pre>
+<h2 id="machine-translation">Machine Translation</h2>
+<pre><code class="lang-csharp">var example = new PromptTemplate(&quot;{phrase}\n&quot; +
+                                 &quot;Translation: {translation}&quot;);
+
+var suffix = new PromptTemplate(&quot;{phrase}\n&quot; +
+                                &quot;Translation: &quot;);
+
+var examples = new List&lt;object&gt;()
+{
+    new { phrase = &quot;Hugging Face a révolutionné le NLP.&quot;, translation = &quot;Hugging Face revolutionized NLP.&quot; },
+    new { phrase = &quot;Cela est incroyable!&quot;, translation = &quot;This is unbelievable!&quot; },
+    new { phrase = &quot;Désolé je ne peux pas.&quot;, translation = &quot;Sorry but I cannot.&quot; },
+}.Select(i =&gt; i.ToDictionary()).ToList();
+
+var prompt = new FewShotPromptTemplate(example, suffix, examples);
+
+var llm = new OpenAIModel(Constants.OpenAIKey, OpenAIModelConfiguration.Default with { MaxTokens = 100 });
+var llmChain = new ModelChain(prompt, llm);
+var executor = llmChain.GetExecutor();
+
+var answer1 = await executor.PromptAsync(&quot;Parlez-vous français?&quot;);
+Console.WriteLine(answer1);
+var answer2 = await executor.PromptAsync(@&quot;Comment ça va? &quot;);
+Console.WriteLine(answer2);
+</code></pre>
+<pre><code class="lang-text">&gt; Do you speak French?
+</code></pre>
+<pre><code class="lang-text">&gt; How are you?
+</code></pre>
+<h2 id="tweet-generation">Tweet Generation</h2>
+<pre><code class="lang-csharp">var example = new PromptTemplate(&quot;Keyword: {keyword}\n&quot; +
+                                 &quot;Tweet: {tweet}&quot;);
+var suffix = new PromptTemplate(&quot;Keyword: {keyword}\n&quot; +
+                                &quot;Tweet: &quot;);
+
+var examples = new List&lt;object&gt;()
+{
+    new { keyword = &quot;markets&quot;, tweet = &quot;Take feedback from nature and markets, not from people&quot; },
+    new { keyword = &quot;children&quot;, tweet = &quot;Maybe we die so we can come back as children.&quot; },
+    new { keyword = &quot;startups&quot;, tweet = &quot; Startups should not worry about how to put out fires, they should worry about how to start them.&quot; },
+}.Select(i =&gt; i.ToDictionary()).ToList();
+
+var prompt = new FewShotPromptTemplate(example, suffix, examples);
+
+var llm = new OpenAIModel(Constants.OpenAIKey, OpenAIModelConfiguration.Default with { Temperature = 0.7f, MaxTokens = 100 });
+var llmChain = new ModelChain(prompt, llm);
+var executor = llmChain.GetExecutor();
+
+var answer1 = await executor.PromptAsync(&quot;cats&quot;);
+Console.WriteLine(answer1);
+var answer2 = await executor.PromptAsync(&quot;NLP&quot;);
+Console.WriteLine(answer2);
+</code></pre>
+<pre><code class="lang-text">&gt; Life is like a box of cats, you never know what you're gonna get! 
+</code></pre>
+<pre><code class="lang-text">&gt; NLP is changing the way we interact with machines, and making them smarter than ever before.
+</code></pre>
+<h2 id="chatbot-and-conversational-ai">Chatbot and Conversational AI</h2>
+<pre><code class="lang-csharp">
+var prefix = new PromptTemplate(&quot;This is a discussion between a [human] and a [robot].\n&quot; +
+                                &quot;The [robot] is very nice and empathetic.&quot;);
+
+var example = new PromptTemplate(&quot;[human]: {human_phrase}\n&quot; +
+                                 &quot;[robot]: {robot_phrase}&quot;);
+
+var suffix = new PromptTemplate(&quot;[human]: {human_phrase}\n&quot; +
+                                &quot;[robot]: &quot;);
+
+var examples = new List&lt;object&gt;()
+{
+    new { human_phrase = &quot;Hello nice to meet you.&quot;, robot_phrase = &quot;Nice to meet you too.&quot; },
+    new { human_phrase = &quot;How is it going today?&quot;, robot_phrase = &quot;Not so bad, thank you! How about you?&quot; },
+    new { human_phrase = &quot;I am ok, but I am a bit sad...&quot;, robot_phrase = &quot;Oh? Why that?&quot; },
+}.Select(i =&gt; i.ToDictionary()).ToList();
+
+var prompt = new FewShotPromptTemplate(prefix, example, suffix, examples);
+
+var llm = new OpenAIModel(Constants.OpenAIKey, OpenAIModelConfiguration.Default with { Temperature = 0.7f, MaxTokens = 100 });
+var llmChain = new ModelChain(prompt, llm);
+var executor = llmChain.GetExecutor();
+
+var answer1 = await executor.PromptAsync(&quot;I broke up with my girlfriend...&quot;);
+Console.WriteLine(answer1);
+var answer2 = await executor.PromptAsync(&quot;I won a lot of money today&quot;);
+Console.WriteLine(answer2);
+</code></pre>
+<pre><code class="lang-text">&gt; I'm sorry to hear that. Is there anything I can do to help?
+</code></pre>
+<pre><code class="lang-text">&gt; That sounds like a great thing, so why are you sad?
+</code></pre>
+<p>Note that this is not a real chatbot, but just an example. GPT-3 are &quot;stateless&quot; model, meaning that every request you make is new and the AI is not
+going to remember anything about the previous requests you made.</p>
+<p>In many Natural Language Processing situations it's not a problem (summarization, classification, paraphras, etc),
+but as far as chatbots are concerned it's definitely an issue because we do want our chatbot to memorize the discussion history in order to make more relevant responses.</p>
+<h2 id="intent-classification">Intent Classification</h2>
+<pre><code class="lang-csharp">
+var example = new PromptTemplate(&quot;Statement: {statement}\nIntent: {intent}&quot;);
+var suffix = new PromptTemplate(&quot;Statement: {statement}\nIntent: &quot;);
+
+var examples = new List&lt;object&gt;()
+{
+    new { statement = &quot;I want to start coding tomorrow because it seems to be so fun!&quot;, intent = &quot;start coding&quot; },
+    new { statement = &quot;Show me the last pictures you have please.&quot;, intent = &quot;show pictures&quot; },
+    new { statement = &quot;Search all these files as fast as possible.&quot;, intent = &quot;search files&quot; },
+}.Select(i =&gt; i.ToDictionary()).ToList();
+
+var prompt = new FewShotPromptTemplate(example, suffix, examples);
+
+var llm = new OpenAIModel(Constants.OpenAIKey, OpenAIModelConfiguration.Default with { Temperature = 0, MaxTokens = 100 });
+var llmChain = new ModelChain(prompt, llm);
+var executor = llmChain.GetExecutor();
+
+var answer1 = await executor.PromptAsync(&quot;Can you please teach me Chinese next week?&quot;);
+Console.WriteLine(answer1);
+var answer2 = await executor.PromptAsync(&quot;Open the fridge, and put giraffe inside&quot;);
+Console.WriteLine(answer2);
+</code></pre>
+<pre><code class="lang-text">&gt; teach Chinese
+</code></pre>
+<pre><code class="lang-text">&gt; open fridge
+</code></pre>
+<h2 id="paraphrasing">Paraphrasing</h2>
+<pre><code class="lang-csharp">
+var example = new PromptTemplate(&quot;[Original]: {original}\n&quot; +
+                                 &quot;[Paraphrase]: {paraphrase}&quot;);
+var suffix = new PromptTemplate(&quot;[Original]: {original}\n&quot; +
+                                &quot;[Paraphrase]: &quot;);
+
+var examples = new List&lt;object&gt;()
+{
+    new { original = &quot;If you tire of lazing on the beach after 10 minutes, this one's for you: eduvacations are getaways that are all about learning new things.&quot;, 
+        paraphrase = &quot;For those who get bored of lounging on the beach in just 10 minutes, an eduvacation might be a better fit since it is focused on learning new things.&quot; },
+    new { original = &quot;As lockdowns lifted, 2022 saw a new phenomenon of COVID-19 induced ‘revenge travel’ as people scrambled to make up for lost time.&quot;, 
+        paraphrase = &quot;In 2022, there was a new trend called \&quot;revenge travel\&quot; that emerged as people tried to make up for the time they lost due to COVID-19 lockdowns.&quot; },
+    new { original = &quot;From e-bikes to e-scooters to e-sleds, motorised personal transport is taking over cities and destinations across the world. More and more travel agencies are also offering electric bike escapes, allowing outdoor exploration without the gym bunny prerequisite.&quot;, 
+        paraphrase = &quot;Motorized personal transport, such as e-bikes, e-scooters, and e-sleds, is becoming increasingly popular in cities and tourist destinations around the world. More travel agencies are also offering electric bike trips, which allow outdoor exploration without requiring extreme physical fitness.&quot; },
+}.Select(i =&gt; i.ToDictionary()).ToList();
+
+var prompt = new FewShotPromptTemplate(example, suffix, examples);
+
+var llm = new OpenAIModel(Constants.OpenAIKey, OpenAIModelConfiguration.Default with { Temperature = 0, MaxTokens = 100 });
+var llmChain = new ModelChain(prompt, llm);
+var executor = llmChain.GetExecutor();
+
+var answer1 = await executor.PromptAsync(&quot;Nature positive travel is set to take over in 2023 as holidaymakers seek ways to reduce and reverse their environmental impact.&quot;);
+Console.WriteLine(answer1);
+var answer2 = await executor.PromptAsync(&quot;The emergence of remote work in 2022 brought digital nomadism into the mainstream.&quot;);
+Console.WriteLine(answer2);
+</code></pre>
+<pre><code class="lang-text">&gt; In 2023, nature positive travel is expected to become popular as travelers look for ways to reduce and undo their environmental footprint.
+</code></pre>
+<pre><code class="lang-text">&gt; The rise of remote work in 2022 made digital nomadism a popular lifestyle.
+</code></pre>
+<h2 id="summarization">Summarization</h2>
+<pre><code class="lang-csharp">
+var example = new PromptTemplate(&quot;Original: {original}\n&quot; +
+                                 &quot;Summary: {summary}&quot;);
+var suffix = new PromptTemplate(&quot;Original: {original}\n&quot; +
+                                &quot;Summary: &quot;);
+
+var examples = new List&lt;object&gt;()
+{
+    new { original = &quot;America has changed dramatically during recent years. Not only has the number of graduates in traditional engineering disciplines such as mechanical, civil, electrical, chemical, and aeronautical engineering declined, but in most of the premier American universities engineering curricula now concentrate on and encourage largely the study of engineering science.  As a result, there are declining offerings in engineering subjects dealing with infrastructure, the environment, and related issues, and greater concentration on high technology subjects, largely supporting increasingly complex scientific developments. While the latter is important, it should not be at the expense of more traditional engineering.\r\nRapidly developing economies such as China and India, as well as other industrial countries in Europe and Asia, continue to encourage and advance the teaching of engineering. Both China and India, respectively, graduate six and eight times as many traditional engineers as does the United States. Other industrial countries at minimum maintain their output, while America suffers an increasingly serious decline in the number of engineering graduates and a lack of well-educated engineers. \r\n(Source:  Excerpted from Frankel, E.G. (2008, May/June) Change in education: The cost of sacrificing fundamentals. MIT Faculty &quot;,
+        summary = &quot;MIT Professor Emeritus Ernst G. Frankel (2008) has called for a return to a course of study that emphasizes the traditional skills of engineering, noting that the number of American engineering graduates with these skills has fallen sharply when compared to the number coming from other countries.&quot;},
+    new { original = &quot;So how do you go about identifying your strengths and weaknesses, and analyzing the opportunities and threats that flow from them? SWOT Analysis is a useful technique that helps you to do this.\r\nWhat makes SWOT especially powerful is that, with a little thought, it can help you to uncover opportunities that you would not otherwise have spotted. And by understanding your weaknesses, you can manage and eliminate threats that might otherwise hurt your ability to move forward in your role.\r\nIf you look at yourself using the SWOT framework, you can start to separate yourself from your peers, and further develop the specialized talents and abilities that you need in order to advance your career and to help you achieve your personal goals.&quot;,
+        summary = &quot;SWOT Analysis is a technique that helps you identify strengths, weakness, opportunities, and threats. Understanding and managing these factors helps you to develop the abilities you need to achieve your goals and progress in your career.&quot;},
+    new { original = &quot;Jupiter is the fifth planet from the Sun and the largest in the Solar System. It is a gas giant with a mass one-thousandth that of the Sun, but two-and-a-half times that of all the other planets in the Solar System combined. Jupiter is one of the brightest objects visible to the naked eye in the night sky, and has been known to ancient civilizations since before recorded history. It is named after the Roman god Jupiter.[19] When viewed from Earth, Jupiter can be bright enough for its reflected light to cast visible shadows,[20] and is on average the third-brightest natural object in the night sky after the Moon and Venus.\r\nJupiter is primarily composed of hydrogen with a quarter of its mass being helium, though helium comprises only about a tenth of the number of molecules. It may also have a rocky core of heavier elements,[21] but like the other giant planets, Jupiter lacks a well-defined solid surface. Because of its rapid rotation, the planet's shape is that of an oblate spheroid (it has a slight but noticeable bulge around the equator).&quot;,
+        summary = &quot;Jupiter is the largest planet in the solar system. It is a gas giant, and is the fifth planet from the sun.&quot;}
+}.Select(i =&gt; i.ToDictionary()).ToList();
+
+var prompt = new FewShotPromptTemplate(example, suffix, examples);
+
+var llm = new OpenAIModel(Constants.OpenAIKey, OpenAIModelConfiguration.Default with { Temperature = 0.1f, MaxTokens = 100 });
+var llmChain = new ModelChain(prompt, llm);
+var executor = llmChain.GetExecutor();
+
+var answer1 = await executor.PromptAsync(&quot;For all its whizz-bang caper-gone-wrong energy, and for all its subsequent emotional troughs, this week’s Succession finale might have been the most important in its entire run. Because, unless I am very much wrong, Succession – a show about people trying to forcefully mount a succession – just had its succession. And now everything has to change.\r\nThe episode ended with Logan Roy defying his children by selling Waystar Royco to idiosyncratic Swedish tech bro Lukas Matsson. It’s an unexpected twist, like if King Lear contained a weird new beat where Lear hands the British crown to Jack Dorsey for a laugh, but it sets up a bold new future for the show. What will happen in season four? Here are some theories.\r\nSeason three of Succession picked up seconds after season two ended. It was a smart move, showing the immediate swirl of confusion that followed Kendall Roy’s decision to undo his father, and something similar could happen here. This week’s episode ended with three of the Roy siblings heartbroken and angry at their father’s grand betrayal. Perhaps season four could pick up at that precise moment, and show their efforts to reorganise their rebellion against him. This is something that Succession undoubtedly does very well – for the most part, its greatest moments have been those heart-thumping scenes where Kendall scraps for support to unseat his dad – and Jesse Armstrong has more than enough dramatic clout to centre the entire season around the battle to stop the Matsson deal dead in its tracks.&quot;);
+Console.WriteLine(answer1);
+var answer2 = await executor.PromptAsync(&quot;Roizman is the founder of Museum of Nevyansk Icon at Sverdlovsk region. This is the first private museum to collect icon-paintings. It is located in the city of Yekaterinburg. This museum has over 600 exhibits, including icons, gospel covers, crosses, books and wooden sculptures. The earliest icon is The Egyptian Mother of God (1734), the latest is Christ Pantocrator (1919). Roizman worked in finding, searching and restoration of the icons.&quot;);
+Console.WriteLine(answer2);
+</code></pre>
+<pre><code class="lang-text">&gt; The season three finale of Succession saw Logan Roy defy his children by selling Waystar Royco to a Swedish tech bro, setting up a bold new future for the show. Season four could pick up at the moment of Logan's betrayal and focus on the Roy siblings' efforts to reorganize their rebellion against him.
+</code></pre>
+<pre><code class="lang-text">&gt; Boris Roizman is the founder of the Museum of Nevyansk Icon, the first private museum to collect icon-paintings, located in Yekaterinburg, Russia. The museum houses over 600 exhibits, including icons, gospel covers, crosses, books, and wooden sculptures, ranging from The Egyptian Mother of God (1734) to Christ Pantocrator (1919). Roizman was responsible for finding, searching, and restoring the icons.
+</code></pre>
+<p>Note: Roizman actual name is <a href="https://en.wikipedia.org/wiki/Yevgeny_Roizman">Yevgeny</a></p>
+<h2 id="zero-shot-text-classification">Zero-shot text classification</h2>
+<pre><code class="lang-csharp">var example = new PromptTemplate(&quot;Message: {message}\n&quot; +
+                                 &quot;Topic: {topic}&quot;);
+var suffix = new PromptTemplate(&quot;Message: {message}\n&quot; +
+                                &quot;Topic: &quot;);
+
+var examples = new List&lt;object&gt;()
+{
+    new { message = &quot;When the spaceship landed on Mars, the whole humanity was excited&quot;, topic = &quot;space&quot;},
+    new { message = &quot;I love playing tennis and golf. I'm practicing twice a week.&quot;, topic = &quot;sport&quot;},
+    new { message = &quot;Managing a team of sales people is a tough but rewarding job.&quot;, topic = &quot;business&quot;},
+}.Select(i =&gt; i.ToDictionary()).ToList();
+
+var prompt = new FewShotPromptTemplate(example, suffix, examples);
+
+var llm = new OpenAIModel(Constants.OpenAIKey, OpenAIModelConfiguration.Default with { MaxTokens = 100 });
+var llmChain = new ModelChain(prompt, llm);
+var executor = llmChain.GetExecutor();
+
+var answer1 = await executor.PromptAsync(&quot;I am trying to cook chicken with tomatoes.&quot;);
+Console.WriteLine(answer1);
+var answer2 = await executor.PromptAsync(&quot;2022 has been the year of solo female travel, with many women taking to the road after feeling the isolation of the pandemic.&quot;);
+Console.WriteLine(answer2);
+</code></pre>
+<pre><code class="lang-text">&gt; cooking
+</code></pre>
+<pre><code class="lang-text">&gt; travel
+</code></pre>
+<h2 id="keyword-and-keyphrase-extraction">Keyword and Keyphrase Extraction</h2>
+<pre><code class="lang-csharp">var example = new PromptTemplate(&quot;Information: {information}\n&quot; +
+                                 &quot;Keywords: {keywords}&quot;);
+var suffix = new PromptTemplate(&quot;Information: {information}\n&quot; +
+                                &quot;Keywords: &quot;);
+
+var examples = new List&lt;object&gt;()
+{
+    new { information = &quot;Information Retrieval (IR) is the process of obtaining resources relevant to the information need. For instance, a search query on a web search engine can be an information need. The search engine can return web pages that represent relevant resources.&quot;, 
+        keywords = &quot;information, search, resources&quot;},
+    new { information = &quot;David Robinson has been in Arizona for the last three months searching for his 24-year-old son, Daniel Robinson, who went missing after leaving a work site in the desert in his Jeep Renegade on June 23. &quot;, 
+        keywords = &quot;searching, missing, desert&quot;},
+    new { information = &quot;I believe that using a document about a topic that the readers know quite a bit about helps you understand if the resulting keyphrases are of quality.&quot;, 
+        keywords = &quot;document, understand, keyphrases&quot;},
+}.Select(i =&gt; i.ToDictionary()).ToList();
+
+var prompt = new FewShotPromptTemplate(example, suffix, examples);
+
+var llm = new OpenAIModel(Constants.OpenAIKey, OpenAIModelConfiguration.Default with { MaxTokens = 100 });
+var llmChain = new ModelChain(prompt, llm);
+var executor = llmChain.GetExecutor();
+
+var answer1 = await executor.PromptAsync(&quot;Since transformer models have a token limit, you might run into some errors when inputting large documents. In that case, you could consider splitting up your document into paragraphs and mean pooling (taking the average of) the resulting vectors.&quot;);
+Console.WriteLine(answer1);
+var answer2 = await executor.PromptAsync(&quot;If your classes are not known in advance (e.g., they are set by a user or generated on the fly), you can try zero-shot classification by either giving an instruction containing the classes or even by using embeddings to see which class label (or other classified texts) are most similar to the text&quot;);
+Console.WriteLine(answer2);
+</code></pre>
+<pre><code class="lang-text">&gt; transformer, token, errors, inputting, document, paragraphs, mean pooling
+</code></pre>
+<pre><code class="lang-text">&gt; classes, user, embeddings
+</code></pre>
+<p>Keyword extraction is the process of identifying the main ideas from a text. Keyphrase extraction is similar, but it involves extracting multiple words.</p>
+<pre><code class="lang-csharp">var example = new PromptTemplate(&quot;Information: {information}\n&quot; +
+                                 &quot;Keywords: {keywords}&quot;);
+var suffix = new PromptTemplate(&quot;Information: {information}\n&quot; +
+                                &quot;Keywords: &quot;);
+
+var examples = new List&lt;object&gt;()
+{
+    new { information = &quot;Information Retrieval (IR) is the process of obtaining resources relevant to the information need. For instance, a search query on a web search engine can be an information need. The search engine can return web pages that represent relevant resources.&quot;,
+        keywords = &quot;information retrieval, search query, relevant resource&quot;},
+    new { information = &quot;David Robinson has been in Arizona for the last three months searching for his 24-year-old son, Daniel Robinson, who went missing after leaving a work site in the desert in his Jeep Renegade on June 23. &quot;,
+        keywords = &quot;searching son, missing after work, desert&quot;},
+    new { information = &quot;I believe that using a document about a topic that the readers know quite a bit about helps you understand if the resulting keyphrases are of quality.&quot;,
+        keywords = &quot;document, help understand, resulting keyphrases&quot;},
+}.Select(i =&gt; i.ToDictionary()).ToList();
+
+var prompt = new FewShotPromptTemplate(example, suffix, examples);
+
+var llm = new OpenAIModel(Constants.OpenAIKey, OpenAIModelConfiguration.Default with { MaxTokens = 100 });
+var llmChain = new ModelChain(prompt, llm);
+var executor = llmChain.GetExecutor();
+
+var answer1 = await executor.PromptAsync(&quot;Since transformer models have a token limit, you might run into some errors when inputting large documents. In that case, you could consider splitting up your document into paragraphs and mean pooling (taking the average of) the resulting vectors.&quot;);
+Console.WriteLine(answer1);
+var answer2 = await executor.PromptAsync(&quot;If your classes are not known in advance (e.g., they are set by a user or generated on the fly), you can try zero-shot classification by either giving an instruction containing the classes or even by using embeddings to see which class label (or other classified texts) are most similar to the text&quot;);
+Console.WriteLine(answer2);
+</code></pre>
+<pre><code class="lang-text">&gt; transformer models, token limit, large documents, splitting, mean pooling
+</code></pre>
+<pre><code class="lang-text">classes, zero-shot classification, embeddings, class label
+</code></pre>
+<p>This time, instead of extracting one single word, we want to extract several words (known as keyphrases) from the same example.</p>
+<h2 id="product-description-and-ad-generation">Product Description and Ad Generation</h2>
+<pre><code class="lang-csharp">var example = new PromptTemplate(&quot;Keywords: {keywords}\n&quot; +
+                                 &quot;Sentence: {sentence}&quot;);
+var suffix = new PromptTemplate(&quot;Keywords: {keywords}\n&quot; +
+                                &quot;Sentence: &quot;);
+
+var examples = new List&lt;object&gt;()
+{
+    new { keywords = &quot;shoes, women, $59&quot;, sentence = &quot;Beautiful shoes for women at the price of $59.&quot;},
+    new { keywords = &quot;trousers, men, $69&quot;, sentence = &quot;Modern trousers for men, for $69 only.&quot;},
+    new { keywords = &quot;gloves, winter, $19&quot;, sentence = &quot;Amazingly hot gloves for cold winters, at $19.&quot;},
+}.Select(i =&gt; i.ToDictionary()).ToList();
+
+var prompt = new FewShotPromptTemplate(example, suffix, examples);
+
+var llm = new OpenAIModel(Constants.OpenAIKey, OpenAIModelConfiguration.Default with { MaxTokens = 100 });
+var llmChain = new ModelChain(prompt, llm);
+var executor = llmChain.GetExecutor();
+
+var answer1 = await executor.PromptAsync(&quot;t-shirt, men, $39&quot;);
+Console.WriteLine(answer1);
+var answer2 = await executor.PromptAsync(&quot;car, dog, 199$&quot;);
+Console.WriteLine(answer2);
+</code></pre>
+<pre><code class="lang-text">&gt; Stylish t-shirts for men, only $39.
+</code></pre>
+<pre><code class="lang-text">&gt; Get a car for your dog for just 199$.
+</code></pre>
+<h2 id="a-little-extra">A little extra</h2>
+<p>These examples could as well be created by use few-shots prompts to create them for us. Here is an snippet how to generate prompts based on example.</p>
+<pre><code class="lang-csharp">var example = new PromptTemplate(&quot;{phrase}\n&quot; +
+                                 &quot;Prompt:\n{prompt}&quot;);
+
+var suffix = new PromptTemplate(&quot;{phrase}\n&quot; +
+                                &quot;Prompt:\n&quot;);
+
+var examples = new List&lt;object&gt;()
+{
+    new { phrase = &quot;Hugging Face a révolutionné le NLP.\r\nTranslation: Hugging Face revolutionized NLP.&quot;,
+        prompt = &quot;var example = new PromptTemplate(\&quot;{phrase}\\nTranslation: {translation}\&quot;);\r\nvar suffix = new PromptTemplate(\&quot;{phrase}\\nTranslation: \&quot;);&quot; },
+    new { phrase = &quot;Description: Fetch the companies that have less than five people in it.\r\nCode: SELECT COMPANY, COUNT(EMPLOYEE_ID) FROM Employee GROUP BY COMPANY HAVING COUNT(EMPLOYEE_ID) &lt; 5;&quot;,
+        prompt = &quot;var example = new PromptTemplate(\&quot;Description: {Question}\\nCode: {Answer}\&quot;);\r\nvar suffix = new PromptTemplate(\&quot;Description: {Question}\\nCode: \&quot;);&quot; },
+    new { phrase = &quot;Context: NLP Cloud was founded in 2021 when the team realized there was no easy way to reliably leverage Natural Language Processing in production.\r\nQuestion: When was NLP Cloud founded?\r\nAnswer: 2021&quot;,
+        prompt = &quot;var example = new PromptTemplate(\&quot;Context: {context}\\nQuestion: {question}\\nAnswer: {answer}\&quot;);\r\nvar suffix = new PromptTemplate(\&quot;Context: {context}\\nQuestion: {question}\\nAnswer: \&quot;);&quot; },
+}.Select(i =&gt; i.ToDictionary()).ToList();
+
+var prompt = new FewShotPromptTemplate(example, suffix, examples);
+
+var llm = new OpenAIModel(Constants.OpenAIKey, OpenAIModelConfiguration.Default with { MaxTokens = 200 });
+var llmChain = new ModelChain(prompt, llm);
+var executor = llmChain.GetExecutor();
+
+var answer1 = await executor.PromptAsync(&quot;keyword: markets\r\ntweet: Take feedback from nature and markets, not from people&quot;);
+Console.WriteLine(answer1);
+</code></pre>
+<pre><code class="lang-csharp">var example = new PromptTemplate(&quot;Keyword: {keyword}\nTweet: {tweet}&quot;);
+var suffix = new PromptTemplate(&quot;Keyword: {keyword}\nTweet: &quot;);
+</code></pre>
+<p>This obviously could be expanded to entire codebase generation.</p>
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/xakpc/DotnetPrompt/blob/main/docs/articles/prompts/few_shots_example.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      <span>Copyright 2023 © Pavel <i>«xakpc»</i> Osadchuk for <strong>DotnetPrompt</strong></span>
+      
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>
