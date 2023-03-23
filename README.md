@@ -13,7 +13,7 @@ Our library helps you integrate LLMs with other tools and resources to create po
 To get started, add NuGet meta-package
 
 ```ps
-> dotnet add package DotnetPrompt.All --version 1.0.0-alpha.1
+> dotnet add package DotnetPrompt.All --version 1.0.0-alpha.2
 ```
 
 For example, let's say we want to create a `ModelChain` that takes user message, formats it with a `PromptTemplate`, 
